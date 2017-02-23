@@ -1,0 +1,17 @@
+/* Currently useless attempt to center search form */
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+.navbar .navbar-collapse {
+  text-align: center;
+}
+
+.fig-search {
+  width: 600px !important
+}
+
+body {
+  padding-top: 90px;
+}
