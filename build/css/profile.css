@@ -15,3 +15,9 @@
 body {
   padding-top: 90px;
 }
+
+.panel-body{
+  height:500px;
+  overflow-y:scroll;
+  width:100%;
+}
