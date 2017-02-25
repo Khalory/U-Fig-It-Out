@@ -1,0 +1,66 @@
+/* Currently useless attempt to center search form */
+.navbar .navbar-nav {
+  display: inline-block;
+  float: none;
+  vertical-align: top;
+}
+.navbar .navbar-collapse {
+  text-align: center;
+}
+
+.fig-search {
+  width: 600px !important
+}
+
+body {
+  padding-top: 60px;
+}
+
+.hr-mini {
+  margin-top: 5px;
+}
+
+.item-category {
+  text-align: center;
+  display: block;
+}
+
+.item-header {
+  font-size: 2em;
+}
+
+.item-images {
+  transform: rotate(0deg);
+}
+
+.item-price {
+  text-align: right;
+}
+
+.item-subimage {
+  position: fixed;
+  height: 100%;
+  bottom: 0;
+}
+
+.item-subimage div {
+  position: fixed;
+  bottom: 0;
+}
+
+.item-subimage div img {
+  float: left;
+}
+
+.item-subimage-chevron {
+  height: 100px;
+  width: 100%;
+  display: table;
+}
+
+.item-subimage-chevron .btn-group {
+  width: 100%;
+  display: table-cell;
+  vertical-align: bottom;
+  text-align: left;
+}
