@@ -10,6 +10,7 @@ Purple, Light ------- #B564F7
 */
 
 /*NAVBAR*/
+
 .navbar {
   background-color: #7634AB;
   border: none;
@@ -152,6 +153,11 @@ a:active:focus{
   height: 80vh;
   overflow-y: auto;
 }
+.panel-body-whiteBack{
+  max-height: 500px;
+  overflow-y: auto;
+}
+
 .listing-add {
   font-size: 24px;
   font-weight: bold;
@@ -185,4 +191,15 @@ a:active:focus{
   border-color: #EBF2EE;
   color: #00A332;
   outline: none;
+}
+.panel-main{
+  height:200px;
+  text-align:center;
+}
+
+.temp123{
+  text-align:center;
+}
+.temp123 > input{
+  text-align:left;
 }
