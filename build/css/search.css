@@ -14,22 +14,22 @@ body {
 /* Style applies to a elements within ul elements with class nav within
    an element with class fb-trending */
 .fb-trending ul.nav a {
-  padding-left: 5px;
-  padding-right: 5px;
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 /* Makes links dark blue, even if they have been visited. (By default, the
    browser will change the look of visited links.) */
 a,
 a:visited {
-  /* The color Facebook uses. */
+  /* The color UFIGITOUT uses. */
   color: #000;
   font-weight: bold;
 }
 
-/* Blue background */
+/* Purple background */
 .navbar {
   background-color: #980fcb;
 }
@@ -184,4 +184,7 @@ button.fb-notifications:hover {
 .fb-left-sidebar .nav > li.active > a {
   font-weight: bold;
   background-color: #980fcb;
+}
+.panel-body{
+  overflow-y: auto;
 }
