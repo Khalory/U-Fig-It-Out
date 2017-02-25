@@ -1,0 +1,190 @@
+
+body {
+  padding-top: 60px;
+  /* I figured out the background color using Chrome's Inspect tool. */
+  background-color: #e9eaed;
+}
+.fig-search {
+  width: 395px !important;
+}
+.media img {
+    height:auto;
+    width:120px;
+}
+/* Style applies to a elements within ul elements with class nav within
+   an element with class fb-trending */
+.fb-trending ul.nav a {
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+/* Makes links dark blue, even if they have been visited. (By default, the
+   browser will change the look of visited links.) */
+a,
+a:visited {
+  /* The color UFIGITOUT uses. */
+  color: #000;
+  font-weight: bold;
+}
+
+/* Purple background */
+.navbar {
+  background-color: #980fcb;
+}
+
+/* Make house logo white, even if the user hovers over it */
+.navbar .navbar-brand,
+.navbar .navbar-brand:hover {
+  color: white;
+}
+
+/* Remove the background color and border of all navbar buttons. Make their
+   color dark blue, like Facebook. */
+.navbar button {
+  background-color: transparent;
+  border: none;
+  color: #980fcb;
+}
+
+/* Make buttons slightly darker when the user hovers over it, like Facebook
+  does. */
+.navbar button:hover {
+  background-color: transparent;
+  color: #22345c;
+  border: none;
+}
+
+/* Make the button white if clicked on, and remain white after clicking.
+   Facebook normally opens up a menu when you do this.
+   :active = user is currently interacting with the button.
+   :focus = user is currently interacting or has just interacted with the
+   button.
+   :active:focus = both at the same time
+   We have to override all of these combinations, since Bootstrap has separate
+   rules for them.*/
+.navbar button:active,
+.navbar button:focus,
+.navbar button:active:focus {
+  background-color: transparent;
+  color: white;
+  border: none;
+  /* Removes halo and shadow on button when clicked. */
+  outline: none;
+  box-shadow: none;
+}
+
+/* Search button style -- overrides the above two rules for the search
+   button */
+.navbar form button,
+.navbar form button:hover,
+.navbar form button:focus,
+.navbar form button:active,
+.navbar form button:active:focus {
+  background-color: lightgrey;
+  color: black;
+  /* Make it a bit wider. */
+  width: 50px;
+  /* Make the border's curve more gentle */
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  /* Apply a light-grey border color. You can specify colors as names, rgb
+     triplets, or hex numbers. */
+  border-top: 1px solid rgb(204, 204, 204);
+  border-bottom: 1px solid rgb(204, 204, 204);
+  border-right: 1px solid rgb(204, 204, 204);
+  /* Removes halo and shadow on button when clicked. */
+  outline: none;
+  box-shadow: none;
+}
+
+/* Navbar button style when the button has notifications.
+   Apply same style when the user is hovering the mouse over the button. */
+button.fb-notifications,
+button.fb-notifications:hover {
+  color: white;
+}
+
+/* Make the Bootstrap badges more Facebook-style in the navbar */
+.navbar .badge {
+  background-color: red;
+  color: white;
+  border-radius: 3px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border: 1px solid black;
+  /* Offset the badge a bit so it hovers over the glyphicon. */
+  right: 8px;
+  top: -10px;
+}
+
+/* Make the "John" and "Home" buttons white. Would probably be cleaner
+   using a CSS class! */
+.navbar .navbar-right > .btn-toolbar > .btn-group:first-child button,
+.navbar .navbar-right > .btn-toolbar > .btn-group:nth-child(2) button
+{
+  color: white;
+}
+
+/* Make the "John" and "Home" buttons have a dark blue background when
+   hovered over. */
+.navbar .navbar-right > .btn-toolbar > .btn-group:first-child button:hover,
+.navbar .navbar-right > .btn-toolbar > .btn-group:nth-child(2) button:hover
+{
+  background-color: #2e467c;
+}
+/* Remove padding between list elements, align list items all of the way to the
+   left, and make text non-bolded & black. */
+.fb-left-sidebar .nav > li > a {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 0px;
+  color: black;
+  font-weight: normal;
+}
+
+/* Make list items have a darker gray background when the mouse hovers
+   over them. */
+.fb-left-sidebar .nav > li > a:hover,
+.fb-left-sidebar .nav > li.active > a:hover {
+  /* This is the color Facebook uses */
+  background-color: #980fcb;
+  color: black;
+}
+
+/* Override Bootstrap's default style, which changes the color/bgcolor of
+   list items when you click on them. */
+.fb-left-sidebar .nav > li > a:active,
+.fb-left-sidebar .nav > li > a:focus,
+.fb-left-sidebar .nav > li > a:active:focus,
+.fb-left-sidebar .nav > li.active > a:active,
+.fb-left-sidebar .nav > li.active > a:focus,
+.fb-left-sidebar .nav > li.active > a:active:focus {
+  background-color: transparent;
+  color: black;
+}
+
+/* Make the badges have no background, a dark gray color, and normal font
+   weight (removes bold). */
+.fb-left-sidebar .badge {
+  background-color: transparent;
+  /* The same color as Facebook */
+  color: #4e5665;
+  font-weight: normal;
+}
+
+/* Color all text items in the left sidebar this color gray. */
+.fb-left-sidebar {
+  /* I got this color from Facebook */
+  color: #9197a3;
+}
+
+/* The active pill should be bolded w/ no background. */
+.fb-left-sidebar .nav > li.active > a {
+  font-weight: bold;
+  background-color: #980fcb;
+}
+.panel-body{
+  overflow-y: auto;
+}
