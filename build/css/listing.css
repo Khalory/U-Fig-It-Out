@@ -33,6 +33,12 @@ body {
   transform: rotate(0deg);
 }
 
+.item-payment-allowed {
+}
+
+.item-payment {
+}
+
 .item-price {
   text-align: right;
 }
