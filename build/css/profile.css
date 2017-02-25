@@ -11,6 +11,10 @@
 .fig-search {
   width: 600px !important
 }
+.fig-searchTall{
+  width: 100px !important
+  height: 100px !important
+}
 
 body {
   padding-top: 90px;
@@ -19,4 +23,15 @@ body {
 .panel-body{
   height:500px;
   overflow-y:scroll;
+}
+.panel-main{
+  height:200px;
+  text-align:center;
+}
+
+.temp123{
+  text-align:center;
+}
+.temp123 > input{
+  text-align:left;
 }
