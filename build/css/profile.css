@@ -10,6 +10,7 @@ Purple, Light ------- #B564F7
 */
 
 /*NAVBAR*/
+
 .navbar {
   background-color: #7634AB;
   border: none;
@@ -82,6 +83,10 @@ body {
   background-color: #EBF2EE;
 }
 
+a {
+  color: black;
+}
+
 a:hover {
   color: #00D451;
 }
@@ -93,7 +98,7 @@ a:active:focus{
 }
 
 .img-thumbnail {
-  background-color: #B564F7;
+  background-color: lightgray;
 }
 
 /*LISTINGS PANEL HEADING*/
@@ -103,26 +108,23 @@ a:active:focus{
   border-bottom: none;
 }
 .nav-tabs > li.active > a {
-  background-color: #B564F7;
-  border-color: #B564F7 !important;
+  border-bottom-color: white !important;
   color: #7634AB
 }
-.nav-tabs > li > a {
-  color: #00D451;
-  border-color: #7634AB !important;
-}
 .nav-tabs > li.active > a:hover {
-  border-color: #B564F7 !important;
-  background-color: #B564F7;
+  border-bottom-color: white !important;
   color: #7634AB;
 }
 .nav-tabs > li.active > a:active,
 .nav-tabs > li.active > a:focus,
 .nav-tabs > li.active > a:active:focus {
-  border-color: #B564F7 !important;
-  background-color: #B564F7;
+  border-bottom-color: white !important;
   color: #7634AB;
   outline: none;
+}
+.nav-tabs > li > a {
+  color: #00D451;
+  border-color: #7634AB !important;
 }
 .nav-tabs > li > a:hover {
   border-color: #682E96 !important;
@@ -131,22 +133,27 @@ a:active:focus{
 .nav-tabs > li > a:active,
 .nav-tabs > li > a:focus,
 .nav-tabs > li > a:active:focus {
-  border-color: #B564F7 !important;
-  background-color: #B564F7;
+  border-color: white !important;
+  background-color: white;
   color: #7634AB;
   outline: none;
 }
 
 /*LISTINGS PANEL BODY*/
 .fig-listings {
+  border-width: 2px;
   border-bottom-width: 4px;
-  border-bottom-color: #682E96;
+  border-color: #682E96;
+}
+.media img {
+    height:auto;
+    width:120px;
 }
 .panel-body {
-  max-height: 500px;
-  background-color: #B564F7;
+  height: 80vh;
   overflow-y: auto;
 }
+
 .listing-add {
   font-size: 24px;
   font-weight: bold;
@@ -166,7 +173,7 @@ a:active:focus{
 .listing-item button {
   background-color: #EBF2EE;
   border-color: #EBF2EE;
-  color: #FF9211;
+  color: #8A9F9E;
 }
 .listing-item button:hover {
   background-color: #EBF2EE;
