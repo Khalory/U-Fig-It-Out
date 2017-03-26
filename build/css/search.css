@@ -146,6 +146,54 @@ a {
   border-bottom-width: 4px;
   border-bottom-color: #682E96;
 }
+
+.fig-listings {
+  border-width: 2px;
+  border-bottom-width: 4px;
+  border-color: #682E96;
+}
+
+.listing-add {
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #EBF2EE;
+  border-color: #682E96 !important;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.listing-item {
+  background-color: #EBF2EE;
+  border-color: #682E96 !important;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.li-style {
+  border-width: 2px;
+  border-color: #682E96;
+}
+.listing-item button {
+  background-color: #EBF2EE;
+  border-color: #EBF2EE;
+  color: #FF9211;
+}
+.listing-item button:hover {
+  background-color: #EBF2EE;
+  border-color: #EBF2EE;
+  color: #00D451;
+}
+.listing-item button:active,
+.listing-item button:focus,
+.listing-item button:active:focus{
+  background-color: #EBF2EE;
+  border-color: #EBF2EE;
+  color: #00A332;
+  outline: none;
+}
+
 .panel-default {
   overflow-y: hidden;
 }
