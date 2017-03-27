@@ -32,6 +32,9 @@ export default class ListingPage extends React.Component {
                 </div>
               </form>
               <div className="nav navbar-nav navbar-right">
+                <button type="button" className="btn btn-default navbar-btn">
+                  <li><ab href="#" className = "slightUp">Sell an item!</ab></li>
+                </button>
                 <div className="btn-toolbar pull-right" role="toolbar">
                   <div className="btn-group" role="group">
                     <button type="button" className="btn btn-default navbar-btn">
