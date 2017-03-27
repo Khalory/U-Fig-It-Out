@@ -14,6 +14,7 @@
     <link href="css/profile.css" rel="stylesheet">
   </head>
   <body>
+    <div id="profile"></div>
     <!-- Navbar -->
     <nav class="navbar navbar-fixed-top navbar-default">
       <div class="container">
@@ -75,121 +76,11 @@
       <div class="row">
         <!-- Profile Info -->
         <div class="col-md-4">
-          <div class="row">
-            <div class="col-md-12">
-              <img class="img-thumbnail" src="img/fig-man.jpg" width=80% />
-              <br>
-              <h3>FigMan
-                <a href="#"><span class="glyphicon glyphicon-pencil"></a>
-              </h3>
-              figman.umass.edu
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <ul class="nav nav-pills pull-left">
-                <li role="presentation" class="active">
-                  <span class="glyphicon glyphicon-star"></span>
-                </li>
-                <li role="presentation">
-                  <span class="glyphicon glyphicon-star"></span>
-                </li>
-                <li role="presentation">
-                  <span class="glyphicon glyphicon-star"></span>
-                </li>
-                <li role="presentation">
-                  <span class="glyphicon glyphicon-star-empty"></span>
-                </li>
-                <li role="presentation">
-                  <span class="glyphicon glyphicon-star-empty"></span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <div id="profile-info"></div>
         </div>
         <!-- Selling/Buying List -->
         <div class="col-md-8">
-          <div class="panel panel-default fig-listings">
-            <div class="panel-heading">
-              <ul class="nav nav-tabs nav-justified">
-                <li role="presentation" class="active">
-                  <a href="#"><span class="glyphicon glyphicon-tag">
-                  </span> <strong>Selling</strong></a>
-                </li>
-                <li role="presentation">
-                  <a href="#"><span class="glyphicon glyphicon-heart"></span>
-                  <strong>Buying</strong></a>
-                </li>
-              </ul>
-            </div>
-            <div class=panel-body>
-              <ul class="list-group">
-                <li class="list-group-item listing-add">
-                  <a href="#"><center>Add another listing!</center></a>
-                </li>
-                <li class="media list-group-item listing-item">
-                  <div class="media-top media-left">
-                    <img src="img/AlgorithmsTextbook.jpeg" alt="Item">
-                  </div>
-                  <div class="media-body">
-                    <a href="#"><h4>CS 311 Textbook</h4></a>
-                    Like new, has no markings whatsoever!
-                  </div>
-                  <div class="media-top media-right">
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span>Edit</button>
-                  </div>
-                </li>
-                <li class="media list-group-item listing-item">
-                  <div class="media-top media-left">
-                    <img src="img/AlgorithmsTextbook.jpeg" alt="Item">
-                  </div>
-                  <div class="media-body">
-                    <a href="#"><h4>CS 311 Textbook</h4></a>
-                    Like new, has no markings whatsoever!
-                  </div>
-                  <div class="media-top media-right">
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span>Edit</button>
-                  </div>
-                </li>
-                <li class="media list-group-item listing-item">
-                  <div class="media-top media-left">
-                    <img src="img/AlgorithmsTextbook.jpeg" alt="Item">
-                  </div>
-                  <div class="media-body">
-                    <a href="#"><h4>CS 311 Textbook</h4></a>
-                    Like new, has no markings whatsoever!
-                  </div>
-                  <div class="media-top media-right">
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span>Edit</button>
-                  </div>
-                </li>
-                <li class="media list-group-item listing-item">
-                  <div class="media-top media-left">
-                    <img src="img/AlgorithmsTextbook.jpeg" alt="Item">
-                  </div>
-                  <div class="media-body">
-                    <a href="#"><h4>CS 311 Textbook</h4></a>
-                    Like new, has no markings whatsoever!
-                  </div>
-                  <div class="media-top media-right">
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span>Edit</button>
-                  </div>
-                </li>
-                <li class="media list-group-item listing-item">
-                  <div class="media-top media-left">
-                    <img src="img/AlgorithmsTextbook.jpeg" alt="Item">
-                  </div>
-                  <div class="media-body">
-                    <a href="#"><h4>CS 311 Textbook</h4></a>
-                    Like new, has no markings whatsoever!
-                  </div>
-                  <div class="media-top media-right">
-                    <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-cog"></span>Edit</button>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <div id="profile-listings"></div>
         </div>
       </div>
     </div>
@@ -199,5 +90,6 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- App code -->
     <script src="js/bundle.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>
