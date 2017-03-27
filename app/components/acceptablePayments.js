@@ -2,12 +2,12 @@ import React from 'react';
 
 export default class AcceptablePayments extends React.Component {
   render() {
-    var checked = this.props.checked
-    if (checked === null) {
-      checked = [false] * 7
+    var checked = [false, false, false, false, false, false, false]
+    if (typeof this.props.checked !== 'undefined' && this.props.checked) {
+      checked = this.props.checked
     }
-    else if (checked.length < 7) {
-      checked = checked.concat([false] * checked.length)
+    while (checked.length < 7) {
+      checked = checked.push(false)
     }
     return (
       <div className="row">
@@ -17,15 +17,15 @@ export default class AcceptablePayments extends React.Component {
           <table className="table item-payments">
             <tbody>
               <tr>
-                <td><input type="checkbox" disabled={this.props.disabled} checked={this.props.checked[0]}>Venmo</input></td>
-                <td><input type="checkbox" disabled={this.props.disabled} checked={this.props.checked[1]}>Paypal</input></td>
-                <td><input type="checkbox" disabled={this.props.disabled} checked={this.props.checked[2]}>Figs</input></td>
-                <td><input type="checkbox" disabled={this.props.disabled} checked={this.props.checked[3]}>Cash</input></td>
+                <td><input type="checkbox" disabled={this.props.disabled} checked={checked[0]}>Venmo</input></td>
+                <td><input type="checkbox" disabled={this.props.disabled} checked={checked[1]}>Paypal</input></td>
+                <td><input type="checkbox" disabled={this.props.disabled} checked={checked[2]}>Figs</input></td>
+                <td><input type="checkbox" disabled={this.props.disabled} checked={checked[3]}>Cash</input></td>
               </tr>
               <tr>
-                <td><input type="checkbox" disabled={this.props.disabled} checked={this.props.checked[4]}>Check</input></td>
-                <td><input type="checkbox" disabled={this.props.disabled} checked={this.props.checked[5]}>Barter</input></td>
-                <td><input type="checkbox" disabled={this.props.disabled} checked={this.props.checked[6]}>Bank Transfer</input></td>
+                <td><input type="checkbox" disabled={this.props.disabled} checked={checked[4]}>Check</input></td>
+                <td><input type="checkbox" disabled={this.props.disabled} checked={checked[5]}>Barter</input></td>
+                <td><input type="checkbox" disabled={this.props.disabled} checked={checked[6]}>Bank Transfer</input></td>
                 <td></td>
               </tr>
             </tbody>

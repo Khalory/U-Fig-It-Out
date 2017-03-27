@@ -1,5 +1,5 @@
 import React from 'react';
-
+import AcceptablePayments from './acceptablePayments'
 export default class newlisting extends React.Component {
   render() {
     return (
@@ -43,23 +43,8 @@ export default class newlisting extends React.Component {
           </div>
             <h2> Description:</h2>
             <textarea className="form-control" rows="5" id="comment"></textarea>
-        <h2>  Acceptable Payments </h2>
-          <table className="table">
-            <tbody>
-              <tr>
-                <td><input type="checkbox">Venmo</input></td>
-                <td><input type="checkbox">Paypal</input></td>
-                <td><input type="checkbox">Figs</input></td>
-                <td><input type="checkbox">Cash</input></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox">Check</input></td>
-                <td><input type="checkbox">Barter</input></td>
-                <td><input type="checkbox">Bank Transfer</input></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+
+      <AcceptablePayments disabled={false}/>
           File Path:
           <input type = "text" />
           <button type="button" className="btn btn-secondary">Add Photos!</button>
