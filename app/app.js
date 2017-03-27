@@ -1,41 +1,64 @@
-import React from 'react'//dont ever remove this everything will break
-//doesn't it need a semicolon?
+import React from 'react'
 import ReactDOM from 'react-dom';
 
 
 // Each major browser view user interface must be imported.
 import Newlisting from './components/newlisting'
-import Main from './components/main'
+import Navbar from './components/navbar'
+import NavbarUser from './components/navbarUser'
 import ListingPage from './components/listingPage'
 import ProfileInfo from './components/profile-info'
 import ProfileListings from './components/profile-listings'
+import SearchLeftBar from './components/searchleftbar'
+import SearchListings from './components/searchlistings'
 
 // For each view conditionally determine which view to display
 // depending on if the ID is present in the HTML.
-if (document.getElementById('ui-03') !== null) {
+if (document.getElementById('top-navbar') !== null) {
   ReactDOM.render(
-    <Main />,
-    document.getElementById('ui-03')
+    <Navbar />,
+    document.getElementById('top-navbar')
   )
-} else if (document.getElementById('listingPage') !== null) {
+}
+if (document.getElementById('navbar-user') !== null) {
   ReactDOM.render(
-    <ListingPage />,
-    document.getElementById('listingPage')
+    <NavbarUser />,
+    document.getElementById('navbar-user')
   )
-}else if(document.getElementById('newlisting') !== null){
-  ReactDOM.render(
-    <Newlisting />,
-    document.getElementById('newlisting')
-  )
-} else if (document.getElementById('profile-info') !== null) {
+}
+if (document.getElementById('profile') !== null) {
   ReactDOM.render(
     <ProfileInfo />,
-    document.getElementById('profile-info')
-  );
+    document.getElementById('profile')
+  )
 }
 if (document.getElementById('profile-listings') !== null) {
   ReactDOM.render(
     <ProfileListings />,
     document.getElementById('profile-listings')
-  );
+  )
+}
+if (document.getElementById('searchleftbar') !== null) {
+  ReactDOM.render(
+    <SearchLeftBar />,
+    document.getElementById('searchleftbar')
+  )
+}
+if (document.getElementById('searchlistings') !== null) {
+  ReactDOM.render(
+    <SearchListings />,
+    document.getElementById('searchlistings')
+  )
+}
+if (document.getElementById('listingPage') !== null) {
+  ReactDOM.render(
+    <ListingPage />,
+    document.getElementById('listingPage')
+  )
+}
+ if(document.getElementById('newlisting') !== null){
+  ReactDOM.render(
+    <Newlisting />,
+    document.getElementById('newlisting')
+  )
 }
