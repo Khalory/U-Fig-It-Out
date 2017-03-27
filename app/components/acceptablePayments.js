@@ -7,7 +7,7 @@ export default class AcceptablePayments extends React.Component {
       checked = this.props.checked
     }
     while (checked.length < 7) {
-      checked = checked.push(false)
+      checked.push(false)
     }
     return (
       <div className="row">

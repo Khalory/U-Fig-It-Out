@@ -89,7 +89,7 @@ export default class ListingPage extends React.Component {
                   </div>
                 </div>
               </div>
-              <AcceptablePayments disabled={false} checked={[true, true, true, true, false]} />
+              <AcceptablePayments disabled={true} checked={[true, false, true, true, false]} />
             </div>
           </div>
         </div>
