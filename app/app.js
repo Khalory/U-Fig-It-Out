@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 import ReactDOM from 'react-dom';
 
 
 // Each major browser view user interface must be imported.
-import newlisting from './components/newlisting'
+import Newlisting from './components/newlisting'
 import Main from './components/main'
 import ListingPage from './components/listingPage'
 
@@ -19,9 +19,9 @@ if (document.getElementById('ui-03') !== null) {
     <ListingPage />,
     document.getElementById('listingPage')
   )
-}else if(document.getElementById("newlisting") !== null){
+}else if(document.getElementById('newlisting') !== null){
   ReactDOM.render(
-    <newlisting />,
-    document.getElementById("newlisting")
+    <Newlisting />,
+    document.getElementById('newlisting')
   )
 }
