@@ -1,4 +1,4 @@
-import React from 'react';
+//import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Each major browser view user interface must be imported.
@@ -18,9 +18,14 @@ if (document.getElementById('ui-01') !== null) {
     document.getElementById('ui-02')
   );
 } else if (document.getElementById('ui-03') !== null) {
-  console.log("yoyo")
+  //console.log("yoyo")
   ReactDOM.render(
     <Main />,
     document.getElementById('ui-03')
+  );
+}else if(document.getElementById("newlisting") !== null){
+  ReactDOM.render(
+    <newlisting />,
+    document.getElementById("newlisting")
   );
 }
