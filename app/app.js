@@ -9,8 +9,7 @@ import NavbarUser from './components/navbarUser'
 import ListingPage from './components/listingPage'
 import ProfileInfo from './components/profile-info'
 import ProfileListings from './components/profile-listings'
-import SearchLeftBar from './components/searchleftbar'
-import SearchListings from './components/searchlistings'
+import Search from './components/search'
 
 // For each view conditionally determine which view to display
 // depending on if the ID is present in the HTML.
@@ -38,18 +37,6 @@ if (document.getElementById('profile-listings') !== null) {
     document.getElementById('profile-listings')
   )
 }
-if (document.getElementById('searchleftbar') !== null) {
-  ReactDOM.render(
-    <SearchLeftBar />,
-    document.getElementById('searchleftbar')
-  )
-}
-if (document.getElementById('searchlistings') !== null) {
-  ReactDOM.render(
-    <SearchListings />,
-    document.getElementById('searchlistings')
-  )
-}
 if (document.getElementById('listingPage') !== null) {
   ReactDOM.render(
     <ListingPage />,
@@ -61,4 +48,10 @@ if (document.getElementById('listingPage') !== null) {
     <Newlisting />,
     document.getElementById('newlisting')
   )
+}
+if (document.getElementById('search') !== null) {
+  ReactDOM.render(
+    <Search />,
+    document.getElementById('search')
+  );
 }
