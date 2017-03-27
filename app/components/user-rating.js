@@ -4,9 +4,7 @@ export default class UserRating extends React.Component {
   render() {
     return (
       <div>
-        <h3>FigMan
-          <a href="#"><span className="glyphicon glyphicon-pencil"></span></a>
-        </h3>
+        <h3>FigMan</h3>
         <ul className="nav nav-pills pull-left">
           <li role="presentation" className="active">
             <span className="glyphicon glyphicon-star"></span>
