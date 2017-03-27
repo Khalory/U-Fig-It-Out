@@ -1,5 +1,6 @@
 import React from 'react';
 import Item from './item';
+import UserRating from './user-rating'
 
 export default class SearchListings extends React.Component {
   render() {
@@ -12,33 +13,62 @@ export default class SearchListings extends React.Component {
                 <div className="panel-body">
                   <h4>Books &gt; Textbooks: <b>"CS 311"</b></h4>
                   <ul className="list-group">
+                  <li className="media list-group-item listing-item">
                     <Item picture="img/AlgorithmsTextbook.jpeg" itemtitle="CS 311 Textbook"
                       itemdescription="Like new, has no markings whatsoever!">
+                      <div className="media-top media-right">
+                        <UserRating name="FigMan" />
+                      </div>
                     </Item>
-                    <br />
+                  </li>
+                  <li className="media list-group-item listing-item">
                     <Item picture="img/AlgorithmsTextbook.jpeg" itemtitle="CS 311 Textbook"
                       itemdescription="Like new, has no markings whatsoever!">
+                      <div className="media-top media-right">
+                        <UserRating name="FigMan" />
+                      </div>
                     </Item>
-                    <br />
+                  </li>
+                  <li className="media list-group-item listing-item">
                     <Item picture="img/AlgorithmsTextbook.jpeg" itemtitle="CS 311 Textbook"
                       itemdescription="Like new, has no markings whatsoever!">
+                      <div className="media-top media-right">
+                        <UserRating name="FigMan" />
+                      </div>
                     </Item>
-                    <br />
+                  </li>
+                  <li className="media list-group-item listing-item">
                     <Item picture="img/AlgorithmsTextbook.jpeg" itemtitle="CS 311 Textbook"
                       itemdescription="Like new, has no markings whatsoever!">
+                      <div className="media-top media-right">
+                        <UserRating name="FigMan" />
+                      </div>
                     </Item>
-                    <br />
+                  </li>
+                  <li className="media list-group-item listing-item">
                     <Item picture="img/AlgorithmsTextbook.jpeg" itemtitle="CS 311 Textbook"
                       itemdescription="Like new, has no markings whatsoever!">
+                      <div className="media-top media-right">
+                        <UserRating name="FigMan" />
+                      </div>
                     </Item>
-                    <br />
+                  </li>
+                  <li className="media list-group-item listing-item">
                     <Item picture="img/AlgorithmsTextbook.jpeg" itemtitle="CS 311 Textbook"
                       itemdescription="Like new, has no markings whatsoever!">
+                      <div className="media-top media-right">
+                        <UserRating name="FigMan" />
+                      </div>
                     </Item>
-                    <br />
+                  </li>
+                  <li className="media list-group-item listing-item">
                     <Item picture="img/AlgorithmsTextbook.jpeg" itemtitle="CS 311 Textbook"
                       itemdescription="Like new, has no markings whatsoever!">
+                      <div className="media-top media-right">
+                        <UserRating name="FigMan" />
+                      </div>
                     </Item>
+                  </li>
                   </ul>
                 </div>
               </div>
