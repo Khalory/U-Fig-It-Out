@@ -25,10 +25,10 @@ if (document.getElementById('navbar-user') !== null) {
     document.getElementById('navbar-user')
   )
 }
-if (document.getElementById('profile') !== null) {
+if (document.getElementById('profile-info') !== null) {
   ReactDOM.render(
     <ProfileInfo />,
-    document.getElementById('profile')
+    document.getElementById('profile-info')
   )
 }
 if (document.getElementById('profile-listings') !== null) {
