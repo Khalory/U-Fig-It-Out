@@ -9,6 +9,7 @@ import Main from './components/main'
 import ListingPage from './components/listingPage'
 import ProfileInfo from './components/profile-info'
 import ProfileListings from './components/profile-listings'
+import Search from './components/search'
 
 // For each view conditionally determine which view to display
 // depending on if the ID is present in the HTML.
@@ -37,5 +38,11 @@ if (document.getElementById('profile-listings') !== null) {
   ReactDOM.render(
     <ProfileListings />,
     document.getElementById('profile-listings')
+  );
+}
+if (document.getElementById('search') !== null) {
+  ReactDOM.render(
+    <Search />,
+    document.getElementById('search')
   );
 }
