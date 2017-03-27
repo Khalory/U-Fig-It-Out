@@ -78,7 +78,7 @@ export default class ListingPage extends React.Component {
                       <div className="row item-subimage-chevron">
                         <div className="btn-group" role="group">
                           <button type="button" className="btn btn-default navbar-btn">
-                            <span className="glyphicon glyphicon-chevron-right">{">"}</span>
+                            <span className="glyphicon glyphicon-chevron-right"></span>
                           </button>
                         </div>
                       </div>
