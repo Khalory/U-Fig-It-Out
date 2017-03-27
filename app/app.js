@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 // Each major browser view user interface must be imported.
-import UI01 from './components/ui-01.js';
-import UI02 from './components/ui-02.js';
+import newlisting from './components/newlisting'
 
 // For each view conditionally determine which view to display
 // depending on if the ID is present in the HTML.
