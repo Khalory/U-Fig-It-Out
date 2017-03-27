@@ -27,6 +27,19 @@ margin-right: 13px;
 
 }
 
+li ab {
+text-decoration: none;
+font-family: arial;
+color: #ABABAB;
+float: left;
+padding: 0px;
+font-size: 13px;
+font-weight: 600;
+margin-top: 2px;
+margin-right: 13px;
+
+}
+
 img {
     width:280px;
     margin: 195px auto 0 auto;
@@ -81,4 +94,12 @@ font-family: verdana;
     z-index:0;
     opacity:0.5;
     font-weight: bold;
+}
+.fixItemListingPlacement{
+  padding-bottom: 0px;
+}
+.slightUp{
+  padding-bottom: 3px;
+  text-align: center;
+  font-size: 14px;
 }
