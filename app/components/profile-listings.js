@@ -27,7 +27,7 @@ export default class ProfileListings extends React.Component {
               <Item picture="img/AlgorithmsTextbook.jpeg" itemtitle="CS 311 Textbook"
                 itemdescription="Like new, has no markings whatsoever!">
                 <div className="media-top media-right">
-                  <UserRating />
+                  <UserRating name="FigMan" />
                 </div>
               </Item>
             </li>

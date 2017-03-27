@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import Newlisting from './components/newlisting'
 import Main from './components/main'
 import ListingPage from './components/listingPage'
-import UserRating from './components/user-rating'
+import ProfileInfo from './components/profile-info'
 import ProfileListings from './components/profile-listings'
 
 // For each view conditionally determine which view to display
@@ -26,13 +26,13 @@ if (document.getElementById('ui-03') !== null) {
     <Newlisting />,
     document.getElementById('newlisting')
   )
-} else if (document.getElementById('user-rating') !== null) {
+} else if (document.getElementById('profile-info') !== null) {
   ReactDOM.render(
-    <UserRating />,
-    document.getElementById('user-rating')
+    <ProfileInfo />,
+    document.getElementById('profile-info')
   );
 }
-if (document.getElementById('profile-listings') !== null) { 
+if (document.getElementById('profile-listings') !== null) {
   ReactDOM.render(
     <ProfileListings />,
     document.getElementById('profile-listings')
