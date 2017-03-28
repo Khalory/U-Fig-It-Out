@@ -18,7 +18,7 @@ export default class ProfileListings extends React.Component {
             </li>
           </ul>
         </div>
-        <div classNameName="panel-body">
+        <div className="panel-body">
           <ul className="list-group">
             <li className="list-group-item listing-add">
               <a href="#"><center>Add another listing!</center></a>
@@ -27,7 +27,7 @@ export default class ProfileListings extends React.Component {
               <Item picture="img/AlgorithmsTextbook.jpeg" itemtitle="CS 311 Textbook"
                 itemdescription="Like new, has no markings whatsoever!">
                 <div className="media-top media-right">
-                  <UserRating name="FigMan" />
+                  <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-cog"></span>Edit</button>
                 </div>
               </Item>
             </li>
