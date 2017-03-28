@@ -1,6 +1,7 @@
 import React from 'react'
 import AcceptablePayments from './acceptablePayments'
 import Navbar from './navbar'
+import ListingImages from './listingImages'
 
 export default class ListingPage extends React.Component {
   render() {
@@ -18,28 +19,7 @@ export default class ListingPage extends React.Component {
             <div className="row">
               <div className="col-md-1"></div>
               <div className="row">
-                <div className="col-md-5">
-                  <div className="row item-images">
-                    <div className="col-md-8">
-                      <img className="img-thumbnail" src="img/figs-1.jpg" width="100%" />
-                    </div>
-                    <div className="col-md-4">
-                      <div className="row item-subimage-chevron">
-                        <div className="btn-group" role="group">
-                          <button type="button" className="btn btn-default navbar-btn">
-                            <span className="glyphicon glyphicon-chevron-right"></span>
-                          </button>
-                        </div>
-                      </div>
-                      <div className="row item-subimage">
-                        <div>
-                          <img className="img-thumbnail" src="img/figs-2.jpg" width="45%" />
-                          <img className="img-thumbnail" src="img/figs-3.jpg" width="45%" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <ListingImages images={['img/figs-1.jpg', 'img/figs-2.jpg', 'img/figs-3.jpg']} />
                 <div className="col-md-5">
                   <div className="row">
                     <span className="item-header">Top Quality Fig - CHEAP!</span>
