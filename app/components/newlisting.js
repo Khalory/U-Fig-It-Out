@@ -1,5 +1,6 @@
 import React from 'react';
 import AcceptablePayments from './acceptablePayments'
+
 export default class newlisting extends React.Component {
   render() {
     return (
