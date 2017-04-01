@@ -103,3 +103,19 @@ font-family: verdana;
   text-align: center;
   font-size: 14px;
 }
+
+.chat-popup {
+  width: 300px;
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
+  border: 1px solid grey;
+  border-bottom: none;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  background-color: #00D451;
+}
+
+.chat-popup button:hover {
+  background-color: #7634AB;
+}
