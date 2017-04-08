@@ -2,8 +2,16 @@ import React from 'react'
 import AcceptablePayments from './acceptablePayments'
 import Navbar from './navbar'
 import ListingImages from './listingImages'
+import {getItemListings} from '../server'
 
 export default class ListingPage extends React.Component {
+
+  componentDidMount() {
+    getItemListings(this.props.id, (items) => {
+      this.state = items[0]
+    })
+  }
+
   render() {
     return (
       <div>
@@ -19,10 +27,10 @@ export default class ListingPage extends React.Component {
             <div className="row">
               <div className="col-md-1"></div>
               <div className="row">
-                <ListingImages images={['img/figs-1.jpg', 'img/figs-2.jpg', 'img/figs-3.jpg']} />
+                <ListingImages images={item.pictures} />
                 <div className="col-md-5">
                   <div className="row">
-                    <span className="item-header">Top Quality Fig - CHEAP!</span>
+                    <span className="item-header">{this.state.title}</span>
                     <br/>
                     <span className="item-price">{"$13.37"}</span>
                   </div>

@@ -45,6 +45,31 @@ var initialData = {
         "img/AlgorithmsTextbook.jpeg"
       ],
       "rating": null
+    },
+    "2": {
+      "_id": 1,
+      "owner": 1,
+      "title": "Top Quality Fig - CHEAP!",
+      "description": "Like new, has no markings whatsoever!",
+      "categories": [
+        1, 2
+      ],
+      "preferred_payments": [
+        1, 2, 5, 4
+      ],
+      "timestamp": 1453690890000,
+      "last_updated": 1453690800000,
+      //0=inactive, 1=active
+      "active": 1,
+      "price": 13.37,
+      //0=sellListing, 1=buyListing
+      "type": 0,
+      "pictures": [
+        "img/figs-1.jpg",
+        "img/figs-2.jpg",
+        "img/figs-3.jpg"
+      ],
+      "rating": null
     }
   },
   "categories": {
@@ -91,7 +116,7 @@ var initialData = {
       "name": "Bank Transfer"
     }
   },
-  "conersation": {
+  "conversation": {
     1: {
       "_id": 1,
       "u1": 1,
