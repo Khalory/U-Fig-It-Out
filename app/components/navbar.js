@@ -33,7 +33,7 @@ export default class Navbar extends React.Component {
             </form>
             <div className="nav navbar-nav navbar-right">
               <button type="button" className="btn btn-default navbar-btn">
-                <li><ab href="#" className="slightUp">Sell an item!</ab></li>
+                <li><a href="http://localhost:8080/newlisting.html" className="slightUp">Sell an item!</a></li>
               </button>
               <div className="btn-toolbar pull-right" role="toolbar">
                 <div className="btn-group" role="group">
