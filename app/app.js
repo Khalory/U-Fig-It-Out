@@ -10,7 +10,7 @@ import ListingPage from './components/listingPage'
 import ProfileInfo from './components/profile-info'
 import ProfileListings from './components/profile-listings'
 import Search from './components/search'
-
+import ChatPopup from './components/chat-popup'
 // For each view conditionally determine which view to display
 // depending on if the ID is present in the HTML.
 if (document.getElementById('top-navbar') !== null) {
@@ -54,4 +54,10 @@ if (document.getElementById('search') !== null) {
     <Search />,
     document.getElementById('search')
   );
+}
+if(document.getElementById('chat-popup')!== null){
+  ReactDOM.render(
+    <ChatPopup />,
+    document.getElementById('chat-popup')
+  )
 }

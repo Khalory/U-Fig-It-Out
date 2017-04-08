@@ -1,5 +1,6 @@
 import React from 'react';
 import AcceptablePayments from './acceptablePayments'
+
 export default class newlisting extends React.Component {
   render() {
     return (
@@ -44,7 +45,7 @@ export default class newlisting extends React.Component {
             <h2> Description:</h2>
             <textarea className="form-control" rows="5" id="comment"></textarea>
 
-      <AcceptablePayments disabled={false}/>
+        <AcceptablePayments disabled={false} checked />
           File Path:
           <input type = "text" />
           <button type="button" className="btn btn-secondary">Add Photos!</button>
