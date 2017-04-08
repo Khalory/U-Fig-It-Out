@@ -1,4 +1,4 @@
-import {readDocument, writeDocument, addDocument} from './database.js';
+import {readDocument, writeDocument, addDocument} from './database';
 
 /**
 * Emulates how a REST call is *asynchronous* -- it calls your function back
@@ -8,6 +8,11 @@ function emulateServerReturn(data, cb) {
   setTimeout(() => {
     cb(data);
   }, 4);
+}
+
+export function getUserData(user, cb) {
+  var userData = readDocument('users', user);
+  emulateServerReturn(userData, cb);
 }
 
 /**
@@ -32,7 +37,7 @@ function getFeedItemSync(feedItemId) {
   return feedItem;
 }
 
-//
+
 function storeListing(id,title,owner, description,categories,preferred_payments,post_time,last_updated,active,price,type,pictures, cb){
   var newItem = {
     "_id": id,
@@ -53,7 +58,7 @@ function storeListing(id,title,owner, description,categories,preferred_payments,
   emulateServerReturn(newItem, cb);
 }
 
-function getItemListings(items, cb){
+export function getItemListings(items, cb){
   if(items.constructor !== Array){
     items = [items]
   }
@@ -64,6 +69,6 @@ function getItemListings(items, cb){
     itemData.owner = userData
     itemDataList.push(itemData)
   }
-  emulateServerReturn(itemData, cb);
+  emulateServerReturn(itemDataList, cb);
 
 }

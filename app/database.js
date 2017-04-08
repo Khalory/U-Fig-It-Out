@@ -45,6 +45,33 @@ var initialData = {
         "img/AlgorithmsTextbook.jpeg"
       ],
       "rating": null
+    },
+    "2": {
+      "_id": 1,
+      "owner": 1,
+      "title": "Top Quality Fig - CHEAP!",
+      "description": "This is the best fig ever, grown in a garden of magic beans which has numerous giant beanstocks. In fact, this fig\
+                      actually grew on one of the giant bean stocks, thus being imbued with the power of giants. You won't find another\
+                      fig like this ever, especially not for this cheap, cheap price because I don't like figs very much.",
+      "categories": [
+        1, 2
+      ],
+      "preferred_payments": [
+        1, 2, 5, 4
+      ],
+      "timestamp": 1453690890000,
+      "last_updated": 1453690800000,
+      //0=inactive, 1=active
+      "active": 1,
+      "price": 13.37,
+      //0=sellListing, 1=buyListing
+      "type": 0,
+      "pictures": [
+        "img/figs-1.jpg",
+        "img/figs-2.jpg",
+        "img/figs-3.jpg"
+      ],
+      "rating": null
     }
   },
   "categories": {
@@ -206,8 +233,3 @@ class ResetDatabase extends React.Component {
     );
   }
 }
-
-ReactDOM.render(
-  <ResetDatabase />,
-  document.getElementById('fig-db-reset')
-);

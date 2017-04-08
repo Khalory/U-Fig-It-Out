@@ -87,7 +87,7 @@ export default class newlisting extends React.Component {
           <input type = "text" />
           <button type="button" className="btn btn-secondary">Add Photos!</button>
           <br/>
-          <button type="button" className="btn btn-secondary" onClick={(description) => this.storeListing(id,title,owner, description,categories,preferred_payments,post_time,last_updated,active,price,type,pictures)}>Create Listing!</button>
+          <button type="button" className="btn btn-secondary" onClick={(e) => this.storeListing(id,title,owner, description,categories,preferred_payments,post_time,last_updated,active,price,type,pictures)}>Create Listing!</button>
           </div>
         </div>
       </div>
