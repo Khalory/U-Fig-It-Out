@@ -39,7 +39,7 @@ if (document.getElementById('profile-listings') !== null) {
 }
 if (document.getElementById('listingPage') !== null) {
   ReactDOM.render(
-    <ListingPage />,
+    <ListingPage id={2}/>,
     document.getElementById('listingPage')
   )
 }

@@ -50,7 +50,9 @@ var initialData = {
       "_id": 1,
       "owner": 1,
       "title": "Top Quality Fig - CHEAP!",
-      "description": "Like new, has no markings whatsoever!",
+      "description": "This is the best fig ever, grown in a garden of magic beans which has numerous giant beanstocks. In fact, this fig\
+                      actually grew on one of the giant bean stocks, thus being imbued with the power of giants. You won't find another\
+                      fig like this ever, especially not for this cheap, cheap price because I don't like figs very much.",
       "categories": [
         1, 2
       ],

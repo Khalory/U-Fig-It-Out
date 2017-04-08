@@ -37,7 +37,7 @@ function getFeedItemSync(feedItemId) {
   return feedItem;
 }
 
-function storeListing(title, username, description, cb){
+export function storeListing(title, username, description, cb){
   var newItem = {
     "title": title,
     "name": username,
@@ -47,7 +47,7 @@ function storeListing(title, username, description, cb){
   emulateServerReturn(newItem, cb);
 }
 
-function getItemListings(items, cb){
+export function getItemListings(items, cb){
   if(items.constructor !== Array){
     items = [items]
   }
@@ -58,6 +58,6 @@ function getItemListings(items, cb){
     itemData.owner = userData
     itemDataList.push(itemData)
   }
-  emulateServerReturn(itemData, cb);
+  emulateServerReturn(itemDataList, cb);
 
 }

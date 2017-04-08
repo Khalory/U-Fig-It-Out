@@ -6,13 +6,20 @@ import {getItemListings} from '../server'
 
 export default class ListingPage extends React.Component {
 
+  constructor(props) {
+    super(props)
+    this.state = null
+  }
+
   componentDidMount() {
     getItemListings(this.props.id, (items) => {
-      this.state = items[0]
+      this.setState(items[0])
     })
   }
 
   render() {
+    if (this.state === null)
+      return <div></div>
     return (
       <div>
         <Navbar />
@@ -27,12 +34,12 @@ export default class ListingPage extends React.Component {
             <div className="row">
               <div className="col-md-1"></div>
               <div className="row">
-                <ListingImages images={item.pictures} />
+                <ListingImages images={this.state.pictures} />
                 <div className="col-md-5">
                   <div className="row">
                     <span className="item-header">{this.state.title}</span>
                     <br/>
-                    <span className="item-price">{"$13.37"}</span>
+                    <span className="item-price">{"$" + this.state.price}</span>
                   </div>
                   <div className="row">
                     <ul className="nav nav-pills pull-left">
@@ -70,9 +77,7 @@ export default class ListingPage extends React.Component {
               <div className="col-md-10">
                 <div className="panel panel-default">
                   <div className="panel-body">
-                    {"This is the best fig ever, grown in a garden of magic beans which has numerous giant beanstocks. In fact, this fig\
-                      actually grew on one of the giant bean stocks, thus being imbued with the power of giants. You won't find another\
-                      fig like this ever, especially not for this cheap, cheap price because I don't like figs very much."}
+                    {this.state.description}
                     </div>
                   </div>
                 </div>
