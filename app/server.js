@@ -31,3 +31,28 @@ function getFeedItemSync(feedItemId) {
   });
   return feedItem;
 }
+
+function storeListing(title, username, description, cb){
+  var newItem = {
+    "title": title,
+    "name": username,
+    "description": description
+  };
+  newItem = addDocument('item_listings', newItem)
+  emulateServerReturn(newItem, cb);
+}
+
+function getItemListings(items, cb){
+  if(items.constructor !== Array){
+    items = [items]
+  }
+  var itemDataList = [];
+  for (var i = 0; i < items.length; i++){
+    var itemData = readDocument("item_listings", items[i]);
+    var userData = readDocument("users", itemData.owner);
+    itemData.owner = userData
+    itemDataList.push(itemData)
+  }
+  emulateServerReturn(itemData, cb);
+
+}

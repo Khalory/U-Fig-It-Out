@@ -15,7 +15,7 @@ export default class Navbar extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="#">
+            <a className="navbar-brand" href="http://localhost:8080/main.html">
               <span className="glyphicon glyphicon-home"></span>
             </a>
           </div>

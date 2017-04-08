@@ -91,7 +91,7 @@ var initialData = {
       "name": "Bank Transfer"
     }
   },
-  "conersation": {
+  "conversation": {
     1: {
       "_id": 1,
       "u1": 1,
