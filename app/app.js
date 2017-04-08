@@ -27,7 +27,7 @@ if (document.getElementById('navbar-user') !== null) {
 }
 if (document.getElementById('profile-info') !== null) {
   ReactDOM.render(
-    <ProfileInfo />,
+    <ProfileInfo user={1} />,
     document.getElementById('profile-info')
   )
 }
