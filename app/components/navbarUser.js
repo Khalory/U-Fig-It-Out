@@ -6,7 +6,7 @@ export default class NavbarUser extends React.Component {
       <div>
         <button type="button" className="btn btn-default navbar-btn">
           <span className="glyphicon glyphicon-user"></span>
-          FigMan
+          <a href="http://localhost:8080/profile.html">Figman</a>
         </button>
         <div className="btn-group" role="group">
           <button type="button" className="btn btn-default navbar-btn dropdown-toggle"
