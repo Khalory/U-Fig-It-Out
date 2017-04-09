@@ -47,7 +47,7 @@ var initialData = {
       "rating": null
     },
     "2": {
-      "_id": 1,
+      "_id": 2,
       "owner": 1,
       "title": "Top Quality Fig - CHEAP!",
       "description": "This is the best fig ever, grown in a garden of magic beans which has numerous giant beanstocks. In fact, this fig\
@@ -77,7 +77,7 @@ var initialData = {
   "categories": {
     1:{
       "_id": 1,
-      "name": "Books"
+      "name": "BOOKS"
     },
     2:{
       "_id": 2,
@@ -86,6 +86,98 @@ var initialData = {
     3:{
       "_id": 3,
       "name": "Non-textbooks"
+    },
+    4:{
+      "_id": 4,
+      "name": "CARS"
+    },
+    5:{
+      "_id": 5,
+      "name": "Vehicles"
+    },
+    6:{
+      "_id": 6,
+      "name": "Automotive Accessories"
+    },
+    7:{
+      "_id": 7,
+      "name": "CLOTHING"
+    },
+    8:{
+      "_id": 8,
+      "name": "Men"
+    },
+    9:{
+      "_id": 9,
+      "name": "Women"
+    },
+    10:{
+      "_id": 10,
+      "name": "HOUSEHOLD"
+    },
+    11:{
+      "_id": 11,
+      "name": "Furniture"
+    },
+    12:{
+      "_id": 12,
+      "name": "Refrigerators and Appliances"
+    },
+    13:{
+      "_id": 13,
+      "name": "Other Items"
+    },
+    14:{
+      "_id": 14,
+      "name": "FIGS"
+    },
+    15:{
+      "_id": 15,
+      "name": "ELECTRONICS"
+    },
+    16:{
+      "_id": 16,
+      "name": "iClickers"
+    },
+    17:{
+      "_id": 17,
+      "name": "Cell Phones"
+    },
+    18:{
+      "_id": 18,
+      "name": "Other Electronic Items"
+    },
+    19:{
+      "_id": 19,
+      "name": "COMPUTERS"
+    },
+    20:{
+      "_id": 20,
+      "name": "Laptops"
+    },
+    21:{
+      "_id": 21,
+      "name": "Desktops"
+    },
+    22:{
+      "_id": 22,
+      "name": "Computing Accessories"
+    },
+    23:{
+      "_id": 23,
+      "name": "VIDEO GAMES"
+    },
+    24:{
+      "_id": 24,
+      "name": "Consoles"
+    },
+    25:{
+      "_id": 25,
+      "name": "Games"
+    },
+    26:{
+      "_id": 26,
+      "name": "Gaming Accessories"
     }
   },
   "preferred_payments": {
@@ -184,6 +276,10 @@ export function readDocument(collection, id) {
   // Clone the data. We do this to model a database, where you receive a
   // *copy* of an object and not the object itself.
   return JSONClone(data[collection][id]);
+}
+
+export function readFullCollection(collection) {
+  return JSONClone(data[collection]);
 }
 
 /**

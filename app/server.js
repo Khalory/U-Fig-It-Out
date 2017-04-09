@@ -1,4 +1,4 @@
-import {readDocument, writeDocument, addDocument} from './database';
+import {readDocument, readFullCollection, writeDocument, addDocument} from './database';
 
 /**
 * Emulates how a REST call is *asynchronous* -- it calls your function back
@@ -15,6 +15,16 @@ export function getUserData(user, cb) {
   emulateServerReturn(userData, cb);
 }
 
+export function getCategories(cb) {
+  var categoriesList = []
+  var categories = readFullCollection("categories");
+  var length = Object.keys(categories).length
+  for(var i=1; i<=length; i++) {
+    var category = readDocument("categories", i)
+    categoriesList.push(category);
+  }
+  emulateServerReturn(categoriesList, cb);
+}
 /**
 * Given a feed item ID, returns a FeedItem object with references resolved.
 * Internal to the server, since it's synchronous.
@@ -71,4 +81,16 @@ export function getItemListings(items, cb){
   }
   emulateServerReturn(itemDataList, cb);
 
+}
+
+export function getUserListings(user, bs, cb) {
+  var itemDataList = []
+  var itemListings = readFullCollection("item_listings");
+  for(var i=1; i<=Object.keys(itemListings).length; i++){
+    var item = readDocument("item_listings", i)
+    if(user===item.owner && item.type===bs && item.active===1){
+      itemDataList.push(item);
+    }
+  }
+  emulateServerReturn(itemDataList, cb);
 }

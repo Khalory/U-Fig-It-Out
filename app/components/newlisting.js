@@ -1,8 +1,8 @@
 import React from 'react';
 import AcceptablePayments from './acceptablePayments'
 import {storeListing} from '../server'
-var title,description,categories,preferred_payments,post_time,last_updated,active,price,pictures
-var type = 0
+
+
 
 export default class newlisting extends React.Component {
   constructor(props) {
@@ -25,14 +25,15 @@ export default class newlisting extends React.Component {
    * Triggers the `onPost` prop if the post isn't empty, and clears
    * the component.
    */
-  handleTitle(e) {
+  handlePost(e) {
     // Prevent the event from "bubbling" up the DOM tree.
     e.preventDefault();
     // Trim whitespace from beginning + end of entry.
     var statusUpdateText = this.state.value.trim();
     if (statusUpdateText !== "") {
-      this.props.onPost(statusUpdateText);
-      this.setState({title: ""});
+      /* TODO: How do we send the post to the server + update the Feed? */
+
+      this.setState({value: ""});
     }
   }
 

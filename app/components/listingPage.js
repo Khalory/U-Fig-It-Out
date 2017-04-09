@@ -2,6 +2,7 @@ import React from 'react'
 import AcceptablePayments from './acceptablePayments'
 import Navbar from './navbar'
 import ListingImages from './listingImages'
+import UserRating from './user-rating'
 import {getItemListings} from '../server'
 
 export default class ListingPage extends React.Component {
@@ -42,23 +43,7 @@ export default class ListingPage extends React.Component {
                     <span className="item-price">{"$" + this.state.price}</span>
                   </div>
                   <div className="row">
-                    <ul className="nav nav-pills pull-left">
-                      <li role="presentation" className="active">
-                        <span className="glyphicon glyphicon-star"></span>
-                      </li>
-                      <li role="presentation">
-                        <span className="glyphicon glyphicon-star"></span>
-                      </li>
-                      <li role="presentation">
-                        <span className="glyphicon glyphicon-star"></span>
-                      </li>
-                      <li role="presentation">
-                        <span className="glyphicon glyphicon-star-empty"></span>
-                      </li>
-                      <li role="presentation">
-                        <span className="glyphicon glyphicon-star-empty"></span>
-                      </li>
-                    </ul>
+                    <UserRating name={this.state.owner.username} rating={this.state.owner.avg_rating} />
                   </div>
                   <div className="row">
                     <div className="btn-group" role="group">
