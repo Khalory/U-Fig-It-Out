@@ -1,6 +1,5 @@
 import React from 'react';
 import Item from './item';
-import UserRating from './user-rating'
 import {getUserListings} from '../server.js'
 
 export default class ProfileListings extends React.Component {
