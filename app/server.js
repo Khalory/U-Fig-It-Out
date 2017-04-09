@@ -1,4 +1,4 @@
-import {readDocument, writeDocument, addDocument} from './database';
+import {readDocument, readFullCollection, writeDocument, addDocument} from './database';
 
 /**
 * Emulates how a REST call is *asynchronous* -- it calls your function back
@@ -60,4 +60,16 @@ export function getItemListings(items, cb){
   }
   emulateServerReturn(itemDataList, cb);
 
+}
+
+export function getUserListings(user, bs, cb) {
+  var itemDataList = []
+  var itemListings = readFullCollection("item_listings");
+  for(var i=1; i<=Object.keys(itemListings).length; i++){
+    var item = readDocument("item_listings", i)
+    if(user===item.owner && item.type===bs && item.active===1){
+      itemDataList.push(item);
+    }
+  }
+  emulateServerReturn(itemDataList, cb);
 }

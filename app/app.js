@@ -33,7 +33,7 @@ if (document.getElementById('profile-info') !== null) {
 }
 if (document.getElementById('profile-listings') !== null) {
   ReactDOM.render(
-    <ProfileListings />,
+    <ProfileListings user={1} userListings={[]} />,
     document.getElementById('profile-listings')
   )
 }

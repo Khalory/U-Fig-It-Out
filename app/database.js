@@ -47,7 +47,7 @@ var initialData = {
       "rating": null
     },
     "2": {
-      "_id": 1,
+      "_id": 2,
       "owner": 1,
       "title": "Top Quality Fig - CHEAP!",
       "description": "This is the best fig ever, grown in a garden of magic beans which has numerous giant beanstocks. In fact, this fig\
@@ -184,6 +184,10 @@ export function readDocument(collection, id) {
   // Clone the data. We do this to model a database, where you receive a
   // *copy* of an object and not the object itself.
   return JSONClone(data[collection][id]);
+}
+
+export function readFullCollection(collection) {
+  return JSONClone(data[collection]);
 }
 
 /**
