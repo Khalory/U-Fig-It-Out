@@ -37,11 +37,22 @@ function getFeedItemSync(feedItemId) {
   return feedItem;
 }
 
-export function storeListing(title, username, description, cb){
+
+function storeListing(id,title,owner, description,categories,preferred_payments,post_time,last_updated,active,price,type,pictures, cb){
   var newItem = {
+    "_id": id,
+    "owner": owner,
     "title": title,
-    "name": username,
-    "description": description
+    "description": description,
+    "categories":categories,
+    "preferred_payments":preferred_payments,
+    "_timestamp": post_time,
+    "last_updated": last_updated,
+    "active": active,
+    "price": price,
+    "type": type,
+    "pictures":pictures,
+    "rating": null
   };
   newItem = addDocument('item_listings', newItem)
   emulateServerReturn(newItem, cb);
