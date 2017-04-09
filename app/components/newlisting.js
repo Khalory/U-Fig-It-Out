@@ -1,12 +1,22 @@
 import React from 'react';
 import AcceptablePayments from './acceptablePayments'
-
+import {storeListing} from '../server'
+var title,description,categories,preferred_payments,post_time,last_updated,active,price,pictures
+var type = 0
 
 export default class newlisting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ""
+      title: "",
+      description:"",
+      categories:[],
+      preferred_payments:[],
+      post_time: null,
+      update_time: null,
+      active: null,
+      price:null,
+      pictures:""
     };
   }
 
@@ -15,15 +25,14 @@ export default class newlisting extends React.Component {
    * Triggers the `onPost` prop if the post isn't empty, and clears
    * the component.
    */
-  handlePost(e) {
+  handleTitle(e) {
     // Prevent the event from "bubbling" up the DOM tree.
     e.preventDefault();
     // Trim whitespace from beginning + end of entry.
     var statusUpdateText = this.state.value.trim();
     if (statusUpdateText !== "") {
-      /* TODO: How do we send the post to the server + update the Feed? */
-      // Reset status update.
-      this.setState({value: ""});
+      this.props.onPost(statusUpdateText);
+      this.setState({title: ""});
     }
   }
 
@@ -51,9 +60,9 @@ export default class newlisting extends React.Component {
             <p>This page is to help you create a new listing to sell your items!</p>
           <div className="form-group">
             <h2>Name of Item:</h2>
-            <input type="text" className="form-control" id="usr" />
+            <input type="text" className="form-control" id="usr" value={this.state.value} onChange={(title) => this.handleChange(value)} />
 
-          <h2>Price:   <input type = "text" /></h2>
+          <h2>Price:   <input type = "text" price={this.state.value} onChange={(price) => this.handleChange(price)}  /></h2>
           <h2>Check all that apply:</h2>
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Textbook</label>
@@ -80,14 +89,14 @@ export default class newlisting extends React.Component {
             <label><input type="checkbox" value="" />Figs</label>
           </div>
             <h2> Description:</h2>
-            <textarea className="form-control" rows="5" id="comment"value={this.state.value} onChange={(description) => this.handleChange(e)}></textarea>
+            <textarea className="form-control" rows="5" id="comment"value={this.state.value} onChange={(description) => this.handleChange(description)}></textarea>
 
-        <AcceptablePayments disabled={false} checked />
+        <AcceptablePayments disabled={false} checked value={this.state.value} onChange={(value) => this.handleChange(prefered_payments)}/>
           File Path:
           <input type = "text" />
-          <button type="button" className="btn btn-secondary">Add Photos!</button>
+          <button type="button" className="btn btn-secondary" value={this.state.value} onClick={(value) => this.handleChange(value)}>Add Photos!</button>
           <br/>
-          <button type="button" className="btn btn-secondary" onClick={(e) => this.storeListing(id,title,owner, description,categories,preferred_payments,post_time,last_updated,active,price,type,pictures)}>Create Listing!</button>
+          <button type="button" className="btn btn-secondary" value={this.state.value} onClick={storeListing(title,description,categories,preferred_payments,post_time,last_updated,active,price,type,pictures)}>Create Listing!</button>
           </div>
         </div>
       </div>
