@@ -1,10 +1,12 @@
 import React from 'react';
+import {getCategories} from '../server'
 
 export default class SearchLeftBar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeIndex: null
+      activeIndex: null,
+      categoriesList: []
     }
   }
 
@@ -14,39 +16,14 @@ export default class SearchLeftBar extends React.Component {
 
 
   render() {
-    var categories = [
-        { name: <b>BOOKS</b> },
-        { name: "Textbooks" },
-        { name: "Non-textbooks" },
-        { name: <b>CARS</b>},
-        { name: "Vehicles"},
-        { name: "Automotive Accessories"},
-        { name: <b>CLOTHING</b>},
-        { name: "Men"},
-        { name: "Women"},
-        { name: <b>HOUSEHOLD</b>},
-        { name: "Furniture"},
-        { name: "Refrigerators and Appliances"},
-        { name: "Other Items"},
-        { name: <b>FIGS</b>},
-        { name: <b>ELECTRONICS</b>},
-        { name: "iClickers"},
-        { name: "Cell Phones"},
-        { name: "Other Electronic Items"},
-        { name: <b>COMPUTER</b>},
-        { name: "Laptops"},
-        { name: "Desktops"},
-        { name: "Computing Accessories"},
-        { name: <b>VIDEO GAMES</b>},
-        { name: "Consoles"},
-        { name: "Games"},
-        { name: "Gaming Accessories"}
-    ]
+    getCategories((categories) => {
+      this.setState({categoriesList: categories})
+    })
 
     return <div>
       <div className="col-md-2 fig-categories">
         <ul className="nav nav-pills nav-stacked">
-        { categories.map((category, i) => {
+        { this.state.categoriesList.map((category, i) => {
             return <Category key={i}
               name={ category.name }
               index={ i }

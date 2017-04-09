@@ -15,6 +15,16 @@ export function getUserData(user, cb) {
   emulateServerReturn(userData, cb);
 }
 
+export function getCategories(cb) {
+  var categoriesList = []
+  var categories = readFullCollection("categories");
+  var length = Object.keys(categories).length
+  for(var i=1; i<=length; i++) {
+    var category = readDocument("categories", i)
+    categoriesList.push(category);
+  }
+  emulateServerReturn(categoriesList, cb);
+}
 /**
 * Given a feed item ID, returns a FeedItem object with references resolved.
 * Internal to the server, since it's synchronous.
