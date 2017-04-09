@@ -1,18 +1,55 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
+import { IndexRoute, Router, Route, browserHistory } from 'react-router'
 
 
 // Each major browser view user interface must be imported.
+import Index from './components/index'
+import Main from './components/main'
 import Newlisting from './components/newlisting'
 import Navbar from './components/navbar'
 import NavbarUser from './components/navbarUser'
 import ListingPage from './components/listingPage'
+import Profile from './components/profile'
 import ProfileInfo from './components/profile-info'
 import ProfileListings from './components/profile-listings'
 import Search from './components/search'
 import ChatPopup from './components/chat-popup'
-// For each view conditionally determine which view to display
-// depending on if the ID is present in the HTML.
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>{this.props.children}</div>
+    )
+  }
+}
+
+//Force the state of each page
+class ProfilePage extends React.Component {
+  render() {
+    return <Profile user={1} />;
+  }
+}
+class ListingP extends React.Component {
+  render() {
+    return <ListingPage id={2} />;
+  }
+}
+
+ReactDOM.render((
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={Index} />
+      <Route path="main" component={Main} />
+      <Route path="profile/:id" component={ProfilePage} />
+      <Route path="item/:id" component={ListingP} />
+      <Route path="make_listing" component={Newlisting} />
+      <Route path="search" component={Search} />
+    </Route>
+  </Router>
+),document.getElementById('index'));
+
 if (document.getElementById('top-navbar') !== null) {
   ReactDOM.render(
     <Navbar />,

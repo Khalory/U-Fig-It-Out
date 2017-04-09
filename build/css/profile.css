@@ -9,79 +9,6 @@ Purple, Dark -------- #682E96
 Purple, Light ------- #B564F7
 */
 
-/*NAVBAR*/
-
-.navbar {
-  background-color: #7634AB;
-  border: none;
-}
-.fig-search {
-  width: 600px !important;
-}
-.navbar button {
-  background-color: #7634AB;
-  border: none;
-  color: #EBF2EE;
-}
-.navbar button:hover {
-  background-color: #682E96;
-  color: #EBF2EE;
-  border: none;
-}
-.navbar button:active,
-.navbar button:focus,
-.navbar button:active:focus {
-  background-color: #B564F7;
-  color: #EBF2EE;
-  border: none;
-  /* Removes halo and shadow on button when clicked. */
-  outline: none;
-}
-.navbar form button {
-  /* Make it a bit wider. */
-  width: 50px;
-  background-color: #00D451;
-  /* Make the border's curve more gentle */
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  /* Apply a light-grey border color. */
-  border-top: 1px solid #00D451;
-  border-bottom: 1px solid #00D451;
-  border-right: 1px solid #00D451;
-  /* Removes halo and shadow on button when clicked. */
-  outline: none;
-  box-shadow: none;
-}
-.navbar form button:hover,
-.navbar form button:focus,
-.navbar form button:active,
-.navbar form button:active:focus {
-  background-color: #EBF2EE;
-  color: black;
-  border-top: 1px solid #EBF2EE;
-  border-bottom: 1px solid #EBF2EE;
-  border-right: 1px solid #EBF2EE;
-}
-
-/* Make dropdown button light purple when open */
-.open > .dropdown-toggle.btn-default {
-  background-color: #B564F7 !important;
-}
-
-/* Currently useless attempt to center search form */
-.navbar .navbar-nav {
-  display: inline-block;
-  float: none;
-  vertical-align: top;
-}
-.navbar .navbar-collapse {
-  text-align: center;
-}
-
-body {
-  padding-top: 90px;
-  background-color: #EBF2EE;
-}
 
 a {
   color: black;
@@ -101,43 +28,6 @@ a:active:focus{
   background-color: lightgray;
 }
 
-/*LISTINGS PANEL HEADING*/
-.fig-listings > .panel-heading {
-  background-color: #7634AB;
-  padding-bottom: 0px;
-  border-bottom: none;
-}
-.nav-tabs > li.active > a {
-  border-bottom-color: white !important;
-  color: #7634AB
-}
-.nav-tabs > li.active > a:hover {
-  border-bottom-color: white !important;
-  color: #7634AB;
-}
-.nav-tabs > li.active > a:active,
-.nav-tabs > li.active > a:focus,
-.nav-tabs > li.active > a:active:focus {
-  border-bottom-color: white !important;
-  color: #7634AB;
-  outline: none;
-}
-.nav-tabs > li > a {
-  color: #00D451;
-  border-color: #7634AB !important;
-}
-.nav-tabs > li > a:hover {
-  border-color: #682E96 !important;
-  background-color: #682E96;
-}
-.nav-tabs > li > a:active,
-.nav-tabs > li > a:focus,
-.nav-tabs > li > a:active:focus {
-  border-color: white !important;
-  background-color: white;
-  color: #7634AB;
-  outline: none;
-}
 
 /*LISTINGS PANEL BODY*/
 .fig-listings {
@@ -152,55 +42,4 @@ a:active:focus{
 .panel-body {
   height: 80vh;
   overflow-y: auto;
-}
-
-.listing-add {
-  font-size: 24px;
-  font-weight: bold;
-  background-color: #EBF2EE;
-  border-color: #682E96 !important;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-.listing-item {
-  background-color: #EBF2EE;
-  border-color: #682E96 !important;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-.listing-item button {
-  background-color: #EBF2EE;
-  border-color: #EBF2EE;
-  color: #8A9F9E;
-}
-.listing-item button:hover {
-  background-color: #EBF2EE;
-  border-color: #EBF2EE;
-  color: #00D451;
-}
-.listing-item button:active,
-.listing-item button:focus,
-.listing-item button:active:focus{
-  background-color: #EBF2EE;
-  border-color: #EBF2EE;
-  color: #00A332;
-  outline: none;
-}
-
-.chat-popup {
-  width: 300px;
-  position: fixed;
-  bottom: 0px;
-  right: 20px;
-  border: 1px solid grey;
-  border-bottom: none;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  background-color: #00D451;
-}
-
-.chat-popup button:hover {
-  background-color: #7634AB;
 }

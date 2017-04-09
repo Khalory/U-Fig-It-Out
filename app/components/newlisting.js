@@ -1,5 +1,7 @@
 import React from 'react';
 import AcceptablePayments from './acceptablePayments'
+import Navbar from './navbar'
+import ChatPopup from './chat-popup'
 
 
 export default class newlisting extends React.Component {
@@ -42,6 +44,7 @@ export default class newlisting extends React.Component {
   render() {
     return (
       <div>
+        <Navbar />
         <div className="container">
           <div className="row center">
             <div className = "col-md-2">
@@ -92,6 +95,7 @@ export default class newlisting extends React.Component {
         </div>
       </div>
     </div>
+    <ChatPopup />
     </div>
     )
   }
