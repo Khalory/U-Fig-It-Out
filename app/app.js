@@ -45,7 +45,7 @@ ReactDOM.render((
       <Route path="profile/:id" component={ProfilePage} />
       <Route path="item/:id" component={ListingP} />
       <Route path="make_listing" component={Newlisting} />
-      <Route path="search" component={Search} />
+      <Route path="search/" component={Search} />
     </Route>
   </Router>
 ),document.getElementById('index'));

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router'
 
 export default class NavbarUser extends React.Component {
   render() {
@@ -6,7 +7,7 @@ export default class NavbarUser extends React.Component {
       <div>
         <button type="button" className="btn btn-default navbar-btn">
           <span className="glyphicon glyphicon-user"></span>
-          <a href="http://localhost:8080/profile.html">Figman</a>
+          <Link to={"/profile/" + this.props.user}>{this.props.name}</Link>
         </button>
         <div className="btn-group" role="group">
           <button type="button" className="btn btn-default navbar-btn dropdown-toggle"

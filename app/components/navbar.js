@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router';
 
 import NavbarUser from './navbarUser.js'
 
@@ -15,9 +16,9 @@ export default class Navbar extends React.Component {
               <span className="icon-bar"></span>
               <span className="icon-bar"></span>
             </button>
-            <a className="navbar-brand" href="http://localhost:8080/main.html">
+            <Link to={"/main/"} className="navbar-brand">
               <span className="glyphicon glyphicon-home"></span>
-            </a>
+            </Link>
           </div>
 
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -37,7 +38,7 @@ export default class Navbar extends React.Component {
               </button>
               <div className="btn-toolbar pull-right" role="toolbar">
                 <div className="btn-group" role="group">
-                  <NavbarUser />
+                  <NavbarUser user={this.props.user} name={this.props.name} />
                 </div>
               </div>
             </div>

@@ -3,20 +3,37 @@ import Navbar from './navbar'
 import ProfileInfo from './profile-info'
 import ProfileListings from './profile-listings'
 import ChatPopup from './chat-popup'
+import {getUserData} from '../server'
 
-export default class Index extends React.Component {
+export default class Profile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      contents: []
+    };
+  }
+
+  refresh() {
+    getUserData(this.props.user, (userData) => {
+      this.setState(userData);
+    });
+  }
+
+  componentDidMount() {
+    this.refresh();
+  }
 
   render() {
     return(
       <div>
-        <Navbar />
+        <Navbar user={this.state._id} name={this.state.username}/>
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <ProfileInfo user={this.props.user} />
+              <ProfileInfo user={this.state._id} name={this.state.username} rating={this.state.avg_rating} profile_picture={this.state.profile_picture} email={this.state.email} />
             </div>
             <div className="col-md-8">
-              <ProfileListings user={this.props.user} userListings={[]} />
+              <ProfileListings user={this.state._id} userListings={[]} />
             </div>
           </div>
         </div>
