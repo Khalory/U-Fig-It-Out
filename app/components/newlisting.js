@@ -1,14 +1,22 @@
 import React from 'react';
 import AcceptablePayments from './acceptablePayments'
-import Navbar from './navbar'
-import ChatPopup from './chat-popup'
+import {storeListing} from '../server'
+
 
 
 export default class newlisting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ""
+      title: "",
+      description:"",
+      categories:[],
+      preferred_payments:[],
+      post_time: null,
+      update_time: null,
+      active: null,
+      price:null,
+      pictures:""
     };
   }
 
@@ -24,7 +32,7 @@ export default class newlisting extends React.Component {
     var statusUpdateText = this.state.value.trim();
     if (statusUpdateText !== "") {
       /* TODO: How do we send the post to the server + update the Feed? */
-      // Reset status update.
+
       this.setState({value: ""});
     }
   }
@@ -44,7 +52,6 @@ export default class newlisting extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
         <div className="container">
           <div className="row center nlBody">
             <div className = "col-md-2">
@@ -54,48 +61,83 @@ export default class newlisting extends React.Component {
             <p>This page is to help you create a new listing to sell your items!</p>
           <div className="form-group">
             <h2 className="nlh2">Name of Item:</h2>
-            <input type="text" className="form-control nlinput" id="usr" />
+            <input type="text" className="form-control" id="usr" value={this.state.value} onChange={(title) => this.handleChange(value)} />
 
-          <h2 className="nlh2">Price:   <input type = "text" /></h2>
+          <h2 className="nlh2">Price:   <input type = "text" price={this.state.value} onChange={(price) => this.handleChange(price)}  /></h2>
           <h2 className="nlh2">Check all that apply:</h2>
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Textbook</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />ICliker</label>
+            <label><input type="checkbox" value="" />Non-Textbook</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Clothing</label>
+            <label><input type="checkbox" value="" />Vehicles</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Automotive Acessories</label>
+          </div>
+
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Men's Clothing</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Women's Clothing</label>
           </div>
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Furniture</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Video Games</label>
+            <label><input type="checkbox" value="" />Refrigerators and Appliances</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Other Household items</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Figs</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />IClickers</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Cell Phones</label>
           </div>
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Television</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Housing</label>
+            <label><input type="checkbox" value="" />Laptops</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Figs</label>
+            <label><input type="checkbox" value="" />Desktops</label>
           </div>
-            <h2 className="nlh2"> Description:</h2>
-            <textarea className="form-control nlinput" rows="5" id="comment"value={this.state.value} onChange={(description) => this.handleChange(e)}></textarea>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Video Games</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Game Consoles</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Gaming Accessories</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Other Electronic Items</label>
+          </div>
 
-        <AcceptablePayments disabled={false} checked />
+
+            <h2 className="nlh2"> Description:</h2>
+            <textarea className="form-control" rows="5" id="comment"value={this.state.value} onChange={(description) => this.handleChange(description)}></textarea>
+
+        <AcceptablePayments disabled={false} checked value={this.state.value} onChange={(value) => this.handleChange(prefered_payments)}/>
           File Path:
           <input type = "text" />
-          <button type="button" className="btn btn-secondary">Add Photos!</button>
+          <button type="button" className="btn btn-secondary" value={this.state.value} onClick={(value) => this.handleChange(value)}>Add Photos!</button>
           <br/>
-          <button type="button" className="btn btn-secondary" onClick={(e) => this.storeListing(id,title,owner, description,categories,preferred_payments,post_time,last_updated,active,price,type,pictures)}>Create Listing!</button>
+          <button type="button" className="btn btn-secondary" value={this.state.value} onClick={storeListing(title,description,categories,preferred_payments,post_time,last_updated,active,price,type,pictures)}>Create Listing!</button>
           </div>
         </div>
       </div>
     </div>
-    <ChatPopup />
     </div>
     )
   }

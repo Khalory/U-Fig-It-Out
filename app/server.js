@@ -48,17 +48,17 @@ function getFeedItemSync(feedItemId) {
 }
 
 
-function storeListing(id,title,owner, description,categories,preferred_payments,post_time,last_updated,active,price,type,pictures, cb){
+function storeListing(title,description,categories,preferred_payments,post_time,last_updated,price,type,pictures, cb){
+
   var newItem = {
-    "_id": id,
-    "owner": owner,
+    "owner": this.props.user,
     "title": title,
     "description": description,
     "categories":categories,
     "preferred_payments":preferred_payments,
-    "_timestamp": post_time,
+    "timestamp": post_time,
     "last_updated": last_updated,
-    "active": active,
+    "active": 1,
     "price": price,
     "type": type,
     "pictures":pictures,
