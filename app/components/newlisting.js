@@ -46,18 +46,18 @@ export default class newlisting extends React.Component {
       <div>
         <Navbar />
         <div className="container">
-          <div className="row center">
+          <div className="row center nlBody">
             <div className = "col-md-2">
             </div>
             <div className = "col-md-8">
             <h1>New Listing</h1>
             <p>This page is to help you create a new listing to sell your items!</p>
           <div className="form-group">
-            <h2>Name of Item:</h2>
-            <input type="text" className="form-control" id="usr" />
+            <h2 className="nlh2">Name of Item:</h2>
+            <input type="text" className="form-control nlinput" id="usr" />
 
-          <h2>Price:   <input type = "text" /></h2>
-          <h2>Check all that apply:</h2>
+          <h2 className="nlh2">Price:   <input type = "text" /></h2>
+          <h2 className="nlh2">Check all that apply:</h2>
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Textbook</label>
           </div>
@@ -82,8 +82,8 @@ export default class newlisting extends React.Component {
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Figs</label>
           </div>
-            <h2> Description:</h2>
-            <textarea className="form-control" rows="5" id="comment"value={this.state.value} onChange={(description) => this.handleChange(e)}></textarea>
+            <h2 className="nlh2"> Description:</h2>
+            <textarea className="form-control nlinput" rows="5" id="comment"value={this.state.value} onChange={(description) => this.handleChange(e)}></textarea>
 
         <AcceptablePayments disabled={false} checked />
           File Path:
