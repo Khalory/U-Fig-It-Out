@@ -69,26 +69,62 @@ export default class newlisting extends React.Component {
             <label><input type="checkbox" value="" />Textbook</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />ICliker</label>
+            <label><input type="checkbox" value="" />Non-Textbook</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Clothing</label>
+            <label><input type="checkbox" value="" />Vehicles</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Automotive Acessories</label>
+          </div>
+
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Men's Clothing</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Women's Clothing</label>
           </div>
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Furniture</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Video Games</label>
+            <label><input type="checkbox" value="" />Refrigerators and Appliances</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Other Household items</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Figs</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />IClickers</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Cell Phones</label>
           </div>
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Television</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Housing</label>
+            <label><input type="checkbox" value="" />Laptops</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Figs</label>
+            <label><input type="checkbox" value="" />Desktops</label>
           </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Video Games</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Game Consoles</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Gaming Accessories</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value="" />Other Electronic Items</label>
+          </div>
+
+
             <h2> Description:</h2>
             <textarea className="form-control" rows="5" id="comment"value={this.state.value} onChange={(description) => this.handleChange(description)}></textarea>
 
