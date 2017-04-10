@@ -123,8 +123,6 @@ export default class newlisting extends React.Component {
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Other Electronic Items</label>
           </div>
-
-
             <h2> Description:</h2>
             <textarea className="form-control" rows="5" id="comment"value={this.state.value} onChange={(description) => this.handleChange(description)}></textarea>
 
