@@ -1,7 +1,7 @@
 import React from 'react';
 import AcceptablePayments from './acceptablePayments'
 import Navbar from './navbar'
-import {storeListing} from '../server'
+//import {storeListing} from '../server'
 
 
 
@@ -9,16 +9,17 @@ export default class newlisting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "",
-      description:"",
+      title: '',
+      description:'',
       categories:[],
       preferred_payments:[],
       post_time: null,
       update_time: null,
       active: null,
-      price:null,
-      pictures:""
+      price: null,
+      pictures:''
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   /**
@@ -34,7 +35,16 @@ export default class newlisting extends React.Component {
     if (statusUpdateText !== "") {
       /* TODO: How do we send the post to the server + update the Feed? */
 
-      this.setState({value: ""});
+      this.setState({
+      title: '',
+      description:'',
+      categories:[],
+      preferred_payments:[],
+      post_time: null,
+      update_time: null,
+      active: null,
+      price: null,
+      pictures:''});
     }
   }
 
@@ -42,14 +52,11 @@ export default class newlisting extends React.Component {
    * Called when the user types a character into the status update box.
    * @param e An Event object.
    */
-  handleChange(e) {
-    // Prevent the event from "bubbling" up the DOM tree.
-    e.preventDefault();
-    // e.target is the React Virtual DOM target of the input event -- the
-    // <textarea> element. The textarea's `value` is the entire contents of
-    // what the user has typed in so far.
-    this.setState({value: e.target.value});
+   handleChange(event) {
+      name = event.target.name;
+    this.setState({[name]: event.target.value});
   }
+
   render() {
     return (
       <div>
@@ -63,15 +70,14 @@ export default class newlisting extends React.Component {
             <p>This page is to help you create a new listing to sell your items!</p>
           <div className="form-group">
             <h2 className="nlh2">Name of Item:</h2>
-            <input type="text" className="form-control" id="usr" />
-
-          <h2 className="nlh2">Price:   <input type = "text"  /></h2>
+            <input type="text" className="form-control" name = 'title' value ={this.state.value}  onChange={this.handleChange} />
+          <h2 className="nlh2">Price:   <input type = "text" title = 'price'  /></h2>
           <h2 className="nlh2">Check all that apply:</h2>
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Textbook</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Non-Textbook</label>
+            <label><input type="checkbox" name='non-textbook' OnChang={this.handleChange} /> Non-Textbook</label>
           </div>
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Vehicles</label>
@@ -79,7 +85,6 @@ export default class newlisting extends React.Component {
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Automotive Acessories</label>
           </div>
-
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Men's Clothing</label>
           </div>
@@ -132,11 +137,12 @@ export default class newlisting extends React.Component {
           <input type = "text" />
           <button type="button" className="btn btn-secondary" >Add Photos!</button>
           <br/>
-          <button type="button" className="btn btn-secondary">Create Listing!</button>
+          <button type="button" className="btn btn-secondary" >Create Listing!</button>
           </div>
         </div>
       </div>
     </div>
+
     </div>
     )
   }
