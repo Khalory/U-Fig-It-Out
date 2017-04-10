@@ -8,14 +8,14 @@ import { IndexRoute, Router, Route, browserHistory } from 'react-router'
 import Index from './components/index'
 import Main from './components/main'
 import Newlisting from './components/newlisting'
-import Navbar from './components/navbar'
-import NavbarUser from './components/navbarUser'
+//import Navbar from './components/navbar'
+//import NavbarUser from './components/navbarUser'
 import ListingPage from './components/listingPage'
 import Profile from './components/profile'
-import ProfileInfo from './components/profile-info'
-import ProfileListings from './components/profile-listings'
+//import ProfileInfo from './components/profile-info'
+//import ProfileListings from './components/profile-listings'
 import Search from './components/search'
-import ChatPopup from './components/chat-popup'
+//import ChatPopup from './components/chat-popup'
 
 class App extends React.Component {
   render() {
@@ -50,6 +50,7 @@ ReactDOM.render((
   </Router>
 ),document.getElementById('index'));
 
+/*
 if (document.getElementById('top-navbar') !== null) {
   ReactDOM.render(
     <Navbar />,
@@ -97,4 +98,4 @@ if(document.getElementById('chat-popup')!== null){
     <ChatPopup />,
     document.getElementById('chat-popup')
   )
-}
+}*/

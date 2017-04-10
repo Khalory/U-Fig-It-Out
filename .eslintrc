@@ -27,5 +27,4 @@
   "rules": {
     "react/no-unknown-property": 1
   }
-  "parser": "babel-eslint"
 }

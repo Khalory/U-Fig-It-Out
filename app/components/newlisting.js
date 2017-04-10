@@ -1,5 +1,6 @@
 import React from 'react';
 import AcceptablePayments from './acceptablePayments'
+import Navbar from './navbar'
 import {storeListing} from '../server'
 
 
@@ -52,6 +53,7 @@ export default class newlisting extends React.Component {
   render() {
     return (
       <div>
+        <Navbar />
         <div className="container">
           <div className="row center nlBody">
             <div className = "col-md-2">
