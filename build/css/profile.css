@@ -8,38 +8,3 @@ Purple -------------- #7634AB (used for navbar)
 Purple, Dark -------- #682E96
 Purple, Light ------- #B564F7
 */
-
-
-a {
-  color: black;
-}
-
-a:hover {
-  color: #00D451;
-}
-
-a:active,
-a:focus,
-a:active:focus{
-  color: #00A332;
-}
-
-.img-thumbnail {
-  background-color: lightgray;
-}
-
-
-/*LISTINGS PANEL BODY*/
-.fig-listings {
-  border-width: 2px;
-  border-bottom-width: 4px;
-  border-color: #682E96;
-}
-.media img {
-    height:auto;
-    width:120px;
-}
-.panel-body {
-  height: 80vh;
-  overflow-y: auto;
-}

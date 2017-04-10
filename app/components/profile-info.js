@@ -24,7 +24,7 @@ export default class ProfileInfo extends React.Component {
     return (
       <div className="row">
         <div className="col-md-12">
-          <img className="img-thumbnail" src={this.state.profile_picture} width="80%" />
+          <img className="img-thumbnail prof-pic" src={this.state.profile_picture} width="80%" />
           <br />
           <UserRating name={this.state.username} rating={this.state.avg_rating} />
           <br />
