@@ -61,9 +61,9 @@ export default class newlisting extends React.Component {
             <p>This page is to help you create a new listing to sell your items!</p>
           <div className="form-group">
             <h2 className="nlh2">Name of Item:</h2>
-            <input type="text" className="form-control" id="usr" value={this.state.value} onChange={(title) => this.handleChange(value)} />
+            <input type="text" className="form-control" id="usr" />
 
-          <h2 className="nlh2">Price:   <input type = "text" price={this.state.value} onChange={(price) => this.handleChange(price)}  /></h2>
+          <h2 className="nlh2">Price:   <input type = "text"  /></h2>
           <h2 className="nlh2">Check all that apply:</h2>
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Textbook</label>
@@ -124,13 +124,13 @@ export default class newlisting extends React.Component {
             <label><input type="checkbox" value="" />Other Electronic Items</label>
           </div>
             <h2 className="nlh2"> Description:</h2>
-            <textarea className="form-control" rows="5" id="comment"value={this.state.value} onChange={(description) => this.handleChange(description)}></textarea>
-        <AcceptablePayments disabled={false} checked value={this.state.value} onChange={(value) => this.handleChange(prefered_payments)}/>
+            <textarea className="form-control" rows="5" id="comment"></textarea>
+        <AcceptablePayments disabled={false} checked/>
           File Path:
           <input type = "text" />
-          <button type="button" className="btn btn-secondary" value={this.state.value} onClick={(value) => this.handleChange(value)}>Add Photos!</button>
+          <button type="button" className="btn btn-secondary" >Add Photos!</button>
           <br/>
-          <button type="button" className="btn btn-secondary" value={this.state.value} onClick={storeListing(title,description,categories,preferred_payments,post_time,last_updated,active,price,type,pictures)}>Create Listing!</button>
+          <button type="button" className="btn btn-secondary">Create Listing!</button>
           </div>
         </div>
       </div>
