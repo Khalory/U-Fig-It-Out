@@ -145,38 +145,42 @@ var initialData = {
     },
     18:{
       "_id": 18,
-      "name": "Other Electronic Items"
+      "name": "TVs"
     },
     19:{
       "_id": 19,
-      "name": "COMPUTERS"
+      "name": "Other Electronic Items"
     },
     20:{
       "_id": 20,
-      "name": "Laptops"
+      "name": "COMPUTERS"
     },
     21:{
       "_id": 21,
-      "name": "Desktops"
+      "name": "Laptops"
     },
     22:{
       "_id": 22,
-      "name": "Computing Accessories"
+      "name": "Desktops"
     },
     23:{
       "_id": 23,
-      "name": "VIDEO GAMES"
+      "name": "Computing Accessories"
     },
     24:{
       "_id": 24,
-      "name": "Consoles"
+      "name": "VIDEO GAMES"
     },
     25:{
       "_id": 25,
-      "name": "Games"
+      "name": "Consoles"
     },
     26:{
       "_id": 26,
+      "name": "Games"
+    },
+    27:{
+      "_id": 27,
       "name": "Gaming Accessories"
     }
   },

@@ -5,7 +5,7 @@ export default class SearchLeftBar extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      activeIndex: null,
+      activeIndex: this.props.activeIndex,
       categoriesList: []
     }
   }
@@ -13,7 +13,6 @@ export default class SearchLeftBar extends React.Component {
   handleClick(index) {
     this.setState({activeIndex: index})
   }
-
 
   render() {
     getCategories((categories) => {
