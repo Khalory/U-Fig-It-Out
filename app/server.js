@@ -94,3 +94,15 @@ export function getUserListings(user, bs, cb) {
   }
   emulateServerReturn(itemDataList, cb);
 }
+
+export function getCategoryListings(category, cb) {
+  var itemDataList = []
+  var itemListings = readFullCollection("item_listings");
+  for(var i=1; i<=Object.keys(itemListings).length; i++){
+    var item = readDocument("item_listings", i)
+    if(item._id===category && item.active===1){
+      itemDataList.push(item);
+    }
+  }
+  emulateServerReturn(itemDataList, cb);
+}

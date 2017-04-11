@@ -12,10 +12,8 @@ export default class Search extends React.Component {
     };
   }
 
-  //Only grabbing user data for navbar
-  //Will need to also get category and listing data
   componentDidMount() {
-    getUserData(this.props.params.id, (userData) => {
+    getUserData(this.props.location.query.id, (userData) => {
       this.setState(userData);
     });
   }
@@ -24,8 +22,8 @@ export default class Search extends React.Component {
     return (
       <div>
         <Navbar user={this.state._id} name={this.state.username} />
-        <SearchLeftBar />
-        <SearchListings />
+        <SearchLeftBar activeIndex={this.props.params.category}/>
+        <SearchListings category={2}/>
       </div>
     )
   }
