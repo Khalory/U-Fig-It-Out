@@ -13,7 +13,6 @@ export default class ListingPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     getItemListings(this.props.params.id, (items) => {
       this.setState(items[0])
     })

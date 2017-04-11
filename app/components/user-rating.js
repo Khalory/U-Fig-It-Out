@@ -34,6 +34,8 @@ export default class UserRating extends React.Component {
   }
 
   render() {
+    if (this.state === null)
+      return <div></div>
     return (
       <div>
         <h3><Link to={"/profile/" + this.state._id}>{this.state.username}</Link></h3>

@@ -8,7 +8,7 @@ import {getUserData} from '../server'
 export default class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {contents: []}
+    this.state = null
   }
 
   componentDidMount() {
@@ -18,6 +18,8 @@ export default class Profile extends React.Component {
   }
 
   render() {
+    if (this.state === null)
+      return <div></div>
     return(
       <div>
         <Navbar user={this.state._id} name={this.state.username}/>
