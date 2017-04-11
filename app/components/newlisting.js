@@ -1,7 +1,7 @@
 import React from 'react';
 import AcceptablePayments from './acceptablePayments'
 import Navbar from './navbar'
-//import {storeListing} from '../server'
+import {storeListing} from '../server'
 
 
 
@@ -53,8 +53,10 @@ export default class newlisting extends React.Component {
    * @param e An Event object.
    */
    handleChange(event) {
-      name = event.target.name;
-    this.setState({[name]: event.target.value});
+      var name = event.target.name;
+      var newState = this.state
+      newState[name] = event.target.value
+      this.setState(newState);
   }
 
   render() {
@@ -77,7 +79,7 @@ export default class newlisting extends React.Component {
             <label><input type="checkbox" value="" />Textbook</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" name='non-textbook' OnChang={this.handleChange} /> Non-Textbook</label>
+            <label><input type="checkbox" name='non-textbook' onChange={this.handleChange} /> Non-Textbook</label>
           </div>
           <div className ="checkbox-inline">
             <label><input type="checkbox" value="" />Vehicles</label>

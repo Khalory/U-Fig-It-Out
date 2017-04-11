@@ -48,8 +48,7 @@ function getFeedItemSync(feedItemId) {
 }
 
 
-function storeListing(title,description,categories,preferred_payments,post_time,last_updated,price,type,pictures, cb){
-
+export function storeListing(title,description,categories,preferred_payments,post_time,last_updated,price,type,pictures, cb) {
   var newItem = {
     "owner": this.props.user,
     "title": title,

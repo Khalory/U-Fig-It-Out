@@ -8,9 +8,7 @@ import {getUserData} from '../server'
 export default class Profile extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      contents: []
-    };
+    this.state = {contents: []}
   }
 
   refresh() {
@@ -30,10 +28,10 @@ export default class Profile extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-md-4">
-              <ProfileInfo user={this.state._id} name={this.state.username} rating={this.state.avg_rating} profile_picture={this.state.profile_picture} email={this.state.email} />
+              <ProfileInfo key={this.state._id} user={this.state._id} name={this.state.username} rating={this.state.avg_rating} profile_picture={this.state.profile_picture} email={this.state.email} />
             </div>
             <div className="col-md-8">
-              <ProfileListings user={this.state._id} userListings={[]} />
+              <ProfileListings key={this.state._id} user={this.state._id} userListings={[]} />
             </div>
           </div>
         </div>
