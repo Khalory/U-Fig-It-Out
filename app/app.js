@@ -26,24 +26,14 @@ class App extends React.Component {
 }
 
 //Force the state of each page
-class ProfilePage extends React.Component {
-  render() {
-    return <Profile user={1} />;
-  }
-}
-class ListingP extends React.Component {
-  render() {
-    return <ListingPage id={2} />;
-  }
-}
 
 ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Index} />
       <Route path="main" component={Main} />
-      <Route path="profile/:id" component={ProfilePage} />
-      <Route path="item/:id" component={ListingP} />
+      <Route path="profile/:id" component={Profile} />
+      <Route path="item/:id" component={ListingPage} />
       <Route path="make_listing" component={Newlisting} />
       <Route path="search/" component={Search} />
     </Route>

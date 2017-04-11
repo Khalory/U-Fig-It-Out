@@ -36,7 +36,7 @@ export default class SearchListings extends React.Component {
 
                     {this.state.items.map((listing, i) => {
                       return (<li key={i} className="media list-group-item listing-item">
-                      <Item picture={listing.pictures[0]} itemtitle={listing.title}
+                      <Item id={listing._id} picture={listing.pictures[0]} itemtitle={listing.title}
                         itemdescription={listing.description}>
                         <div className="media-top media-right">
                           <UserRating name={listing.owner.username} rating={listing.owner.avg_rating} />
