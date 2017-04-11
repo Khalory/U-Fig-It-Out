@@ -11,14 +11,10 @@ export default class Profile extends React.Component {
     this.state = {contents: []}
   }
 
-  refresh() {
+  componentDidMount() {
     getUserData(this.props.params.id, (userData) => {
       this.setState(userData);
     });
-  }
-
-  componentDidMount() {
-    this.refresh();
   }
 
   render() {
