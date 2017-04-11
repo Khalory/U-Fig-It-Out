@@ -31,11 +31,11 @@ ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <IndexRoute component={Index} />
-      <Route path="main" component={Main} />
+      <Route path="main/:id" component={Main} />
       <Route path="profile/:id" component={Profile} />
       <Route path="item/:id" component={ListingPage} />
-      <Route path="make_listing" component={Newlisting} />
-      <Route path="search/" component={Search} />
+      <Route path="make_listing/:id" component={Newlisting} />
+      <Route path="search/:id" component={Search} />
     </Route>
   </Router>
 ),document.getElementById('index'));

@@ -1,12 +1,26 @@
 import React from 'react';
 import Navbar from './navbar'
 import ChatPopup from './chat-popup'
+import {getUserData} from '../server'
 
 export default class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      contents: []
+    };
+  }
+
+  componentDidMount() {
+    getUserData(this.props.params.id, (userData) => {
+      this.setState(userData);
+    });
+  }
+
   render() {
     return(
       <div background = "http://www.indoorcitrustrees.com/wp-content-uploads/2016/05/Indoor-fig-tree-5.jpeg">
-        <Navbar />
+        <Navbar user={this.state._id} name={this.state.username} />
         <div>
           <font face = "Comic sans MS" size = "6"><center>U-Fig-It-Out</center></font>
         </div>

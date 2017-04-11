@@ -15,7 +15,9 @@ export default class ProfileListings extends React.Component {
   }
 
   componentDidMount() {
-    this.refresh(0);
+    getUserListings(this.props.user, 0, (userListings) => {
+      this.setState({userListings: userListings})
+    })
   }
 
   handleBuyClick(clickEvent) {
