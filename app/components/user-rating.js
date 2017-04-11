@@ -36,7 +36,7 @@ export default class UserRating extends React.Component {
   render() {
     return (
       <div>
-        <h3>{this.state.username}</h3>
+        <h3><Link to={"/profile/" + this.state._id}>{this.state.username}</Link></h3>
         <ul className="nav nav-pills pull-left">
           {this.calcRating()}
         </ul>
