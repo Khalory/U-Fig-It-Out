@@ -49,9 +49,9 @@ function getFeedItemSync(feedItemId) {
 
 
 
-function storeListing(title,description,categories,preferred_payments,price,pictures, cb){
+export function storeListing(user,title,description,categories,preferred_payments,price, cb){
   var newItem = {
-    "owner": this.props.user,
+    "owner": user,
     "title": title,
     "description": description,
     "categories":categories,
@@ -75,6 +75,7 @@ export function getItemListings(items, cb){
   var itemDataList = [];
   for (var i = 0; i < items.length; i++){
     var itemData = readDocument("item_listings", items[i]);
+    console.log(itemData)
     var userData = readDocument("users", itemData.owner);
     itemData.owner = userData
     itemDataList.push(itemData)

@@ -2,6 +2,7 @@ import React from 'react';
 import AcceptablePayments from './acceptablePayments'
 import Navbar from './navbar'
 import {storeListing} from '../server'
+import {readFullCollection} from '../database'
 
 
 
@@ -37,7 +38,8 @@ export default class newlisting extends React.Component {
     var preferred_payments = this.state.preferred_payments;
     var price = this.state.price;
 
-    storeListing(title,description,categories,preferred_payments,price)
+    storeListing(this.props.location.query.id,title,description,categories,preferred_payments,price, () =>
+      console.log(readFullCollection('item_listings')))
 
       this.setState({
       title: '',
