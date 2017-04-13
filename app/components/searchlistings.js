@@ -37,7 +37,7 @@ export default class SearchListings extends React.Component {
                       return (<li key={i} className="media list-group-item listing-item">
                       <Item id={listing._id} picture={listing.pictures[0]} itemtitle={listing.title}
                         itemdescription={listing.description}>
-                        <div className="media-top media-right">
+                        <div className="media-top media-right user-rating">
                           <UserRating user={listing.owner}/>
                         </div>
                       </Item>
