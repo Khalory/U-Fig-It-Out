@@ -1,14 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router'
+import {getUserData} from '../server'
 
 export default class NavbarUser extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      contents: []
+    };
+  }
+
+  componentDidMount() {
+    getUserData(this.props.user, (userData) => {
+      this.setState(userData);
+    });
+  }
+
   render() {
     return (
       <div>
-        <Link to={"/profile/" + this.props.user}>
+        <Link to={"/profile/" + this.state._id}>
           <button type="button" className="btn btn-default navbar-btn">
             <span className="glyphicon glyphicon-user"></span>
-            {this.props.name}
+            {this.state.username}
           </button>
         </Link>
         <div className="btn-group" role="group">

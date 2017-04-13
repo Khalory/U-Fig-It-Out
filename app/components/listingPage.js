@@ -23,7 +23,7 @@ export default class ListingPage extends React.Component {
       return <div></div>
     return (
       <div>
-        <Navbar user={this.state.owner._id} name={this.state.owner.username}/>
+        <Navbar user={this.state.owner._id} />
         <div className="container">
           <div className="row">
             <div className="col-md-4 item-category">
