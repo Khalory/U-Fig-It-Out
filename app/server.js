@@ -74,6 +74,7 @@ export function getItemListings(items, cb){
   }
   var itemDataList = [];
   for (var i = 0; i < items.length; i++){
+    console.log(items[0])
     var itemData = readDocument("item_listings", items[i]);
     console.log(itemData)
     var userData = readDocument("users", itemData.owner);
