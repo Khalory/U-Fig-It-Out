@@ -1,7 +1,7 @@
 import React from 'react';
 import AcceptablePayments from './acceptablePayments'
 import Navbar from './navbar'
-//import {storeListing} from '../server'
+import {storeListing} from '../server'
 
 
 
@@ -19,7 +19,8 @@ export default class newlisting extends React.Component {
       price: null,
       pictures:''
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.handleCheckChange = this.handleCheckChange.bind(this);
   }
 
   /**
@@ -28,12 +29,15 @@ export default class newlisting extends React.Component {
    * the component.
    */
   handlePost(e) {
-    // Prevent the event from "bubbling" up the DOM tree.
     e.preventDefault();
-    // Trim whitespace from beginning + end of entry.
-    var statusUpdateText = this.state.value.trim();
-    if (statusUpdateText !== "") {
-      /* TODO: How do we send the post to the server + update the Feed? */
+    // Prevent the event from "bubbling" up the DOM tree.
+    var title = this.state.title.trim();
+    var description = this.state.description.trim;
+    var categories = this.state.categories;
+    var preferred_payments = this.state.preferred_payments;
+    var price = this.state.price;
+
+    storeListing(title,description,categories,preferred_payments,price)
 
       this.setState({
       title: '',
@@ -46,15 +50,24 @@ export default class newlisting extends React.Component {
       price: null,
       pictures:''});
     }
-  }
+
 
   /**
    * Called when the user types a character into the status update box.
    * @param e An Event object.
    */
-   handleChange(event) {
-      name = event.target.name;
-    this.setState({[name]: event.target.value});
+   handleTextChange(event) {
+    //  name = event.target.name;
+    event.preventDefault()
+
+    this.setState({name: event.target.value});
+  }
+
+  handleCheckChange(event){
+    var  arr = this.state.categories
+    arr.push(event.target.value)
+    this.setState({ categories: arr })
+
   }
 
   render() {
@@ -70,80 +83,95 @@ export default class newlisting extends React.Component {
             <p>This page is to help you create a new listing to sell your items!</p>
           <div className="form-group">
             <h2 className="nlh2">Name of Item:</h2>
-            <input type="text" className="form-control" name = 'title' value ={this.state.value}  onChange={this.handleChange} />
-          <h2 className="nlh2">Price:   <input type = "text" title = 'price'  /></h2>
+            <input type="text" className="form-control" name = 'title' value ={this.state.value}  onChange={this.handleTextChange} />
+          <h2 className="nlh2">Price:   <input type = "text" title = 'price' value ={this.state.value}  onChange={this.handleTextChange}  /></h2>
           <h2 className="nlh2">Check all that apply:</h2>
+
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Textbook</label>
+            <label><input type="checkbox" value={1} name='categories' onChange={this.handleCheckChange} />Book</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" name='non-textbook' OnChang={this.handleChange} /> Non-Textbook</label>
+            <label><input type="checkbox" value={2} name='categories' onChange={this.handleCheckChange} />Textbook</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Vehicles</label>
+            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} /> Non-Textbook</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Automotive Acessories</label>
+            <label><input type="checkbox" value={4} name='categories' onChange={this.handleCheckChange} />CARS</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Men's Clothing</label>
+            <label><input type="checkbox" value ={5} name='categories' onChange={this.handleCheckChange} />Vehicles</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Women's Clothing</label>
+            <label><input type="checkbox"value ={6} name='categories' onChange={this.handleCheckChange} />Automotive Acessories</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Furniture</label>
+            <label><input type="checkbox" value={7} name='categories' onChange={this.handleCheckChange} />CLOTHING</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Refrigerators and Appliances</label>
+            <label><input type="checkbox" value ={8} name='categories' onChange={this.handleCheckChange} />Men's Clothing</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Other Household items</label>
+            <label><input type="checkbox" value ={9} name='categories' onChange={this.handleCheckChange} />Women's Clothing</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Figs</label>
+            <label><input type="checkbox" value ={10} name='categories' onChange={this.handleCheckChange} /> HOUSEHOLD </label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />IClickers</label>
+            <label><input type="checkbox" value ={11} name='categories' onChange={this.handleCheckChange} />Furniture</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Cell Phones</label>
+            <label><input type="checkbox" value ={12} name='categories' onChange={this.handleCheckChange} />Refrigerators and Appliances</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Television</label>
+            <label><input type="checkbox" value ={13} name='categories' onChange={this.handleCheckChange} />Other Items</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Laptops</label>
+            <label><input type="checkbox" value ={14} name='categories' onChange={this.handleCheckChange} />Figs</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Desktops</label>
+            <label><input type="checkbox" value ={15} name='categories' onChange={this.handleCheckChange} />ELECTRONICS</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Video Games</label>
+            <label><input type="checkbox" value ={16} name='categories' onChange={this.handleCheckChange} />IClickers</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Game Consoles</label>
+            <label><input type="checkbox" value ={17} name='categories' onChange={this.handleCheckChange} />Cell Phones</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Gaming Accessories</label>
+            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Television</label>
           </div>
           <div className ="checkbox-inline">
-            <label><input type="checkbox" value="" />Other Electronic Items</label>
+            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Laptops</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Desktops</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Video Games</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Game Consoles</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Gaming Accessories</label>
+          </div>
+          <div className ="checkbox-inline">
+            <label><input type="checkbox" value ={18} name='categories' onChange={this.handleCheckChange} />Other Electronic Items</label>
           </div>
             <h2 className="nlh2"> Description:</h2>
-            <textarea className="form-control" rows="5" id="comment"></textarea>
+            <textarea className="form-control" rows="5" name = 'description' value ={this.state.value}  onChange={this.handleTextChange}></textarea>
         <AcceptablePayments disabled={false} checked/>
           File Path:
           <input type = "text" />
           <button type="button" className="btn btn-secondary" >Add Photos!</button>
           <br/>
-          <button type="button" className="btn btn-secondary" >Create Listing!</button>
+          <button type="button" className="btn btn-secondary" onClick={(e) => this.handlePost(e)} >Create Listing!</button>
           </div>
         </div>
       </div>
     </div>
-
-    </div>
+  </div>
     )
   }
 }

@@ -48,7 +48,7 @@ function getFeedItemSync(feedItemId) {
 }
 
 
-function storeListing(title,description,categories,preferred_payments,post_time,last_updated,price,type,pictures, cb){
+function storeListing(title,description,categories,preferred_payments,price,pictures, cb){
 
   var newItem = {
     "owner": this.props.user,
@@ -56,13 +56,13 @@ function storeListing(title,description,categories,preferred_payments,post_time,
     "description": description,
     "categories":categories,
     "preferred_payments":preferred_payments,
-    "timestamp": post_time,
-    "last_updated": last_updated,
+    "timestamp": new Date().getTime(),
+    "last_updated": new Date().getTime(),
     "active": 1,
     "price": price,
-    "type": type,
-    "pictures":pictures,
+    "type": 0,
     "rating": null
+
   };
   newItem = addDocument('item_listings', newItem)
   emulateServerReturn(newItem, cb);
