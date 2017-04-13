@@ -13,7 +13,7 @@ export default class ListingPage extends React.Component {
   }
 
   componentDidMount() {
-    getItemListings(this.props.id, (items) => {
+    getItemListings(this.props.params.id, (items) => {
       this.setState(items[0])
     })
   }
@@ -23,7 +23,7 @@ export default class ListingPage extends React.Component {
       return <div></div>
     return (
       <div>
-        <Navbar />
+        <Navbar user={this.state.owner._id} name={this.state.owner.username}/>
         <div className="container">
           <div className="row">
             <div className="col-md-4 item-category">
@@ -43,7 +43,7 @@ export default class ListingPage extends React.Component {
                     <span className="item-price">{"$" + this.state.price}</span>
                   </div>
                   <div className="row">
-                    <UserRating name={this.state.owner.username} rating={this.state.owner.avg_rating} />
+                    <UserRating user={this.state.owner._id} />
                   </div>
                   <div className="row">
                     <div className="btn-group" role="group">

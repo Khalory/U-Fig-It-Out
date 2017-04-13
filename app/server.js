@@ -48,8 +48,8 @@ function getFeedItemSync(feedItemId) {
 }
 
 
-function storeListing(title,description,categories,preferred_payments,price,pictures, cb){
 
+function storeListing(title,description,categories,preferred_payments,price,pictures, cb){
   var newItem = {
     "owner": this.props.user,
     "title": title,
@@ -89,6 +89,18 @@ export function getUserListings(user, bs, cb) {
   for(var i=1; i<=Object.keys(itemListings).length; i++){
     var item = readDocument("item_listings", i)
     if(user===item.owner && item.type===bs && item.active===1){
+      itemDataList.push(item);
+    }
+  }
+  emulateServerReturn(itemDataList, cb);
+}
+
+export function getCategoryListings(category, cb) {
+  var itemDataList = []
+  var itemListings = readFullCollection("item_listings");
+  for(var i=1; i<=Object.keys(itemListings).length; i++){
+    var item = readDocument("item_listings", i)
+    if(item._id===category && item.active===1){
       itemDataList.push(item);
     }
   }

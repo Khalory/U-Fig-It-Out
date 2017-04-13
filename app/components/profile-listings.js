@@ -15,7 +15,9 @@ export default class ProfileListings extends React.Component {
   }
 
   componentDidMount() {
-    this.refresh(0);
+    getUserListings(this.props.user, 0, (userListings) => {
+      this.setState({userListings: userListings})
+    })
   }
 
   handleBuyClick(clickEvent) {
@@ -54,7 +56,7 @@ export default class ProfileListings extends React.Component {
             </li>
             {this.state.userListings.map((listing, i) => {
               return (<li key={i} className="media list-group-item listing-item">
-              <Item picture={listing.pictures[0]} itemtitle={listing.title}
+              <Item id={listing._id} picture={listing.pictures[0]} itemtitle={listing.title}
                 itemdescription={listing.description}>
                 <div className="media-top media-right">
                   <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-cog"></span>Edit</button>

@@ -67,7 +67,6 @@ export default class newlisting extends React.Component {
     var  arr = this.state.categories
     arr.push(event.target.value)
     this.setState({ categories: arr })
-
   }
 
   render() {
