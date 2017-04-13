@@ -17,7 +17,7 @@ var initialData = {
       "username": "tRich",
       "password": "ilovewebprogramming",
       "email": "trichards@umass.edu",
-      "profile_picture": "img/fig-man.jpg",
+      "profile_picture": "img/totally-tim-richards.jpeg",
       "avg_rating": 5,
       "num_ratings": 8
     }
@@ -48,7 +48,7 @@ var initialData = {
     },
     "2": {
       "_id": 2,
-      "owner": 1,
+      "owner": 2,
       "title": "Top Quality Fig - CHEAP!",
       "description": "This is the best fig ever, grown in a garden of magic beans which has numerous giant beanstocks. In fact, this fig\
                       actually grew on one of the giant bean stocks, thus being imbued with the power of giants. You won't find another\
@@ -333,3 +333,8 @@ class ResetDatabase extends React.Component {
     );
   }
 }
+
+ReactDOM.render(
+  <ResetDatabase />,
+  document.getElementById('db-reset')
+);
