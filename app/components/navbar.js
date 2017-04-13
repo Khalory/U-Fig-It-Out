@@ -38,7 +38,7 @@ export default class Navbar extends React.Component {
               </button>
               <div className="btn-toolbar pull-right" role="toolbar">
                 <div className="btn-group" role="group">
-                  <NavbarUser user={this.props.user} name={this.props.name} />
+                  <NavbarUser user={this.props.user} />
                 </div>
               </div>
             </div>

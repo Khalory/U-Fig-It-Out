@@ -22,7 +22,7 @@ export default class Profile extends React.Component {
       return <div></div>
     return(
       <div>
-        <Navbar user={this.state._id} name={this.state.username}/>
+        <Navbar user={this.state._id}/>
         <div className="container">
           <div className="row">
             <div className="col-md-4">
