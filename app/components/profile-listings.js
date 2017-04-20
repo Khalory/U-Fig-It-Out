@@ -1,6 +1,7 @@
 import React from 'react';
 import Item from './item';
 import {getUserListings} from '../server.js'
+import {Link} from 'react-router';
 
 export default class ProfileListings extends React.Component {
   constructor(props) {
@@ -52,7 +53,7 @@ export default class ProfileListings extends React.Component {
         <div className="panel-body">
           <ul className="list-group">
             <li className="list-group-item listing-add">
-              <a href="#"><center>Add another listing!</center></a>
+              <Link to={"/make_listing/" + 1} query={{id:this.props.user}}><center>Add another listing!</center></Link>
             </li>
             {this.state.userListings.map((listing, i) => {
               return (<li key={i} className="media list-group-item listing-item">

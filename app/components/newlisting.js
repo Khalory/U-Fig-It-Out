@@ -74,7 +74,7 @@ export default class newlisting extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar user={this.props.location.query.id}/>
         <div className="container">
           <div className="row center nlBody">
             <div className = "col-md-2">

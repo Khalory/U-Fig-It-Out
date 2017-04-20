@@ -33,9 +33,11 @@ export default class Navbar extends React.Component {
               </div>
             </form>
             <div className="nav navbar-nav navbar-right">
-              <button type="button" className="btn btn-default navbar-btn">
-                <li><a href="http://localhost:8080/newlisting.html" className="slightUp">Sell an item!</a></li>
-              </button>
+              <Link to={"/make_listing/" + 1} query={{id:this.props.user}} className="slightUp">
+                <button type="button" className="btn btn-default navbar-btn">
+                  <li>Sell an item!</li>
+                </button>
+              </Link>
               <div className="btn-toolbar pull-right" role="toolbar">
                 <div className="btn-group" role="group">
                   <NavbarUser user={this.props.user} />
