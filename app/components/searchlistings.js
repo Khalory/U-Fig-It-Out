@@ -33,7 +33,6 @@ export default class SearchListings extends React.Component {
                   <ul className="list-group">
 
                     {this.state.items.map((listing, i) => {
-                      console.log(listing)
                       return (<li key={i} className="media list-group-item listing-item">
                       <Item id={listing._id} picture={listing.pictures[0]} itemtitle={listing.title}
                         itemdescription={listing.description}>

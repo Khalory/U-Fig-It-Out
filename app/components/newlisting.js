@@ -1,27 +1,31 @@
 import React from 'react';
-import AcceptablePayments from './acceptablePayments'
+import PreferredPayments from './preferredpayments'
 import Navbar from './navbar'
-import {storeListing} from '../server'
-import {readFullCollection} from '../database'
-
-
+import {storeListing, getCategories} from '../server'
 
 export default class newlisting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       title: '',
-      description:'',
-      categories:[],
-      preferred_payments:[],
+      description: '',
+      categories: [],
+      active_categories: [],
+      preferred_payments: [],
       post_time: null,
       update_time: null,
-      active: null,
-      price: null,
-      pictures:''
+      price: '',
+      images: []
     };
     this.handleTextChange = this.handleTextChange.bind(this);
-    this.handleCheckChange = this.handleCheckChange.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
+    this.handleUncheck = this.handleUncheck.bind(this);
+  }
+
+  componentDidMount() {
+    getCategories((categories) =>
+      this.setState({categories: categories})
+    )
   }
 
   /**
@@ -33,146 +37,116 @@ export default class newlisting extends React.Component {
     e.preventDefault();
     // Prevent the event from "bubbling" up the DOM tree.
     var title = this.state.title.trim();
-    var description = this.state.description.trim;
-    var categories = this.state.categories;
+    var description = this.state.description.trim();
+    var categories = this.state.active_categories;
     var preferred_payments = this.state.preferred_payments;
     var price = this.state.price;
+    var images = this.state.images
 
-    storeListing(this.props.location.query.id,title,description,categories,preferred_payments,price, () =>
-      console.log(readFullCollection('item_listings')))
-
+    storeListing(this.props.location.query.id, title, description, categories, preferred_payments, price, images, (listing) => {
       this.setState({
-      title: '',
-      description:'',
-      categories:[],
-      preferred_payments:[],
-      post_time: null,
-      update_time: null,
-      active: null,
-      price: null,
-      pictures:''});
-    }
-
+        title: '',
+        description: '',
+        categories: [],
+        active_categories: [],
+        preferred_payments: [],
+        post_time: null,
+        update_time: null,
+        price: '',
+        images: []
+      })
+      console.log(listing)
+    })
+  }
 
   /**
    * Called when the user types a character into the status update box.
    * @param e An Event object.
    */
    handleTextChange(event) {
-    //  name = event.target.name;
     event.preventDefault()
-
-    this.setState({name: event.target.value});
+    var name = event.target.name
+    var val = event.target.value
+    var ret = {}
+    ret[name] = val
+    this.setState(ret)
   }
 
-  handleCheckChange(event){
-    var  arr = this.state.categories
+  handleCheck(event) {
+    var arr = this.state.active_categories
     arr.push(event.target.value)
-    this.setState({ categories: arr })
+    this.setState({ active_categories: arr })
+  }
+
+  handleUncheck(event) {
+    var arr = this.state.active_categories
+    arr = arr.filter((category) => {
+      return category != event.target.value
+    })
+    this.setState({ active_categories: arr })
+  }
+
+  handleImageChange(e) {
+    e.preventDefault();
+
+    var reader = new FileReader();
+    var file = e.target.files[0];
+
+    reader.onloadend = () => {
+      var images = this.state.images
+      images.push({file: file, name: reader.result})
+      this.setState({images: images});
+    }
+
+    reader.readAsDataURL(file)
   }
 
   render() {
+    var imagePreviews = this.state.images.map((image, i) => {
+      return <img key={i} src={image.name} />
+    })
+
     return (
       <div>
-        <Navbar />
+        <Navbar user={this.props.params.id} />
         <div className="container">
           <div className="row center nlBody">
-            <div className = "col-md-2">
-            </div>
+            <div className = "col-md-2" />
             <div className = "col-md-8">
-            <h1>New Listing</h1>
-            <p>This page is to help you create a new listing to sell your items!</p>
-          <div className="form-group">
-            <h2 className="nlh2">Name of Item:</h2>
-            <input type="text" className="form-control" name = 'title' value ={this.state.value}  onChange={this.handleTextChange} />
-          <h2 className="nlh2">Price:   <input type = "text" title = 'price' value ={this.state.value}  onChange={this.handleTextChange}  /></h2>
-          <h2 className="nlh2">Check all that apply:</h2>
+              <h1>New Listing</h1>
+              <p>This page is to help you create a new listing to sell your items!</p>
+              <div className="form-group">
+                <h2 className="nlh2">Name of Item:</h2>
+                <input type="text" className="form-control" name="title" onChange={this.handleTextChange} />
+                <h2 className="nlh2">Price:   <input type="text" name="price" onChange={this.handleTextChange} /></h2>
+                <h2 className="nlh2">Check all that apply:</h2>
 
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value={1} name='categories' onChange={this.handleCheckChange} />Book</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value={2} name='categories' onChange={this.handleCheckChange} />Textbook</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} /> Non-Textbook</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value={4} name='categories' onChange={this.handleCheckChange} />CARS</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={5} name='categories' onChange={this.handleCheckChange} />Vehicles</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox"value ={6} name='categories' onChange={this.handleCheckChange} />Automotive Acessories</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value={7} name='categories' onChange={this.handleCheckChange} />CLOTHING</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={8} name='categories' onChange={this.handleCheckChange} />Men's Clothing</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={9} name='categories' onChange={this.handleCheckChange} />Women's Clothing</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={10} name='categories' onChange={this.handleCheckChange} /> HOUSEHOLD </label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={11} name='categories' onChange={this.handleCheckChange} />Furniture</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={12} name='categories' onChange={this.handleCheckChange} />Refrigerators and Appliances</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={13} name='categories' onChange={this.handleCheckChange} />Other Items</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={14} name='categories' onChange={this.handleCheckChange} />Figs</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={15} name='categories' onChange={this.handleCheckChange} />ELECTRONICS</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={16} name='categories' onChange={this.handleCheckChange} />IClickers</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={17} name='categories' onChange={this.handleCheckChange} />Cell Phones</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Television</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Laptops</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Desktops</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Video Games</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Game Consoles</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={3} name='categories' onChange={this.handleCheckChange} />Gaming Accessories</label>
-          </div>
-          <div className ="checkbox-inline">
-            <label><input type="checkbox" value ={18} name='categories' onChange={this.handleCheckChange} />Other Electronic Items</label>
-          </div>
-            <h2 className="nlh2"> Description:</h2>
-            <textarea className="form-control" rows="5" name = 'description' value ={this.state.value}  onChange={this.handleTextChange}></textarea>
-        <AcceptablePayments disabled={false} checked/>
-          File Path:
-          <input type = "text" />
-          <button type="button" className="btn btn-secondary" >Add Photos!</button>
-          <br/>
-          <button type="button" className="btn btn-secondary" onClick={(e) => this.handlePost(e)} >Create Listing!</button>
+                {this.state.categories.map((category) => {
+                  var onCheckChange = this.handleCheck
+                  if (this.state.active_categories.indexOf(category._id) > -1)
+                    onCheckChange = this.handleUncheck
+                  return(
+                    <div key={category._id} className ="checkbox-inline">
+                      <label><input type="checkbox" value={category._id} name="categories" onChange={onCheckChange} />{category.name}</label>
+                    </div>
+                  )
+                })}
+                <h2 className="nlh2"> Description:</h2>
+                <textarea className="form-control" rows="5" name="description" onChange={this.handleTextChange}></textarea>
+                <PreferredPayments disabled={false} preferred_payments={[]} />
+
+                <input className="fileInput" type="file" onChange={(e)=>this.handleImageChange(e)} />
+
+                <div className="imgPreview">
+                  {imagePreviews}
+                </div>
+                <br/>
+                <button type="button" className="btn btn-secondary" onClick={(e) => this.handlePost(e)} >Create Listing!</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
     )
   }
 }

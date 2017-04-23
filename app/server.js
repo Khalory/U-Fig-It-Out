@@ -47,23 +47,29 @@ function getFeedItemSync(feedItemId) {
   return feedItem;
 }
 
+// Private server function
+function storeImage(image) {
+  var img = addDocument('images', {
+    image: image.file
+  })
+  return img._id + '.' + image.name.split('.')[1]
+}
 
-
-export function storeListing(user,title,description,categories,preferred_payments,price, cb){
+export function storeListing(user, title, description, categories, preferred_payments, price, images, cb){
   var newItem = {
     "owner": user,
     "title": title,
     "description": description,
-    "categories":categories,
-    "preferred_payments":preferred_payments,
+    "categories": categories,
+    "preferred_payments": preferred_payments,
     "timestamp": new Date().getTime(),
     "last_updated": new Date().getTime(),
     "active": 1,
     "price": price,
     "type": 0,
-    "rating": null
-
-  };
+    "rating": null,
+    "images": images
+  }
   newItem = addDocument('item_listings', newItem)
   emulateServerReturn(newItem, cb);
 }
@@ -72,13 +78,15 @@ export function getItemListings(items, cb){
   if(items.constructor !== Array){
     items = [items]
   }
-  var itemDataList = [];
+  var itemDataList = []
   for (var i = 0; i < items.length; i++){
-    console.log(items[0])
-    var itemData = readDocument("item_listings", items[i]);
-    console.log(itemData)
-    var userData = readDocument("users", itemData.owner);
+    var itemData = readDocument('item_listings', items[i])
+    var userData = readDocument('users', itemData.owner)
+    var imageData = itemData.images.map((imageId) => {
+      return readDocument('images', imageId)
+    })
     itemData.owner = userData
+    itemData.images = imageData
     itemDataList.push(itemData)
   }
   emulateServerReturn(itemDataList, cb);
@@ -87,9 +95,9 @@ export function getItemListings(items, cb){
 
 export function getUserListings(user, bs, cb) {
   var itemDataList = []
-  var itemListings = readFullCollection("item_listings");
+  var itemListings = readFullCollection('item_listings');
   for(var i=1; i<=Object.keys(itemListings).length; i++){
-    var item = readDocument("item_listings", i)
+    var item = readDocument('item_listings', i)
     if(user===item.owner && item.type===bs && item.active===1){
       itemDataList.push(item);
     }
@@ -99,12 +107,21 @@ export function getUserListings(user, bs, cb) {
 
 export function getCategoryListings(category, cb) {
   var itemDataList = []
-  var itemListings = readFullCollection("item_listings");
+  var itemListings = readFullCollection('item_listings');
   for(var i=1; i<=Object.keys(itemListings).length; i++){
-    var item = readDocument("item_listings", i)
-    if(item._id===category && item.active===1){
+    var item = readDocument('item_listings', i)
+    if(item._id == category && item.active == 1){
       itemDataList.push(item);
     }
   }
   emulateServerReturn(itemDataList, cb);
+}
+
+export function getPreferredPayments(cb) {
+  var preferredPaymentList = []
+  var preferredPayments = readFullCollection('preferred_payments');
+  for(var i = 1; i <= Object.keys(preferredPayments).length; i++){
+    preferredPaymentList.push(readDocument('preferred_payments', i))
+  }
+  emulateServerReturn(preferredPaymentList, cb);
 }

@@ -41,8 +41,8 @@ var initialData = {
       "price": 50.00,
       //0=sellListing, 1=buyListing
       "type": 0,
-      "pictures": [
-        "img/AlgorithmsTextbook.jpeg"
+      "images": [
+        1
       ],
       "rating": null
     },
@@ -66,10 +66,8 @@ var initialData = {
       "price": 13.37,
       //0=sellListing, 1=buyListing
       "type": 0,
-      "pictures": [
-        "img/figs-1.jpg",
-        "img/figs-2.jpg",
-        "img/figs-3.jpg"
+      "images": [
+        2, 3, 4
       ],
       "rating": null
     }
@@ -255,7 +253,26 @@ var initialData = {
       "timestamp": 1453672530000,
       "content": "thanks bro"
     }
+  },
+  "images": {
+    1: {
+      "_id": 1,
+      "name": "img/AlgorithmsTextbook.jpeg"
+    },
+    2: {
+      "_id": 2,
+      "name": "img/figs-1.jpg"
+    },
+    3: {
+      "_id": 3,
+      "name": "img/figs-2.jpg"
+    },
+    4: {
+      "_id": 4,
+      "name": "img/figs-3.jpg"
+    },
   }
+
 };
 
 var data = JSON.parse(localStorage.getItem('fig_data'));

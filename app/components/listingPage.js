@@ -1,20 +1,18 @@
 import React from 'react'
-import AcceptablePayments from './acceptablePayments'
+import PreferredPayments from './preferredpayments'
 import Navbar from './navbar'
 import ListingImages from './listingImages'
 import UserRating from './user-rating'
 import {getItemListings} from '../server'
 
 export default class ListingPage extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = null
   }
 
   componentDidMount() {
-    console.log(this.props.params.id)
-    getItemListings(this.props.params.id, (items) => {
+    getItemListings(this.props.location.query.itemId, (items) => {
       this.setState(items[0])
     })
   }
@@ -24,7 +22,7 @@ export default class ListingPage extends React.Component {
       return <div></div>
     return (
       <div>
-        <Navbar user={this.state.owner._id} />
+        <Navbar user={this.props.params.id} />
         <div className="container">
           <div className="row">
             <div className="col-md-4 item-category">
@@ -36,7 +34,7 @@ export default class ListingPage extends React.Component {
             <div className="row">
               <div className="col-md-1"></div>
               <div className="row">
-                <ListingImages images={this.state.pictures} />
+                <ListingImages images={this.state.images} />
                 <div className="col-md-5">
                   <div className="row">
                     <span className="item-header">{this.state.title}</span>
@@ -68,7 +66,7 @@ export default class ListingPage extends React.Component {
                   </div>
                 </div>
               </div>
-              <AcceptablePayments disabled={true} checked={[true, false, true, true, false]} />
+              <PreferredPayments disabled={true} preferred_payments={this.state.preferred_payments} />
             </div>
           </div>
         </div>
