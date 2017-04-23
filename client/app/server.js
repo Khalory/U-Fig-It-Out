@@ -102,11 +102,11 @@ export function getCategoryListings(category, cb) {
   var itemListings = readFullCollection("item_listings");
   for(var i=1; i<=Object.keys(itemListings).length; i++){
     var item = readDocument("item_listings", i)
-    for(var j=0; j<item.categories.length; j++)
-      if(item.categories[j]===category && item.active===1){
-        console.log(item._id)
+    for(var j=0; j<item.categories.length; j++){
+      if(item.categories[j]==category && item.active==1){
         itemDataList.push(item);
       }
+    }
   }
   emulateServerReturn(itemDataList, cb);
 }

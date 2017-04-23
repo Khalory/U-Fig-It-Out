@@ -10,7 +10,7 @@ export default class Item extends React.Component {
         </div>
         <div className="media-body">
           <Link to={"/item/" + this.props.id}><h3>{this.props.itemtitle}</h3></Link>
-          <a href="#">{this.props.itemdescription}</a>
+          {this.props.itemdescription}
         </div>
         {this.props.children}
       </div>
