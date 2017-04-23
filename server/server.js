@@ -103,11 +103,48 @@ export function getCategoryListings(category, cb) {
   emulateServerReturn(itemDataList, cb);
 }
 
+function getUserIdFromToken(authorizationLine) {
+    try {
+        // Cut off "Bearer " from the header value.
+        var token = authorizationLine.slice(7);
+        // Convert the base64 string to a UTF-8 string.
+        var regularString = new Buffer(token, 'base64').toString('utf8');
+        // Convert the UTF-8 string into a JavaScript object.
+        var tokenObj = JSON.parse(regularString);
+        var id = tokenObj['id'];
+        // Check that id is a number.
+        if (typeof id === 'number') {
+            return id;
+        } else {
+            // Not a number. Return -1, an invalid ID.
+            return -1;
+        }
+    } catch (e) {
+        // Return an invalid ID.
+        return -1;
+    }
+}
+
 /*
-app.get('/user/:userid/feed', function(req, res) {
-  // URL parameters are stored in req.params
+
+Example
+app.get('examplePath', function(req, res) {
   var userid = req.params.userid;
-  // Send response.
-  res.send(getFeedData(userid));
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+  // userid is a string. We need it to be a number.
+  // Parameters are always strings.
+  var useridNumber = parseInt(userid, 10);
+  if (fromUser === useridNumber) {
+    // Send response.
+    res.send(getFeedData(userid));
+  } else {
+    // 401: Unauthorized request.
+    res.status(401).end();
+  }
 });
+*/
+
+
+/*
+Start with app.POST/GET(ETC)
 */
