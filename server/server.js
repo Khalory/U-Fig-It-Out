@@ -1,3 +1,7 @@
+// Support receiving text in HTTP request bodies
+app.use(bodyParser.text());
+// Support receiving JSON in HTTP request bodies
+app.use(bodyParser.json());
 export function getUserData(user, cb) {
   var userData = readDocument('users', user);
   emulateServerReturn(userData, cb);
@@ -98,3 +102,12 @@ export function getCategoryListings(category, cb) {
   }
   emulateServerReturn(itemDataList, cb);
 }
+
+/*
+app.get('/user/:userid/feed', function(req, res) {
+  // URL parameters are stored in req.params
+  var userid = req.params.userid;
+  // Send response.
+  res.send(getFeedData(userid));
+});
+*/
