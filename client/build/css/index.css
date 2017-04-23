@@ -257,7 +257,7 @@ font-family: verdana;
   max-height: 80vh;
   overflow-y:auto;
 }
-.nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+a>li.active {
     color: #fff;
     background-color: #7634AB;
 }

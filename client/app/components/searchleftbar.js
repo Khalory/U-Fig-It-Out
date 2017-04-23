@@ -11,10 +11,21 @@ export default class SearchLeftBar extends React.Component {
     }
   }
 
+componentDidMount() {
+  getCategories((categories) => {
+    this.setState({categoriesList: categories})
+  })
+}
+
+componentDidUpdate() {
+  getCategories((categories) => {
+    this.setState(
+      {activeIndex: this.props.activeIndex},
+      {categoriesList: categories})
+  })
+}
+
   render() {
-    getCategories((categories) => {
-      this.setState({categoriesList: categories})
-    })
 
     return <div>
       <div className="col-md-2 fig-categories">
@@ -23,7 +34,7 @@ export default class SearchLeftBar extends React.Component {
             return <Category key={i}
               name={ category.name }
               index={ i }
-              isActive={ this.state.activeIndex === i }
+              isActive={ this.state.activeIndex == i }
             /> } )
         }
         </ul>

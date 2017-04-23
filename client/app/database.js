@@ -29,7 +29,7 @@ var initialData = {
       "title": "CS 311 Textbook",
       "description": "Like new, has no markings whatsoever!",
       "categories": [
-        1, 2
+        0, 1, 2
       ],
       "preferred_payments": [
         1, 2, 3
@@ -54,7 +54,7 @@ var initialData = {
                       actually grew on one of the giant bean stocks, thus being imbued with the power of giants. You won't find another\
                       fig like this ever, especially not for this cheap, cheap price because I don't like figs very much.",
       "categories": [
-        1, 2
+        0, 1, 2
       ],
       "preferred_payments": [
         1, 2, 5, 4
