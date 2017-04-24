@@ -17,14 +17,6 @@ componentDidMount() {
   })
 }
 
-componentDidUpdate() {
-  getCategories((categories) => {
-    this.setState(
-      {activeIndex: this.props.activeIndex},
-      {categoriesList: categories})
-  })
-}
-
   render() {
 
     return <div>
@@ -34,7 +26,7 @@ componentDidUpdate() {
             return <Category key={i}
               name={ category.name }
               index={ i }
-              isActive={ this.state.activeIndex == i }
+              isActive={ this.props.activeIndex == i }
             /> } )
         }
         </ul>
