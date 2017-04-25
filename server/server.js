@@ -57,6 +57,9 @@ export function storeListing(user,title,description,categories,preferred_payment
 
   };
   newItem = addDocument('item_listings', newItem)
+  var userdata = readDocument('user',user)
+  userdata.items.unshift(newitem._id)
+  writeDocument('user',userdata)
   emulateServerReturn(newItem, cb);
 }
 

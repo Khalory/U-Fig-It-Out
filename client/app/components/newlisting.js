@@ -51,6 +51,8 @@ export default class newlisting extends React.Component {
       active: null,
       price: null,
       pictures:''});
+
+
     }
 
 
