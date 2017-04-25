@@ -1,15 +1,7 @@
-import {readDocument, readFullCollection, writeDocument, addDocument} from './database';
-
-/**
-* Emulates how a REST call is *asynchronous* -- it calls your function back
-* some time in the future with data.
-*/
-function emulateServerReturn(data, cb) {
-  setTimeout(() => {
-    cb(data);
-  }, 4);
-}
-
+// Support receiving text in HTTP request bodies
+app.use(bodyParser.text());
+// Support receiving JSON in HTTP request bodies
+app.use(bodyParser.json());
 export function getUserData(user, cb) {
   var userData = readDocument('users', user);
   emulateServerReturn(userData, cb);
@@ -47,29 +39,23 @@ function getFeedItemSync(feedItemId) {
   return feedItem;
 }
 
-// Private server function
-function storeImage(image) {
-  var img = addDocument('images', {
-    image: image.file
-  })
-  return img._id + '.' + image.name.split('.')[1]
-}
 
-export function storeListing(user, title, description, categories, preferred_payments, price, images, cb){
+
+export function storeListing(user,title,description,categories,preferred_payments,price, cb){
   var newItem = {
     "owner": user,
     "title": title,
     "description": description,
-    "categories": categories,
-    "preferred_payments": preferred_payments,
+    "categories":categories,
+    "preferred_payments":preferred_payments,
     "timestamp": new Date().getTime(),
     "last_updated": new Date().getTime(),
     "active": 1,
     "price": price,
     "type": 0,
-    "rating": null,
-    "images": images
-  }
+    "rating": null
+
+  };
   newItem = addDocument('item_listings', newItem)
   emulateServerReturn(newItem, cb);
 }
@@ -78,15 +64,13 @@ export function getItemListings(items, cb){
   if(items.constructor !== Array){
     items = [items]
   }
-  var itemDataList = []
+  var itemDataList = [];
   for (var i = 0; i < items.length; i++){
-    var itemData = readDocument('item_listings', items[i])
-    var userData = readDocument('users', itemData.owner)
-    var imageData = itemData.images.map((imageId) => {
-      return readDocument('images', imageId)
-    })
+    console.log(items[0])
+    var itemData = readDocument("item_listings", items[i]);
+    console.log(itemData)
+    var userData = readDocument("users", itemData.owner);
     itemData.owner = userData
-    itemData.images = imageData
     itemDataList.push(itemData)
   }
   emulateServerReturn(itemDataList, cb);
@@ -95,9 +79,9 @@ export function getItemListings(items, cb){
 
 export function getUserListings(user, bs, cb) {
   var itemDataList = []
-  var itemListings = readFullCollection('item_listings');
+  var itemListings = readFullCollection("item_listings");
   for(var i=1; i<=Object.keys(itemListings).length; i++){
-    var item = readDocument('item_listings', i)
+    var item = readDocument("item_listings", i)
     if(user===item.owner && item.type===bs && item.active===1){
       itemDataList.push(item);
     }
@@ -107,21 +91,60 @@ export function getUserListings(user, bs, cb) {
 
 export function getCategoryListings(category, cb) {
   var itemDataList = []
-  var itemListings = readFullCollection('item_listings');
+  var itemListings = readFullCollection("item_listings");
   for(var i=1; i<=Object.keys(itemListings).length; i++){
-    var item = readDocument('item_listings', i)
-    if(item._id == category && item.active == 1){
-      itemDataList.push(item);
-    }
+    var item = readDocument("item_listings", i)
+    for(var j=0; j<item.categories.length; j++)
+      if(item.categories[j]===category && item.active===1){
+        console.log(item._id)
+        itemDataList.push(item);
+      }
   }
   emulateServerReturn(itemDataList, cb);
 }
 
-export function getPreferredPayments(cb) {
-  var preferredPaymentList = []
-  var preferredPayments = readFullCollection('preferred_payments');
-  for(var i = 1; i <= Object.keys(preferredPayments).length; i++){
-    preferredPaymentList.push(readDocument('preferred_payments', i))
-  }
-  emulateServerReturn(preferredPaymentList, cb);
+function getUserIdFromToken(authorizationLine) {
+    try {
+        // Cut off "Bearer " from the header value.
+        var token = authorizationLine.slice(7);
+        // Convert the base64 string to a UTF-8 string.
+        var regularString = new Buffer(token, 'base64').toString('utf8');
+        // Convert the UTF-8 string into a JavaScript object.
+        var tokenObj = JSON.parse(regularString);
+        var id = tokenObj['id'];
+        // Check that id is a number.
+        if (typeof id === 'number') {
+            return id;
+        } else {
+            // Not a number. Return -1, an invalid ID.
+            return -1;
+        }
+    } catch (e) {
+        // Return an invalid ID.
+        return -1;
+    }
 }
+
+/*
+
+Example
+app.get('examplePath', function(req, res) {
+  var userid = req.params.userid;
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+  // userid is a string. We need it to be a number.
+  // Parameters are always strings.
+  var useridNumber = parseInt(userid, 10);
+  if (fromUser === useridNumber) {
+    // Send response.
+    res.send(getFeedData(userid));
+  } else {
+    // 401: Unauthorized request.
+    res.status(401).end();
+  }
+});
+*/
+
+
+/*
+Start with app.POST/GET(ETC)
+*/

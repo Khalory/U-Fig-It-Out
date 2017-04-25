@@ -11,19 +11,13 @@ export default class Search extends React.Component {
       contents: []
     };
   }
-//This can be deleted -Joe
-  componentDidMount() {
-    getUserData(this.props.params.id, (userData) => {
-      this.setState(userData);
-    });
-  }
 
   render() {
     return (
       <div>
         <Navbar user={this.props.params.id} />
-        <SearchLeftBar activeIndex={this.props.location.query.category}/>
-        <SearchListings category={2}/>
+        <SearchLeftBar activeIndex={this.props.params.category}/>
+        <SearchListings category={this.props.params.category}/>
       </div>
     )
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import {getCategories} from '../server'
+import { Link } from 'react-router'
 
 export default class SearchLeftBar extends React.Component {
   constructor(props) {
@@ -10,14 +11,13 @@ export default class SearchLeftBar extends React.Component {
     }
   }
 
-  handleClick(index) {
-    this.setState({activeIndex: index})
-  }
+componentDidMount() {
+  getCategories((categories) => {
+    this.setState({categoriesList: categories})
+  })
+}
 
   render() {
-    getCategories((categories) => {
-      this.setState({categoriesList: categories})
-    })
 
     return <div>
       <div className="col-md-2 fig-categories">
@@ -26,8 +26,7 @@ export default class SearchLeftBar extends React.Component {
             return <Category key={i}
               name={ category.name }
               index={ i }
-              isActive={ this.state.activeIndex === i }
-              onClick={ this.handleClick.bind(this) }
+              isActive={ this.props.activeIndex == i }
             /> } )
         }
         </ul>
@@ -38,13 +37,10 @@ export default class SearchLeftBar extends React.Component {
 
 class Category extends React.Component {
 
-  handleClick() {
-    this.props.onClick(this.props.index)
-  }
-
   render () {
-    return <li role="presentation" className={this.props.isActive ? "active" : "inactive"} onClick={this.handleClick.bind(this)}>
-      <a href="#">{this.props.name}</a>
+    return <Link to={"/search/" + this.props.index}><li role="presentation" className={this.props.isActive ? "active" : "inactive"}>
+      {this.props.name}
     </li>
+  </Link>
   }
 }

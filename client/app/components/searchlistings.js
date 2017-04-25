@@ -16,6 +16,12 @@ export default class SearchListings extends React.Component {
     })
   }
 
+  componentDidUpdate() {
+    getCategoryListings(this.props.category, (items) => {
+      this.setState({items: items})
+    })
+  }
+
   render() {
     if (this.state === null)
       return <div></div>
@@ -31,7 +37,6 @@ export default class SearchListings extends React.Component {
                 <div className="panel-body">
                   <h4>{'Books > Textbooks: '}<b>"CS 311"</b></h4>
                   <ul className="list-group">
-
                     {this.state.items.map((listing, i) => {
                       return (<li key={i} className="media list-group-item listing-item">
                       <Item id={listing._id} picture={listing.pictures[0]} itemtitle={listing.title}
