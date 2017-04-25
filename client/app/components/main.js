@@ -1,9 +1,25 @@
 import React from 'react';
 import Navbar from './navbar'
 import ChatPopup from './chat-popup'
+import { Link } from 'react-router'
+import {getCategories} from '../server'
 
 export default class Main extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = null
+  }
+
+  componentDidMount() {
+    getCategories((categories) => {
+      this.setState({categories: categories})
+    })
+  }
+
   render() {
+    if(this.state === null)
+      return <div></div>
+
     return(
       <div background = "http://www.indoorcitrustrees.com/wp-content-uploads/2016/05/Indoor-fig-tree-5.jpeg">
         <Navbar user={this.props.params.id} />
@@ -19,19 +35,19 @@ export default class Main extends React.Component {
             <table className="table centerTable lightBlack">
               <tbody>
                 <tr>
-                  <td><a href="http://localhost:8080/search.html#">Textbooks</a></td>
-                  <td><a href="http://localhost:8080/search.html#">Cars</a> </td>
-                  <td><a href="http://localhost:8080/search.html#">Clothing</a> </td>
+                  <td><Link to={"/search/" + this.state.categories[0]._id}>{this.state.categories[0].name}</Link></td>
+                  <td><Link to={"/search/" + this.state.categories[1]._id}>{this.state.categories[1].name}</Link></td>
+                  <td><Link to={"/search/" + this.state.categories[2]._id}>{this.state.categories[2].name}</Link> </td>
                 </tr>
                 <tr>
-                  <td><a href="http://localhost:8080/search.html#">Household</a> </td>
-                  <td><a href="http://localhost:8080/search.html#">FIGS!!!!</a> </td>
-                  <td><a href="http://localhost:8080/search.html#">Electronics</a> </td>
+                  <td><Link to={"/search/" + this.state.categories[3]._id}>{this.state.categories[3].name}</Link></td>
+                  <td><Link to={"/search/" + this.state.categories[4]._id}>{this.state.categories[4].name}</Link></td>
+                  <td><Link to={"/search/" + this.state.categories[5]._id}>{this.state.categories[5].name}</Link></td>
                 </tr>
                 <tr>
-                  <td><a href="http://localhost:8080/search.html#">Video Games</a></td>
-                  <td><a href="http://localhost:8080/search.html#">Tim Richards pictures</a></td>
-                  <td><a href="http://localhost:8080/search.html#">Even more Figs</a></td>
+                  <td><Link to={"/search/" + this.state.categories[6]._id}>{this.state.categories[6].name}</Link></td>
+                  <td><Link to={"/search/" + this.state.categories[7]._id}>{this.state.categories[7].name}</Link></td>
+                  <td><Link to={"/search/" + this.state.categories[8]._id}>{this.state.categories[8].name}</Link></td>
                 </tr>
               </tbody>
             </table>

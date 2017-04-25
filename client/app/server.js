@@ -93,6 +93,7 @@ export function getItemListings(items, cb){
 
 }
 
+
 export function getUserListings(user, bs, cb) {
   var itemDataList = []
   var itemListings = readFullCollection('item_listings');
