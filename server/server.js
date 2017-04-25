@@ -58,8 +58,16 @@ export function storeListing(user,title,description,categories,preferred_payment
   };
   newItem = addDocument('item_listings', newItem)
   var userdata = readDocument('user',user)
+
   userdata.items.unshift(newitem._id)
   writeDocument('user',userdata)
+
+for each(var cat in categories){
+  var catdata = readDocument('categories',cat)
+  catdata.items.unshift(newitem.id)
+  writeDocument('categories',catdata)
+}
+
   emulateServerReturn(newItem, cb);
 }
 
