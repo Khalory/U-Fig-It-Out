@@ -10,7 +10,10 @@ var initialData = {
       "email": "figman24@umass.edu",
       "profile_picture": "img/fig-man.jpg",
       "avg_rating": 4,
-      "num_ratings": 22
+      "num_ratings": 22,
+      "items": [
+        1
+      ]
     },
     "2": {
       "_id": 2,
@@ -19,7 +22,10 @@ var initialData = {
       "email": "trichards@umass.edu",
       "profile_picture": "img/totally-tim-richards.jpeg",
       "avg_rating": 5,
-      "num_ratings": 8
+      "num_ratings": 8,
+      "items": [
+        2
+      ]
     }
   },
   "item_listings": {
@@ -77,111 +83,144 @@ var initialData = {
   "categories": {
     1:{
       "_id": 1,
-      "name": "BOOKS"
+      "name": "BOOKS",
+      "items": [
+        1, 2
+      ]
     },
     2:{
       "_id": 2,
-      "name": "Textbooks"
+      "name": "Textbooks",
+      "items": [
+        1, 2
+      ]
     },
     3:{
       "_id": 3,
-      "name": "Non-textbooks"
+      "name": "Non-textbooks",
+      "items": [
+        1, 2
+      ]
     },
     4:{
       "_id": 4,
-      "name": "CARS"
+      "name": "CARS",
+      "items": []
     },
     5:{
       "_id": 5,
-      "name": "Vehicles"
+      "name": "Vehicles",
+      "items": []
     },
     6:{
       "_id": 6,
-      "name": "Automotive Accessories"
+      "name": "Automotive Accessories",
+      "items": []
     },
     7:{
       "_id": 7,
-      "name": "CLOTHING"
+      "name": "CLOTHING",
+      "items": []
     },
     8:{
       "_id": 8,
-      "name": "Men"
+      "name": "Men",
+      "items": []
     },
     9:{
       "_id": 9,
-      "name": "Women"
+      "name": "Women",
+      "items": []
     },
     10:{
       "_id": 10,
-      "name": "HOUSEHOLD"
+      "name": "HOUSEHOLD",
+      "items": []
     },
     11:{
       "_id": 11,
-      "name": "Furniture"
+      "name": "Furniture",
+      "items": []
     },
     12:{
       "_id": 12,
-      "name": "Refrigerators and Appliances"
+      "name": "Refrigerators and Appliances",
+      "items": []
     },
     13:{
       "_id": 13,
-      "name": "Other Items"
+      "name": "Other Items",
+      "items": []
     },
     14:{
       "_id": 14,
-      "name": "FIGS"
+      "name": "FIGS",
+      "items": []
     },
     15:{
       "_id": 15,
-      "name": "ELECTRONICS"
+      "name": "ELECTRONICS",
+      "items": []
     },
     16:{
       "_id": 16,
-      "name": "iClickers"
+      "name": "iClickers",
+      "items": []
     },
     17:{
       "_id": 17,
-      "name": "Cell Phones"
+      "name": "Cell Phones",
+      "items": []
     },
     18:{
       "_id": 18,
-      "name": "TVs"
+      "name": "TVs",
+      "items": []
     },
     19:{
       "_id": 19,
-      "name": "Other Electronic Items"
+      "name": "Other Electronic Items",
+      "items": []
     },
     20:{
       "_id": 20,
-      "name": "COMPUTERS"
+      "name": "COMPUTERS",
+      "items": []
     },
     21:{
       "_id": 21,
-      "name": "Laptops"
+      "name": "Laptops",
+      "items": []
     },
     22:{
       "_id": 22,
-      "name": "Desktops"
+      "name": "Desktops",
+      "items": []
     },
     23:{
       "_id": 23,
-      "name": "Computing Accessories"
+      "name": "Computing Accessories",
+      "items": []
     },
     24:{
       "_id": 24,
-      "name": "VIDEO GAMES"
+      "name": "VIDEO GAMES",
+      "items": []
     },
     25:{
       "_id": 25,
-      "name": "Consoles"
+      "name": "Consoles",
+      "items": []
     },
     26:{
       "_id": 26,
-      "name": "Games"
+      "name": "Games",
+      "items": []
     },
     27:{
       "_id": 27,
-      "name": "Gaming Accessories"
+      "name": "Gaming Accessories",
+      "items": []
     }
   },
   "preferred_payments": {
