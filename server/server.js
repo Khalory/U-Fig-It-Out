@@ -1,11 +1,35 @@
+var database = require('./database')
+var readDocument = database.readDocument
+var StatusUpdateSchema = require('./schemas/statusupdate.json');
+var CommentSchema = require('./schemas/comment.json');
+var validate = require('express-jsonschema').validate;
+var writeDocument = database.writeDocument;
+var addDocument = database.addDocument;
+// Imports the express Node module.
+var express = require('express');
+// Creates an Express server.
+var app = express();
+
+// You run the server from `server`, so `../client/build` is `server/../client/build`.
+// '..' means "go up one directory", so this translates into `client/build`!
+app.use(express.static('../client/build'));
+
+var bodyParser = require('body-parser');
 // Support receiving text in HTTP request bodies
 app.use(bodyParser.text());
 // Support receiving JSON in HTTP request bodies
 app.use(bodyParser.json());
-export function getUserData(user, cb) {
+
+export function getUserData(user) {
   var userData = readDocument('users', user);
   emulateServerReturn(userData, cb);
 }
+//Get user info for a particular user
+app.get('user/:userid/info', function(req, res) {
+  var userid = req.params.id;
+  var useridNumber = parseInt(userid, 10);
+  res.send(getUserData(userid));
+})
 
 export function getCategories(cb) {
   var categoriesList = []
@@ -17,29 +41,6 @@ export function getCategories(cb) {
   }
   emulateServerReturn(categoriesList, cb);
 }
-/**
-* Given a feed item ID, returns a FeedItem object with references resolved.
-* Internal to the server, since it's synchronous.
-*/
-function getFeedItemSync(feedItemId) {
-  var feedItem = readDocument('feedItems', feedItemId);
-  // Resolve 'like' counter.
-  feedItem.likeCounter =
-  feedItem.likeCounter.map((id) => readDocument('users', id));
-  // Assuming a StatusUpdate. If we had other types of
-  // FeedItems in the DB, we would
-  // need to check the type and have logic for each type.
-  feedItem.contents.author =
-  readDocument('users', feedItem.contents.author);
-  // Resolve comment author.
-  feedItem.comments.forEach((comment) => {
-    comment.author = readDocument('users', comment.author);
-    comment.likeCounter = comment.likeCounter.map((id) => readDocument('users', id));
-  });
-  return feedItem;
-}
-
-
 
 export function storeListing(user,title,description,categories,preferred_payments,price, cb){
   var newItem = {
@@ -62,11 +63,11 @@ export function storeListing(user,title,description,categories,preferred_payment
   userdata.items.unshift(newitem._id)
   writeDocument('user',userdata)
 
-for each(var cat in categories){
-  var catdata = readDocument('categories',cat)
-  catdata.items.unshift(newitem.id)
-  writeDocument('categories',catdata)
-}
+  for each(var cat in categories){
+    var catdata = readDocument('categories',cat)
+    catdata.items.unshift(newitem.id)
+    writeDocument('categories',catdata)
+  }
 
   emulateServerReturn(newItem, cb);
 }
