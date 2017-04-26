@@ -4,7 +4,7 @@
   "type": "object",
   "properties": {
     "itemId": {
-      "id": "ItemId",
+      "id": "itemId",
       "type": "integer"
     },
     "owner": {
@@ -63,8 +63,12 @@
   },
   "additionalProperties": false,
   "required": [
-    "userId",
-    "location",
-    "contents"
+    "itemId",
+    "owner",
+    "title",
+    "description",
+    "timestamp"
+    
+
   ]
 }
