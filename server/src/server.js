@@ -20,12 +20,11 @@ app.use(bodyParser.json());
 
 function getUserData(user) {
   var userData = readDocument('users', user);
-  emulateServerReturn(userData, cb);
+  return userData
 }
 //Get user info for a particular user
 app.get('user/:userid/info', function(req, res) {
   var userid = req.params.id;
-  var useridNumber = parseInt(userid, 10);
   res.send(getUserData(userid));
 })
 
