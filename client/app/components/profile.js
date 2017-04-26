@@ -29,7 +29,7 @@ export default class Profile extends React.Component {
               <ProfileInfo key={this.state._id} user={this.state._id} name={this.state.username} rating={this.state.avg_rating} profile_picture={this.state.profile_picture} email={this.state.email} />
             </div>
             <div className="col-md-8">
-              <ProfileListings key={this.state._id} user={this.state._id} userListings={[]} />
+              <ProfileListings key={this.state._id} user={this.state._id} items ={this.state.items} userListings={[]} />
             </div>
           </div>
         </div>
