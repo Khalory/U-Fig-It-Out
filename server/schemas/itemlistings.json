@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/",
+  "type": "object",
+  "properties": {
+    "itemId": {
+      "id": "ItemId",
+      "type": "integer"
+    },
+    "owner": {
+      "id": "owner",
+      "type": "integer"
+    },
+    "title": {
+      "id": "title",
+      "type": "string"
+    },
+    "description": {
+      "id":"description",
+      "type":"string"
+    },
+    "categories": {
+      "id":"categories",
+      "type":"array",
+      "items":{
+        "type":"integer"
+      }
+    },
+    "prefered_payments": {
+      "id":"preferred_payments",
+      "type":"array",
+      "items":{
+        "type":"integer"
+      }
+    },
+    "timestamp": {
+      "id": "timestamp",
+      "type": "integer"
+    },
+    "last_updated":{
+      "id":"last_updated",
+      "type":"integer"
+    },
+    "active": {
+      "id":"active",
+      "type":"integer"
+    },
+    "type": {
+      "id" :"type",
+      "type": "integer"
+    },
+    "pictures":{
+      "id":"pictures",
+      "type":"array",
+      "items":{
+        "type":"string"
+      }
+    },
+    "rating":{
+      "id":"rating",
+      "type": "integer"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "userId",
+    "location",
+    "contents"
+  ]
+}
