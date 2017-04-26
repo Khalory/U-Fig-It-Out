@@ -1,7 +1,5 @@
 var database = require('./database')
 var readDocument = database.readDocument
-var StatusUpdateSchema = require('./schemas/statusupdate.json');
-var CommentSchema = require('./schemas/comment.json');
 var validate = require('express-jsonschema').validate;
 var writeDocument = database.writeDocument;
 var addDocument = database.addDocument;
@@ -20,7 +18,7 @@ app.use(bodyParser.text());
 // Support receiving JSON in HTTP request bodies
 app.use(bodyParser.json());
 
-export function getUserData(user) {
+function getUserData(user) {
   var userData = readDocument('users', user);
   emulateServerReturn(userData, cb);
 }
@@ -31,7 +29,7 @@ app.get('user/:userid/info', function(req, res) {
   res.send(getUserData(userid));
 })
 
-export function getCategories(cb) {
+function getCategories(cb) {
   var categoriesList = []
   var categories = readFullCollection("categories");
   var length = Object.keys(categories).length
@@ -42,7 +40,7 @@ export function getCategories(cb) {
   emulateServerReturn(categoriesList, cb);
 }
 
-export function storeListing(user,title,description,categories,preferred_payments,price, cb){
+function storeListing(user,title,description,categories,preferred_payments,price, cb){
   var newItem = {
     "owner": user,
     "title": title,
@@ -62,17 +60,18 @@ export function storeListing(user,title,description,categories,preferred_payment
 
   userdata.items.unshift(newitem._id)
   writeDocument('user',userdata)
-
+  /**
   for each(var cat in categories){
     var catdata = readDocument('categories',cat)
     catdata.items.unshift(newitem.id)
     writeDocument('categories',catdata)
   }
+  */
 
   emulateServerReturn(newItem, cb);
 }
 
-export function getItemListings(items, cb){
+function getItemListings(items, cb){
   if(items.constructor !== Array){
     items = [items]
   }
@@ -89,7 +88,7 @@ export function getItemListings(items, cb){
 
 }
 
-export function getUserListings(user, bs, cb) {
+function getUserListings(user, bs, cb) {
   var itemDataList = []
   var itemListings = readFullCollection("item_listings");
   for(var i=1; i<=Object.keys(itemListings).length; i++){
@@ -101,7 +100,7 @@ export function getUserListings(user, bs, cb) {
   emulateServerReturn(itemDataList, cb);
 }
 
-export function getCategoryListings(category, cb) {
+function getCategoryListings(category, cb) {
   var itemDataList = []
   var itemListings = readFullCollection("item_listings");
   for(var i=1; i<=Object.keys(itemListings).length; i++){
@@ -160,5 +159,3 @@ app.get('examplePath', function(req, res) {
 /*
 Start with app.POST/GET(ETC)
 */
-
-}
