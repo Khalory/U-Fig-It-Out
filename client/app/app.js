@@ -16,11 +16,17 @@ import Profile from './components/profile'
 //import ProfileListings from './components/profile-listings'
 import Search from './components/search'
 //import ChatPopup from './components/chat-popup'
+import ErrorBanner from './components/errorbanner'
 
 class App extends React.Component {
   render() {
     return (
-      <div>{this.props.children}</div>
+      <div>
+        <div className="col-md-12">
+          <ErrorBanner />
+        </div>
+        <div>{this.props.children}</div>
+      </div>
     )
   }
 }

@@ -23,8 +23,8 @@ function getUserData(user) {
   return userData
 }
 //Get user info for a particular user
-app.get('user/:userid/info', function(req, res) {
-  var userid = req.params.id;
+app.get('/user/:userid/info', function(req, res) {
+  var userid = req.params.userid;
   res.send(getUserData(userid));
 })
 
