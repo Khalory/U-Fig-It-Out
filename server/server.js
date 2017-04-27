@@ -2,6 +2,9 @@ var database = require('./database');
 var readDocument = database.readDocument;
 var writeDocument = database.writeDocument;
 var addDocument = database.addDocument;
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
 var itemListingSchema = require('./schemas/itemlistings.json');
 // Support receiving text in HTTP request bodies
 app.use(bodyParser.text());
