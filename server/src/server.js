@@ -89,7 +89,7 @@ function storeListing(user, title, description, categories, preferred_payments, 
   newItem = addDocument('item_listings', newItem)
   var userdata = readDocument('user',user)
 
-  userdata.items.push(newitem._id)
+  userdata.items.push(newItem._id)
   writeDocument('user', userdata)
   /**
   for each(var cat in categories){
