@@ -309,7 +309,7 @@ var initialData = {
     4: {
       "_id": 4,
       "name": "img/figs-3.jpg"
-    },
+    }
   }
 
 };
