@@ -5,7 +5,7 @@ export default class UserRating extends React.Component {
   calcRating(){
     var stars = []
     for(var i=1; i<6; i++) {
-      if (i<=this.props.user.avg_rating) {
+      if (i<=this.props.owner.avg_rating) {
         stars.push((<li role="presentation" className="active" key={i}>
                     <span className="glyphicon glyphicon-star"></span>
                   </li>))
@@ -23,7 +23,7 @@ export default class UserRating extends React.Component {
     var rating = this.calcRating()
     return (
       <div>
-        <h3><Link to={"/profile/" + this.props.user._id}>{this.props.user.username}</Link></h3>
+        <h3><Link to={"/profile/" + this.props.user} query={{ user:this.props.owner._id }}>{this.props.owner.username}</Link></h3>
         <ul className="nav nav-pills pull-left">
           {rating}
         </ul>

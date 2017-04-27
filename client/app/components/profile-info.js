@@ -19,7 +19,7 @@ export default class ProfileInfo extends React.Component {
         <div className="col-md-12">
           <img className="img-thumbnail prof-pic" src={this.props.profile_picture} width="80%" />
           <br />
-          <UserRating key={this.props.user} user={this.state.owner} />
+          <UserRating key={this.props.user} user={this.state.owner} owner={this.state.owner} />
           <br />
           {this.props.email}
         </div>

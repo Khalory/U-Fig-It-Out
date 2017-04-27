@@ -19,7 +19,7 @@ export default class NavbarUser extends React.Component {
   render() {
     return (
       <div>
-        <Link to={"/profile/" + this.state._id}>
+        <Link to={"/profile/" + this.state._id} query={{user:this.state._id}}>
           <button type="button" className="btn btn-default navbar-btn">
             <span className="glyphicon glyphicon-user"></span>
             {this.state.username}
