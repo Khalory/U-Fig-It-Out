@@ -52,7 +52,7 @@ export default class PreferredPayments extends React.Component {
       for (var j = 0; j < 4; j++) {
         if (i*4 + j < len) {
           var pp = this.state.preferred_payments[i*4 + j]
-          paymentRow.push(<td key={(i*4 + j) * (pp.checked ? 1 : -1)}><input value={i*4 + j} type="checkbox" disabled={this.props.disabled} checked={pp.checked} onChange={this.click.bind(this)}/>{pp.name}</td>)
+          paymentRow.push(<td key={(i*4 + j + 1) * (pp.checked ? 1 : -1)}><input value={i*4 + j} type="checkbox" disabled={this.props.disabled} checked={pp.checked} onChange={this.click.bind(this)}/>{pp.name}</td>)
         }
         else
           paymentRow.push(<td key={i*4 + j}></td>)
