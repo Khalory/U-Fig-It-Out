@@ -2,14 +2,17 @@ import React from 'react'
 
 export default class ListingPage extends React.Component {
   render() {
-    var imgs = this.props.images.map((image) => {
-      return image.name
-    })
+    var imgs = this.props.images ? this.props.images : []
+    var primary = imgs.length > 0 ? <img key={0} className="img-thumbnail" src={imgs[0]} width="100%" /> : ''
+    var secondary = imgs.length > 1 ? imgs.splice(1, 2).map((img, i) => {
+                  return <img key={i} className="img-thumbnail" src={img} width="45%" />
+                }) : ''
+
     return (
       <div className="col-md-5">
         <div className="row item-images">
           <div className="col-md-8">
-            <img key={0} className="img-thumbnail" src={imgs.length > 0 ? imgs[0] : ''} width="100%" />
+            {primary}
           </div>
           <div className="col-md-4">
             <div className="row item-subimage-chevron">
@@ -21,9 +24,7 @@ export default class ListingPage extends React.Component {
             </div>
             <div className="row item-subimage">
               <div>
-                {imgs.length > 1 ? imgs.splice(1, 2).map((img, i) => {
-                  return <img key={i} className="img-thumbnail" src={img} width="45%" />
-                }) : ''}
+                {secondary}
               </div>
             </div>
           </div>

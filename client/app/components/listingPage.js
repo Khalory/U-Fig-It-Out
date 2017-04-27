@@ -8,7 +8,19 @@ import {getItemListings} from '../server'
 export default class ListingPage extends React.Component {
   constructor(props) {
     super(props)
-    this.state = null
+    this.state = {
+      itemId: this.props.location.query.itemId,
+      title: '',
+      price: '',
+      owner: {
+        _id: 0,
+        avg_rating: 0,
+        username: ''
+      },
+      description: '',
+      preferred_payments: [],
+      images: []
+    }
   }
 
   componentDidMount() {
@@ -16,16 +28,18 @@ export default class ListingPage extends React.Component {
       this.setState(items[0])
     })
   }
-  
+
   componentDidUpdate() {
+    if (this.state.itemId === this.props.location.query.itemId)
+      return;
+    this.setState({itemId: this.props.location.query.itemId})
+    
     getItemListings(this.props.location.query.itemId, (items) => {
       this.setState(items[0])
     })
   }
 
   render() {
-    if (this.state === null)
-      return <div></div>
     return (
       <div>
         <Navbar user={this.props.params.id} />
@@ -48,7 +62,7 @@ export default class ListingPage extends React.Component {
                     <span className="item-price">{"$" + this.state.price}</span>
                   </div>
                   <div className="row">
-                    <UserRating user={this.state.owner._id} />
+                    <UserRating user={this.state.owner} />
                   </div>
                   <div className="row">
                     <div className="btn-group" role="group">

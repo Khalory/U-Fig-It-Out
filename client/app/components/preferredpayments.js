@@ -18,6 +18,15 @@ export default class PreferredPayments extends React.Component {
     })
   }
 
+  componentDidUpdate() {
+    getPreferredPayments((pps) => {
+      pps.forEach((pp) => {
+        pp.checked = this.props.preferred_payments.indexOf(pp._id) > -1
+      })
+      this.setState({preferred_payments: pps})
+    })
+  }
+
   render() {
     var payments = []
     var len = this.state.preferred_payments.length

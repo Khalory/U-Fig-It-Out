@@ -19,13 +19,33 @@ app.use(bodyParser.text());
 app.use(bodyParser.json());
 
 function getUserData(user) {
-  var userData = readDocument('users', user);
+  var userData = readDocument('users', user)
   return userData
 }
+
+function getItemListings(itemIds) {
+  if(itemIds.constructor !== Array) {
+    itemIds = [itemIds]
+  }
+  var itemDataList = []
+  for (var i = 0; i < itemIds.length; i++) {
+    var itemData = readDocument("item_listings", itemIds[i])
+    var userData = readDocument("users", itemData.owner)
+    itemData.owner = userData
+    itemDataList.push(itemData)
+  }
+  
+  return itemDataList
+}
+
 //Get user info for a particular user
 app.get('/user/:userid/info', function(req, res) {
-  var userid = req.params.userid;
-  res.send(getUserData(userid));
+  var userid = req.params.userid
+  res.send(getUserData(userid))
+})
+
+app.post('/items', function(req, res) {
+  res.send(getItemListings(req.body))
 })
 
 function getCategories(cb) {
@@ -39,26 +59,26 @@ function getCategories(cb) {
   emulateServerReturn(categoriesList, cb);
 }
 
-function storeListing(user,title,description,categories,preferred_payments,price, cb){
+function storeListing(user, title, description, categories, preferred_payments, price, images, cb) {
   var newItem = {
     "owner": user,
     "title": title,
     "description": description,
-    "categories":categories,
-    "preferred_payments":preferred_payments,
+    "categories": categories,
+    "preferred_payments": preferred_payments,
     "timestamp": new Date().getTime(),
     "last_updated": new Date().getTime(),
     "active": 1,
     "price": price,
     "type": 0,
-    "rating": null
-
-  };
+    "rating": null,
+    "images": images
+  }
   newItem = addDocument('item_listings', newItem)
   var userdata = readDocument('user',user)
 
   userdata.items.unshift(newitem._id)
-  writeDocument('user',userdata)
+  writeDocument('user', userdata)
   /**
   for each(var cat in categories){
     var catdata = readDocument('categories',cat)
@@ -68,23 +88,6 @@ function storeListing(user,title,description,categories,preferred_payments,price
   */
 
   emulateServerReturn(newItem, cb);
-}
-
-function getItemListings(items, cb){
-  if(items.constructor !== Array){
-    items = [items]
-  }
-  var itemDataList = [];
-  for (var i = 0; i < items.length; i++){
-    console.log(items[0])
-    var itemData = readDocument("item_listings", items[i]);
-    console.log(itemData)
-    var userData = readDocument("users", itemData.owner);
-    itemData.owner = userData
-    itemDataList.push(itemData)
-  }
-  emulateServerReturn(itemDataList, cb);
-
 }
 
 function getUserListings(user, bs, cb) {

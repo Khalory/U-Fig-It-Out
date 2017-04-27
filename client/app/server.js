@@ -68,7 +68,7 @@ function sendXHR(verb, resource, body, cb) {
       break;
     case 'object':
       // Tell the server we are sending JSON.
-      xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+      xhr.setRequestHeader("Content-Type", "application/json");
       // Convert body into a JSON string.
       xhr.send(JSON.stringify(body));
       break;
@@ -79,6 +79,12 @@ function sendXHR(verb, resource, body, cb) {
 
 export function getUserData(user, cb) {
   sendXHR('GET', '/user/' + user + '/info', undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText))
+  })
+}
+
+export function getItemListings(itemIds, cb) {
+  sendXHR('POST', '/items', itemIds, (xhr) => {
     cb(JSON.parse(xhr.responseText))
   })
 }
@@ -124,7 +130,7 @@ function storeImage(image) {
   return img._id + '.' + image.name.split('.')[1]
 }
 
-export function storeListing(user, title, description, categories, preferred_payments, price, images, cb){
+export function storeListing(user, title, description, categories, preferred_payments, price, images, cb) {
   var newItem = {
     "owner": user,
     "title": title,
@@ -141,25 +147,6 @@ export function storeListing(user, title, description, categories, preferred_pay
   }
   newItem = addDocument('item_listings', newItem)
   emulateServerReturn(newItem, cb);
-}
-
-export function getItemListings(items, cb){
-  if(items.constructor !== Array){
-    items = [items]
-  }
-  var itemDataList = []
-  for (var i = 0; i < items.length; i++) {
-    var itemData = readDocument('item_listings', items[i])
-    var userData = readDocument('users', itemData.owner)
-    var imageData = itemData.images.map((imageId) => {
-      return readDocument('images', imageId)
-    })
-    itemData.owner = userData
-    itemData.images = imageData
-    itemDataList.push(itemData)
-  }
-  emulateServerReturn(itemDataList, cb);
-
 }
 
 /**

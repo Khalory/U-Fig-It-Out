@@ -44,7 +44,7 @@ var initialData = {
       "price": 50.00,
       //0=sellListing, 1=buyListing
       "type": 0,
-      "pictures": [
+      "images": [
         "img/AlgorithmsTextbook.jpeg"
       ],
       "rating": null
@@ -69,7 +69,7 @@ var initialData = {
       "price": 13.37,
       //0=sellListing, 1=buyListing
       "type": 0,
-      "pictures": [
+      "images": [
         "img/figs-1.jpg",
         "img/figs-2.jpg",
         "img/figs-3.jpg"

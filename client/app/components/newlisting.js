@@ -55,7 +55,6 @@ export default class newlisting extends React.Component {
         price: '',
         images: []
       })
-      console.log(listing)
     })
   }
 
