@@ -9,7 +9,7 @@ export default class Item extends React.Component {
           <a href="#"><img src={this.props.picture} alt="Item" /></a>
         </div>
         <div className="media-body">
-          <Link to={"/item/" + this.props.id}><h3>{this.props.itemtitle}</h3></Link>
+          <Link to={"/item/" + this.props.user} query={{itemId:this.props.id}}><h3>{this.props.itemtitle}</h3></Link>
           {this.props.itemdescription}
         </div>
         {this.props.children}
