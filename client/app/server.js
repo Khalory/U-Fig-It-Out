@@ -100,53 +100,23 @@ export function getCategories(cb) {
   emulateServerReturn(categoriesList, cb);
 }
 
-/**
-* Given a feed item ID, returns a FeedItem object with references resolved.
-* Internal to the server, since it's synchronous.
-*/
-function getFeedItemSync(feedItemId) {
-  var feedItem = readDocument('feedItems', feedItemId);
-  // Resolve 'like' counter.
-  feedItem.likeCounter =
-  feedItem.likeCounter.map((id) => readDocument('users', id));
-  // Assuming a StatusUpdate. If we had other types of
-  // FeedItems in the DB, we would
-  // need to check the type and have logic for each type.
-  feedItem.contents.author =
-  readDocument('users', feedItem.contents.author);
-  // Resolve comment author.
-  feedItem.comments.forEach((comment) => {
-    comment.author = readDocument('users', comment.author);
-    comment.likeCounter = comment.likeCounter.map((id) => readDocument('users', id));
-  });
-  return feedItem;
-}
-
-// Private server function
-function storeImage(image) {
-  var img = addDocument('images', {
-    image: image.file
-  })
-  return img._id + '.' + image.name.split('.')[1]
-}
-
 export function storeListing(user, title, description, categories, preferred_payments, price, images, cb) {
-  var newItem = {
-    "owner": user,
-    "title": title,
-    "description": description,
-    "categories": categories,
-    "preferred_payments": preferred_payments,
-    "timestamp": new Date().getTime(),
-    "last_updated": new Date().getTime(),
-    "active": 1,
-    "price": price,
-    "type": 0,
-    "rating": null,
-    "images": images
-  }
-  newItem = addDocument('item_listings', newItem)
-  emulateServerReturn(newItem, cb);
+  sendXHR('PUT','/make_listing', {
+    owner: user,
+    title: title,
+    description: description,
+    categories:categories,
+    preferred_payments:preferred_payments,
+    timestamp: new Date().getTime(),
+    last_updated: new Date().getTime(),
+    active: 1,
+    price: price,
+    type: 0,
+    rating: null,
+    images: images
+  }, (xhr) => {
+    cb(JSON.parse(xhr.responseText))
+  });
 }
 
 /**

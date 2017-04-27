@@ -1,10 +1,12 @@
 var database = require('./database')
 var readDocument = database.readDocument
-var validate = require('express-jsonschema').validate;
+
 var writeDocument = database.writeDocument;
 var addDocument = database.addDocument;
 // Imports the express Node module.
 var express = require('express');
+var validate = require('express-jsonschema').validate;
+var NewItemSchema = require('../schemas/itemlistings.json')
 // Creates an Express server.
 var app = express();
 
@@ -172,6 +174,19 @@ app.use(function(err, req, res, next) {
   } else {
     // It's some other sort of error; pass it to next error middleware handler
     next(err);
+  }
+});
+
+app.put('/make_listing',validate({body: NewItemSchema}), function(req,res) {
+  var body = req.body;
+  var fromUser = getuserIdFromToken(req.get('Authorization'));
+  if(fromUser === body.userId){
+    var newItem = storeListing(body.user,body.title,body.description,body.categories,body.preferred_payments,body.price);
+    res.status(201);
+    res.set('Location','/make_listing/'+newItem._id)
+    res.send(newItem)
+  }else{res.status(401).end()
+
   }
 });
 
