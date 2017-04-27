@@ -1,8 +1,17 @@
 import React from 'react';
 import UserRating from './user-rating'
-import {getUserData} from '../server'
 
 export default class ProfileInfo extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      owner: {
+        _id: this.props.user,
+        avg_rating: this.props.rating,
+        username: this.props.name
+      }
+    }
+  }
 
   render() {
     return (
@@ -10,7 +19,7 @@ export default class ProfileInfo extends React.Component {
         <div className="col-md-12">
           <img className="img-thumbnail prof-pic" src={this.props.profile_picture} width="80%" />
           <br />
-          <UserRating key={this.props.user} user={this.props.user} />
+          <UserRating key={this.props.user} user={this.state.owner} />
           <br />
           {this.props.email}
         </div>
