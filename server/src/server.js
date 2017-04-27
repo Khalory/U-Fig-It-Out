@@ -51,12 +51,15 @@ app.post('/items', function(req, res) {
   res.send(getItemListings(req.body))
 })
 
+//Get all the categories in the database
 app.get('/allcategories', function(req, res) {
     var allCategories = getCategories();
     res.send(allCategories);
     res.status(200);
 });
 
+//Helper function for app.get('/allcategories'...). Retrieves the list of
+//categories from the database and returns it.
 function getCategories() {
   var categoriesList = [];
   var categories = getCollection("categories");
@@ -111,9 +114,15 @@ function getUserListings(user, bs, cb) {
   emulateServerReturn(itemDataList, cb);
 }
 
-function getCategoryListings(category, cb) {
+app.get('/categories/:categoryid', function(req, res) {
+    var category = req.params.categoryid;
+    res.send(getCategoryListings(category));
+    res.status(200);
+});
+
+function getCategoryListings(category) {
   var itemDataList = []
-  var itemListings = readFullCollection("item_listings");
+  var itemListings = getCollection("item_listings");
   for(var i=1; i<=Object.keys(itemListings).length; i++){
     var item = readDocument("item_listings", i)
     for(var j=0; j<item.categories.length; j++)
@@ -122,7 +131,7 @@ function getCategoryListings(category, cb) {
         itemDataList.push(item);
       }
   }
-  emulateServerReturn(itemDataList, cb);
+  return itemDataList;
 }
 
 function getUserIdFromToken(authorizationLine) {
