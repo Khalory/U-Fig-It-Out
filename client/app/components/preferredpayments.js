@@ -5,26 +5,41 @@ export default class PreferredPayments extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      preferred_payments: []
+      preferred_payments: [],
+      checked_payments: this.props.preferred_payments
     }
   }
 
   componentDidMount() {
     getPreferredPayments((pps) => {
       pps.forEach((pp) => {
-        pp.checked = this.props.preferred_payments.indexOf(pp._id) > -1
+        pp.checked = this.state.checked_payments.indexOf(pp._id) > -1
       })
       this.setState({preferred_payments: pps})
     })
   }
 
   componentDidUpdate() {
+    if (this.state.checked_payments === this.props.preferred_payments)
+      return
+
+    this.setState({checked_payments: this.props.preferred_payments})
     getPreferredPayments((pps) => {
       pps.forEach((pp) => {
-        pp.checked = this.props.preferred_payments.indexOf(pp._id) > -1
+        pp.checked = this.state.checked_payments.indexOf(pp._id) > -1
       })
       this.setState({preferred_payments: pps})
     })
+  }
+
+  click(e) {
+    e.preventDefault()
+    var value = e.target.value
+    var pps = this.state.preferred_payments
+
+    pps[value].checked = !pps[value].checked
+
+    this.setState({preferred_payments: pps})
   }
 
   render() {
@@ -37,7 +52,7 @@ export default class PreferredPayments extends React.Component {
       for (var j = 0; j < 4; j++) {
         if (i*4 + j < len) {
           var pp = this.state.preferred_payments[i*4 + j]
-          paymentRow.push(<td key={i*4 + j}><input type="checkbox" disabled={this.props.disabled} checked={pp.checked} />{pp.name}</td>)
+          paymentRow.push(<td key={(i*4 + j) * (pp.checked ? 1 : -1)}><input value={i*4 + j} type="checkbox" disabled={this.props.disabled} checked={pp.checked} onChange={this.click.bind(this)}/>{pp.name}</td>)
         }
         else
           paymentRow.push(<td key={i*4 + j}></td>)
