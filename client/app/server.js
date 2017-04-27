@@ -129,6 +129,13 @@ export function getUserListings(user, bs, cb) {
 */
 
 export function getCategoryListings(category, cb) {
+  sendXHR('GET', '/categories/' + category, undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText))
+  })
+}
+
+/*
+export function getCategoryListings(category, cb) {
   var itemDataList = []
   var itemListings = readFullCollection('item_listings');
   for(var i=1; i<=Object.keys(itemListings).length; i++) {
@@ -144,6 +151,7 @@ export function getCategoryListings(category, cb) {
   }
   emulateServerReturn(itemDataList, cb);
 }
+*/
 
 export function getPreferredPayments(cb) {
   var preferredPaymentList = []
