@@ -1,13 +1,34 @@
+var database = require('./database')
+var readDocument = database.readDocument
+var validate = require('express-jsonschema').validate;
+var writeDocument = database.writeDocument;
+var addDocument = database.addDocument;
+// Imports the express Node module.
+var express = require('express');
+// Creates an Express server.
+var app = express();
+
+// You run the server from `server`, so `../client/build` is `server/../client/build`.
+// '..' means "go up one directory", so this translates into `client/build`!
+app.use(express.static('../client/build'));
+
+var bodyParser = require('body-parser');
 // Support receiving text in HTTP request bodies
 app.use(bodyParser.text());
 // Support receiving JSON in HTTP request bodies
 app.use(bodyParser.json());
-export function getUserData(user, cb) {
-  var userData = readDocument('users', user);
-  emulateServerReturn(userData, cb);
-}
 
-export function getCategories(cb) {
+function getUserData(user) {
+  var userData = readDocument('users', user);
+  return userData
+}
+//Get user info for a particular user
+app.get('/user/:userid/info', function(req, res) {
+  var userid = req.params.userid;
+  res.send(getUserData(userid));
+})
+
+function getCategories(cb) {
   var categoriesList = []
   var categories = readFullCollection("categories");
   var length = Object.keys(categories).length
@@ -17,31 +38,8 @@ export function getCategories(cb) {
   }
   emulateServerReturn(categoriesList, cb);
 }
-/**
-* Given a feed item ID, returns a FeedItem object with references resolved.
-* Internal to the server, since it's synchronous.
-*/
-function getFeedItemSync(feedItemId) {
-  var feedItem = readDocument('feedItems', feedItemId);
-  // Resolve 'like' counter.
-  feedItem.likeCounter =
-  feedItem.likeCounter.map((id) => readDocument('users', id));
-  // Assuming a StatusUpdate. If we had other types of
-  // FeedItems in the DB, we would
-  // need to check the type and have logic for each type.
-  feedItem.contents.author =
-  readDocument('users', feedItem.contents.author);
-  // Resolve comment author.
-  feedItem.comments.forEach((comment) => {
-    comment.author = readDocument('users', comment.author);
-    comment.likeCounter = comment.likeCounter.map((id) => readDocument('users', id));
-  });
-  return feedItem;
-}
 
-
-
-export function storeListing(user,title,description,categories,preferred_payments,price, cb){
+function storeListing(user,title,description,categories,preferred_payments,price, cb){
   var newItem = {
     "owner": user,
     "title": title,
@@ -57,10 +55,22 @@ export function storeListing(user,title,description,categories,preferred_payment
 
   };
   newItem = addDocument('item_listings', newItem)
+  var userdata = readDocument('user',user)
+
+  userdata.items.unshift(newitem._id)
+  writeDocument('user',userdata)
+  /**
+  for each(var cat in categories){
+    var catdata = readDocument('categories',cat)
+    catdata.items.unshift(newitem.id)
+    writeDocument('categories',catdata)
+  }
+  */
+
   emulateServerReturn(newItem, cb);
 }
 
-export function getItemListings(items, cb){
+function getItemListings(items, cb){
   if(items.constructor !== Array){
     items = [items]
   }
@@ -77,7 +87,7 @@ export function getItemListings(items, cb){
 
 }
 
-export function getUserListings(user, bs, cb) {
+function getUserListings(user, bs, cb) {
   var itemDataList = []
   var itemListings = readFullCollection("item_listings");
   for(var i=1; i<=Object.keys(itemListings).length; i++){
@@ -89,7 +99,7 @@ export function getUserListings(user, bs, cb) {
   emulateServerReturn(itemDataList, cb);
 }
 
-export function getCategoryListings(category, cb) {
+function getCategoryListings(category, cb) {
   var itemDataList = []
   var itemListings = readFullCollection("item_listings");
   for(var i=1; i<=Object.keys(itemListings).length; i++){
@@ -148,3 +158,21 @@ app.get('examplePath', function(req, res) {
 /*
 Start with app.POST/GET(ETC)
 */
+
+/**
+ * Translate JSON Schema Validation failures into error 400s.
+ */
+app.use(function(err, req, res, next) {
+  if (err.name === 'JsonSchemaValidation') {
+    // Set a bad request http response status
+    res.status(400).end();
+  } else {
+    // It's some other sort of error; pass it to next error middleware handler
+    next(err);
+  }
+});
+
+// Starts the server on port 3000!
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});

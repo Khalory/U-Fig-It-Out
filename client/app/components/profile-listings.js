@@ -1,6 +1,7 @@
 import React from 'react';
 import Item from './item';
 import {getUserListings} from '../server.js'
+import {getItemListings} from '../server.js'
 import {Link} from 'react-router';
 
 export default class ProfileListings extends React.Component {
@@ -9,31 +10,33 @@ export default class ProfileListings extends React.Component {
     this.state = props
   }
 
-  refresh(bs) {
-    getUserListings(this.props.user, bs, (userListings) => {
+  refresh() {
+    getItemListings(this.props.items, (userListings) => {
       this.setState({userListings: userListings})
     })
   }
 
   componentDidMount() {
-    getUserListings(this.props.user, 0, (userListings) => {
+    getItemListings(this.props.items, (userListings) => {
       this.setState({userListings: userListings})
     })
   }
 
+//These two clickEvents are disabled for now
   handleBuyClick(clickEvent) {
     clickEvent.preventDefault()
-    if(clickEvent.button === 0) {
+    if(clickEvent.button === 2) {
       this.refresh(1);
     }
   }
 
   handleSellClick(clickEvent) {
     clickEvent.preventDefault()
-    if(clickEvent.button === 0) {
+    if(clickEvent.button === 2) {
       this.refresh(0);
     }
   }
+
 
   render() {
     var items = !this.state.userListings ? <div></div> : this.state.userListings.map((listing, i) => {
