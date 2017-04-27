@@ -97,7 +97,7 @@ export function getCategories(cb) {
 
 export function storeListing(user, title, description, categories, preferred_payments, price, images, cb) {
   sendXHR('POST','/make_listing/:id', {
-    owner: user,
+    user: user,
     title: title,
     description: description,
     categories:categories,

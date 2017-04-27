@@ -43,7 +43,7 @@ export default class newlisting extends React.Component {
     var price = this.state.price;
     var images = this.state.images
 
-    storeListing(this.props.location.query.id, title, description, categories, preferred_payments, price, images, () => {
+    storeListing(this.props.params.id, title, description, categories, preferred_payments, price, images, () => {
       this.setState({
         title: '',
         description: '',
