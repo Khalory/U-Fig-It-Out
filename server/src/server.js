@@ -3,6 +3,7 @@ var readDocument = database.readDocument
 
 var writeDocument = database.writeDocument;
 var addDocument = database.addDocument;
+var getCollection = database.getCollection;
 // Imports the express Node module.
 var express = require('express');
 var validate = require('express-jsonschema').validate;
@@ -36,7 +37,7 @@ function getItemListings(itemIds) {
     itemData.owner = userData
     itemDataList.push(itemData)
   }
-  
+
   return itemDataList
 }
 
@@ -50,15 +51,21 @@ app.post('/items', function(req, res) {
   res.send(getItemListings(req.body))
 })
 
-function getCategories(cb) {
-  var categoriesList = []
-  var categories = readFullCollection("categories");
-  var length = Object.keys(categories).length
+app.get('/allcategories', function(req, res) {
+    var allCategories = getCategories();
+    res.send(allCategories);
+    res.status(200);
+});
+
+function getCategories() {
+  var categoriesList = [];
+  var categories = getCollection("categories");
+  var length = Object.keys(categories).length;
   for(var i=1; i<=length; i++) {
-    var category = readDocument("categories", i)
+    var category = readDocument("categories", i);
     categoriesList.push(category);
   }
-  emulateServerReturn(categoriesList, cb);
+  return categoriesList;
 }
 
 function storeListing(user, title, description, categories, preferred_payments, price, images, cb) {
