@@ -36,6 +36,17 @@ export default class ProfileListings extends React.Component {
   }
 
   render() {
+    var items = !this.state.userListings ? <div></div> : this.state.userListings.map((listing, i) => {
+              return (<li key={i} className="media list-group-item listing-item">
+              <Item id={listing._id} picture={listing.images[0]} itemtitle={listing.title}
+                itemdescription={listing.description}>
+                <div className="media-top media-right">
+                  <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-cog"></span>Edit</button>
+                </div>
+              </Item>
+            </li>)
+            })
+
     return (
       <div className="panel panel-default fig-listings">
         <div className="panel-heading">
@@ -53,18 +64,9 @@ export default class ProfileListings extends React.Component {
         <div className="panel-body">
           <ul className="list-group">
             <li className="list-group-item listing-add">
-              <Link to={"/make_listing/" + 1} query={{id:this.props.user}}><center>Add another listing!</center></Link>
+              <Link to={"/make_listing/" + this.props.user}><center>Add another listing!</center></Link>
             </li>
-            {this.state.userListings.map((listing, i) => {
-              return (<li key={i} className="media list-group-item listing-item">
-              <Item id={listing._id} picture={listing.pictures[0]} itemtitle={listing.title}
-                itemdescription={listing.description}>
-                <div className="media-top media-right">
-                  <button type="button" className="btn btn-default"><span className="glyphicon glyphicon-cog"></span>Edit</button>
-                </div>
-              </Item>
-            </li>)
-            })}
+            {items}
           </ul>
         </div>
       </div>

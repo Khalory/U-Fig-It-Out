@@ -16,8 +16,8 @@ export default class Search extends React.Component {
     return (
       <div>
         <Navbar user={this.props.params.id} />
-        <SearchLeftBar activeIndex={this.props.params.category}/>
-        <SearchListings category={this.props.params.category}/>
+        <SearchLeftBar activeIndex={this.props.location.query.category} user={this.props.params.id}/>
+        <SearchListings category={this.props.location.query.category}/>
       </div>
     )
   }

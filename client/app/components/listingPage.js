@@ -16,6 +16,12 @@ export default class ListingPage extends React.Component {
       this.setState(items[0])
     })
   }
+  
+  componentDidUpdate() {
+    getItemListings(this.props.location.query.itemId, (items) => {
+      this.setState(items[0])
+    })
+  }
 
   render() {
     if (this.state === null)

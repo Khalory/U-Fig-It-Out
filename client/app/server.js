@@ -79,7 +79,7 @@ export function getItemListings(items, cb){
     items = [items]
   }
   var itemDataList = []
-  for (var i = 0; i < items.length; i++){
+  for (var i = 0; i < items.length; i++) {
     var itemData = readDocument('item_listings', items[i])
     var userData = readDocument('users', itemData.owner)
     var imageData = itemData.images.map((imageId) => {
