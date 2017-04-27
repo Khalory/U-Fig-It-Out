@@ -86,7 +86,7 @@ function storeListing(user, title, description, categories, preferred_payments, 
   newItem = addDocument('item_listings', newItem)
   var userdata = readDocument('user',user)
 
-  userdata.items.unshift(newitem._id)
+  userdata.items.push(newitem._id)
   writeDocument('user', userdata)
   /**
   for each(var cat in categories){
@@ -96,7 +96,7 @@ function storeListing(user, title, description, categories, preferred_payments, 
   }
   */
 
-  emulateServerReturn(newItem, cb);
+//  emulateServerReturn(newItem, cb);
 }
 
 function getUserListings(user, bs, cb) {
@@ -184,13 +184,14 @@ app.use(function(err, req, res, next) {
   }
 });
 
-app.put('/make_listing',validate({body: NewItemSchema}), function(req,res) {
+app.post('/make_listing:id',validate({body: NewItemSchema}), function(req,res) {
   var body = req.body;
-  var fromUser = getuserIdFromToken(req.get('Authorization'));
-  if(fromUser === body.userId){
+  var fromUser = getUserIdFromToken(req.get('Authrization'));
+  //var fromUser = getuserIdFromToken(req.get('Authorization'));
+  if(fromUser === body.owner){
     var newItem = storeListing(body.user,body.title,body.description,body.categories,body.preferred_payments,body.price);
     res.status(201);
-    res.set('Location','/make_listing/'+newItem._id)
+    res.set('/make_listing/'+newItem._id)
     res.send(newItem)
   }else{res.status(401).end()
 
