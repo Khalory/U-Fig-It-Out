@@ -1,5 +1,4 @@
 import React from 'react';
-import { getUserData } from '../server'
 import { Link } from 'react-router'
 
 export default class UserRating extends React.Component {
