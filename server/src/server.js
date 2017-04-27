@@ -71,7 +71,7 @@ function getCategories() {
   return categoriesList;
 }
 
-function storeListing(user, title, description, categories, preferred_payments, price, images, cb) {
+function storeListing(user, title, description, categories, preferred_payments, price, images) {
   var newItem = {
     "owner": user,
     "title": title,
@@ -193,20 +193,35 @@ app.use(function(err, req, res, next) {
   }
 });
 
-app.post('/make_listing/:id',validate({body: NewItemSchema}), function(req,res) {
+app.post('/make_listing/:id',function(req,res) {
   var body = req.body;
-  var fromUser = getUserIdFromToken(req.get('Authrization'));
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+  //var fromUser = getuserIdFromToken(req.get('Authorization'));
+  if(fromUser == body.user){
+    var newItem = storeListing(body.user,body.title,body.description,body.categories,body.preferred_payments,body.price);
+    res.status(201);
+    res.set('/make_listing/'+newItem._id)
+    res.send(newItem)
+  }else{
+    res.status(401).end()
+  }
+});
+
+/*
+app.post('/make_listing/:id', validate({body: NewItemSchema}), function(req,res) {
+  var body = req.body;
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
   //var fromUser = getuserIdFromToken(req.get('Authorization'));
   if(fromUser === body.owner){
     var newItem = storeListing(body.user,body.title,body.description,body.categories,body.preferred_payments,body.price);
     res.status(201);
     res.set('/make_listing/'+newItem._id)
     res.send(newItem)
-  }else{res.status(401).end()
-
+  }else{
+    res.status(401).end()
   }
 });
-
+*/
 // Starts the server on port 3000!
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
