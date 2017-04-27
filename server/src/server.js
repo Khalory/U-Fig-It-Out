@@ -91,6 +91,7 @@ function storeListing(user, title, description, categories, preferred_payments, 
 
   userdata.items.push(newItem._id)
   writeDocument('user', userdata)
+  return newItem;
   /**
   for each(var cat in categories){
     var catdata = readDocument('categories',cat)
@@ -192,7 +193,7 @@ app.use(function(err, req, res, next) {
   }
 });
 
-app.post('/make_listing:id',validate({body: NewItemSchema}), function(req,res) {
+app.post('/make_listing/:id',validate({body: NewItemSchema}), function(req,res) {
   var body = req.body;
   var fromUser = getUserIdFromToken(req.get('Authrization'));
   //var fromUser = getuserIdFromToken(req.get('Authorization'));
