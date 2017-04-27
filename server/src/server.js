@@ -52,7 +52,7 @@ app.post('/items', function(req, res) {
 })
 
 //Get all the categories in the database
-app.get('/allcategories', function(req, res) {
+app.get('/categories', function(req, res) {
     var allCategories = getCategories();
     res.send(allCategories);
     res.status(200);
@@ -126,8 +126,7 @@ function getCategoryListings(category) {
   for(var i=1; i<=Object.keys(itemListings).length; i++){
     var item = readDocument("item_listings", i)
     for(var j=0; j<item.categories.length; j++)
-      if(item.categories[j]===category && item.active===1){
-        console.log(item._id)
+      if(item.categories[j]==category && item.active==1){
         itemDataList.push(item);
       }
   }

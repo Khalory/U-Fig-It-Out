@@ -90,7 +90,7 @@ export function getItemListings(itemIds, cb) {
 }
 
 export function getCategories(cb) {
-  sendXHR('GET', '/allcategories', undefined, (xhr) => {
+  sendXHR('GET', '/categories', undefined, (xhr) => {
     cb(JSON.parse(xhr.responseText))
   })
 }
