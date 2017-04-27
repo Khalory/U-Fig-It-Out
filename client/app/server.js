@@ -95,22 +95,22 @@ export function getCategories(cb) {
 }
 
 export function storeListing(user,title,description,categories,preferred_payments,price, cb){
-  var newItem = {
-    "owner": user,
-    "title": title,
-    "description": description,
-    "categories":categories,
-    "preferred_payments":preferred_payments,
-    "timestamp": new Date().getTime(),
-    "last_updated": new Date().getTime(),
-    "active": 1,
-    "price": price,
-    "type": 0,
-    "rating": null
+  sendXHR('PUT','/make_listing', {
+    owner: user,
+    title: title,
+    description: description,
+    categories:categories,
+    preferred_payments:preferred_payments,
+    timestamp: new Date().getTime(),
+    last_updated: new Date().getTime(),
+    active: 1,
+    price: price,
+    type: 0,
+    rating: null
 
-  };
-  newItem = addDocument('item_listings', newItem)
-  emulateServerReturn(newItem, cb);
+  },(xhr) =>{
+cb(JSON.parse(xhr.responseText))
+});
 }
 
 export function getItemListings(items, cb){
