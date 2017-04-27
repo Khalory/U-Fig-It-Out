@@ -31,10 +31,10 @@ export default class SearchListings extends React.Component {
     //console.log(this.state)
     var items = !this.state.items ? <div></div> : this.state.items.map((listing, i) => {
                       return (<li key={i} className="media list-group-item listing-item">
-                      <Item id={listing._id} picture={listing.images[0]} itemtitle={listing.title}
+                      <Item id={listing._id} user={this.props.user} picture={listing.images[0]} itemtitle={listing.title}
                         itemdescription={listing.description}>
                         <div className="media-top media-right user-rating">
-                          <UserRating user={listing.owner}/>
+                          <UserRating user={this.props.user} owner={listing.owner}/>
                         </div>
                       </Item>
                     </li>)})

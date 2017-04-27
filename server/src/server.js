@@ -3,6 +3,7 @@ var readDocument = database.readDocument
 
 var writeDocument = database.writeDocument;
 var addDocument = database.addDocument;
+var getCollection = database.getCollection;
 // Imports the express Node module.
 var express = require('express');
 var validate = require('express-jsonschema').validate;
@@ -36,7 +37,7 @@ function getItemListings(itemIds) {
     itemData.owner = userData
     itemDataList.push(itemData)
   }
-  
+
   return itemDataList
 }
 
@@ -50,18 +51,27 @@ app.post('/items', function(req, res) {
   res.send(getItemListings(req.body))
 })
 
-function getCategories(cb) {
-  var categoriesList = []
-  var categories = readFullCollection("categories");
-  var length = Object.keys(categories).length
+//Get all the categories in the database
+app.get('/categories', function(req, res) {
+    var allCategories = getCategories();
+    res.send(allCategories);
+    res.status(200);
+});
+
+//Helper function for app.get('/allcategories'...). Retrieves the list of
+//categories from the database and returns it.
+function getCategories() {
+  var categoriesList = [];
+  var categories = getCollection("categories");
+  var length = Object.keys(categories).length;
   for(var i=1; i<=length; i++) {
-    var category = readDocument("categories", i)
+    var category = readDocument("categories", i);
     categoriesList.push(category);
   }
-  emulateServerReturn(categoriesList, cb);
+  return categoriesList;
 }
 
-function storeListing(user, title, description, categories, preferred_payments, price, images, cb) {
+function storeListing(user, title, description, categories, preferred_payments, price, images) {
   var newItem = {
     "owner": user,
     "title": title,
@@ -77,10 +87,11 @@ function storeListing(user, title, description, categories, preferred_payments, 
     "images": images
   }
   newItem = addDocument('item_listings', newItem)
-  var userdata = readDocument('user',user)
+  var userdata = readDocument('users',user)
 
-  userdata.items.unshift(newitem._id)
-  writeDocument('user', userdata)
+  userdata.items.push(newItem._id)
+  writeDocument('users', userdata)
+  return newItem;
   /**
   for each(var cat in categories){
     var catdata = readDocument('categories',cat)
@@ -89,7 +100,7 @@ function storeListing(user, title, description, categories, preferred_payments, 
   }
   */
 
-  emulateServerReturn(newItem, cb);
+//  emulateServerReturn(newItem, cb);
 }
 
 function getUserListings(user, bs, cb) {
@@ -104,18 +115,23 @@ function getUserListings(user, bs, cb) {
   emulateServerReturn(itemDataList, cb);
 }
 
-function getCategoryListings(category, cb) {
+app.get('/categories/:categoryid', function(req, res) {
+    var category = req.params.categoryid;
+    res.send(getCategoryListings(category));
+    res.status(200);
+});
+
+function getCategoryListings(category) {
   var itemDataList = []
-  var itemListings = readFullCollection("item_listings");
+  var itemListings = getCollection("item_listings");
   for(var i=1; i<=Object.keys(itemListings).length; i++){
     var item = readDocument("item_listings", i)
     for(var j=0; j<item.categories.length; j++)
-      if(item.categories[j]===category && item.active===1){
-        console.log(item._id)
+      if(item.categories[j]==category && item.active==1){
         itemDataList.push(item);
       }
   }
-  emulateServerReturn(itemDataList, cb);
+  return itemDataList;
 }
 
 function getUserIdFromToken(authorizationLine) {
@@ -177,19 +193,35 @@ app.use(function(err, req, res, next) {
   }
 });
 
-app.put('/make_listing',validate({body: NewItemSchema}), function(req,res) {
+app.post('/make_listing/:id',function(req,res) {
   var body = req.body;
-  var fromUser = getuserIdFromToken(req.get('Authorization'));
-  if(fromUser === body.userId){
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+  //var fromUser = getuserIdFromToken(req.get('Authorization'));
+  if(fromUser == body.user){
     var newItem = storeListing(body.user,body.title,body.description,body.categories,body.preferred_payments,body.price);
     res.status(201);
-    res.set('Location','/make_listing/'+newItem._id)
+    res.set('/make_listing/'+newItem._id)
     res.send(newItem)
-  }else{res.status(401).end()
-
+  }else{
+    res.status(401).end()
   }
 });
 
+/*
+app.post('/make_listing/:id', validate({body: NewItemSchema}), function(req,res) {
+  var body = req.body;
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
+  //var fromUser = getuserIdFromToken(req.get('Authorization'));
+  if(fromUser === body.owner){
+    var newItem = storeListing(body.user,body.title,body.description,body.categories,body.preferred_payments,body.price);
+    res.status(201);
+    res.set('/make_listing/'+newItem._id)
+    res.send(newItem)
+  }else{
+    res.status(401).end()
+  }
+});
+*/
 // Starts the server on port 3000!
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');

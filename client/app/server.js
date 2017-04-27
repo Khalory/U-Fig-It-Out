@@ -90,19 +90,14 @@ export function getItemListings(itemIds, cb) {
 }
 
 export function getCategories(cb) {
-  var categoriesList = []
-  var categories = readFullCollection("categories");
-  var length = Object.keys(categories).length
-  for(var i=1; i<=length; i++) {
-    var category = readDocument("categories", i)
-    categoriesList.push(category);
-  }
-  emulateServerReturn(categoriesList, cb);
+  sendXHR('GET', '/categories', undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText))
+  })
 }
 
 export function storeListing(user, title, description, categories, preferred_payments, price, images, cb) {
-  sendXHR('PUT','/make_listing', {
-    owner: user,
+  sendXHR('POST','/make_listing/:id', {
+    user: user,
     title: title,
     description: description,
     categories:categories,
@@ -134,6 +129,13 @@ export function getUserListings(user, bs, cb) {
 */
 
 export function getCategoryListings(category, cb) {
+  sendXHR('GET', '/categories/' + category, undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText))
+  })
+}
+
+/*
+export function getCategoryListings(category, cb) {
   var itemDataList = []
   var itemListings = readFullCollection('item_listings');
   for(var i=1; i<=Object.keys(itemListings).length; i++) {
@@ -149,6 +151,7 @@ export function getCategoryListings(category, cb) {
   }
   emulateServerReturn(itemDataList, cb);
 }
+*/
 
 export function getPreferredPayments(cb) {
   var preferredPaymentList = []

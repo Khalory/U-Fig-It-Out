@@ -33,7 +33,7 @@ export default class ListingPage extends React.Component {
     if (this.state.itemId === this.props.location.query.itemId)
       return;
     this.setState({itemId: this.props.location.query.itemId})
-    
+
     getItemListings(this.props.location.query.itemId, (items) => {
       this.setState(items[0])
     })
@@ -62,7 +62,7 @@ export default class ListingPage extends React.Component {
                     <span className="item-price">{"$" + this.state.price}</span>
                   </div>
                   <div className="row">
-                    <UserRating user={this.state.owner} />
+                    <UserRating user={this.props.params.id} owner={this.state.owner}/>
                   </div>
                   <div className="row">
                     <div className="btn-group" role="group">
