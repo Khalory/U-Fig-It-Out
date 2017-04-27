@@ -90,14 +90,9 @@ export function getItemListings(itemIds, cb) {
 }
 
 export function getCategories(cb) {
-  var categoriesList = []
-  var categories = readFullCollection("categories");
-  var length = Object.keys(categories).length
-  for(var i=1; i<=length; i++) {
-    var category = readDocument("categories", i)
-    categoriesList.push(category);
-  }
-  emulateServerReturn(categoriesList, cb);
+  sendXHR('GET', '/allcategories', undefined, (xhr) => {
+    cb(JSON.parse(xhr.responseText))
+  })
 }
 
 export function storeListing(user, title, description, categories, preferred_payments, price, images, cb) {
