@@ -44,12 +44,6 @@ export default class ListingPage extends React.Component {
       <div>
         <Navbar user={this.props.params.id} />
         <div className="container">
-          <div className="row">
-            <div className="col-md-4 item-category">
-              {"Food > Healthy > Best > Figs"}
-            </div>
-          </div>
-          <hr className="hr-mini" />
           <div className="col-md-12">
             <div className="row">
               <div className="col-md-1"></div>
@@ -62,7 +56,7 @@ export default class ListingPage extends React.Component {
                     <span className="item-price">{"$" + this.state.price}</span>
                   </div>
                   <div className="row">
-                    <UserRating user={this.props.params.id} owner={this.state.owner}/>
+                    <UserRating key={this.state.owner._id} user={this.props.params.id} owner={this.state.owner}/>
                   </div>
                   <div className="row">
                     <div className="btn-group" role="group">
