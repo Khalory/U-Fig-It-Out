@@ -207,6 +207,15 @@ app.post('/make_listing/:id',function(req,res) {
   }
 });
 
+// Reset database.
+app.post('/resetdb', function(req, res) {
+  console.log("Resetting database...");
+  // This is a debug route, so don't do any validation.
+  database.resetDatabase();
+  // res.send() sends an empty response with status code 200
+  res.send();
+});
+
 /*
 app.post('/make_listing/:id', validate({body: NewItemSchema}), function(req,res) {
   var body = req.body;

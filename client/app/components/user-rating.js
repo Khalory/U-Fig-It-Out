@@ -1,11 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router'
+import { getUserData } from '../server'
 
 export default class UserRating extends React.Component {
-  calcRating(){
+  constructor(props) {
+    super(props)
+    this.state = this.props
+  }
+
+  componentDidMount() {
+    if (typeof(this.state.owner) !== 'number')
+      return
+
+    getUserData(this.state.owner, (user) => {
+      this.setState({owner: user})
+    })
+  }
+
+  componentDidUpdate() {
+    if (this.state.owner === this.props.owner && typeof(this.state.owner) !== 'number')
+      return
+
+    getUserData(this.props.owner, (user) => {
+      this.setState({owner: user})
+    })
+  }
+
+  calcRating() {
     var stars = []
     for(var i=1; i<6; i++) {
-      if (i<=this.props.owner.avg_rating) {
+      if (i<=this.state.owner.avg_rating) {
         stars.push((<li role="presentation" className="active" key={i}>
                     <span className="glyphicon glyphicon-star"></span>
                   </li>))
@@ -23,7 +47,7 @@ export default class UserRating extends React.Component {
     var rating = this.calcRating()
     return (
       <div>
-        <h3><Link to={"/profile/" + this.props.user} query={{ user:this.props.owner._id }}>{this.props.owner.username}</Link></h3>
+        <h3><Link to={"/profile/" + this.props.user} query={{ user:this.state.owner._id }}>{this.state.owner.username}</Link></h3>
         <ul className="nav nav-pills pull-left">
           {rating}
         </ul>

@@ -1,4 +1,4 @@
-import {readDocument, readFullCollection, writeDocument, addDocument} from './database';
+import {readDocument, readFullCollection} from './database';
 
 /**
 * Emulates how a REST call is *asynchronous* -- it calls your function back
