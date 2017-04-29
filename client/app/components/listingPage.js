@@ -13,7 +13,7 @@ export default class ListingPage extends React.Component {
       title: '',
       price: '',
       owner: {
-        _id: 0,
+        _id: '',
         avg_rating: 0,
         username: ''
       },
