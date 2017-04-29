@@ -24,7 +24,7 @@ app.use(bodyParser.text());
 // Support receiving JSON in HTTP request bodies
 app.use(bodyParser.json());
 var MongoClient = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/U-Fig-It-Out';
+var url = 'mongodb://localhost:27017/UFigItOut';
 MongoClient.connect(url, function(err, db) {
   if (err) {
     throw new Error("Could not connect to database: " + err);
