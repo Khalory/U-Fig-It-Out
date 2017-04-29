@@ -87,21 +87,15 @@ MongoClient.connect(url, function(err, db) {
 
   //Get all the categories in the database
   app.get('/categories', function(req, res) {
-      var allCategories = getCategories();
-      res.send(allCategories);
-      res.status(200);
-  });
-
-  //Helper function for app.get('/allcategories'...). Retrieves the list of
-  //categories from the database and returns it.
-  function getCategories() {
-    var categoriesList = []
-    var categories = database.search('categories', {})
-    categories.forEach((category) => {
-      categoriesList.push(category)
-    })
-    return categoriesList;
-  }
+    db.collection('categories').find({}).toArray((err, items) => {
+      if (err) {
+        sendDatabaseError(res, err);
+      } else {
+        res.send(items);
+        res.status(200);
+      }
+    });
+  })
 
   function getCategoryListings(category, cb) {
     var itemDataList = []
