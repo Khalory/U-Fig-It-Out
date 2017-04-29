@@ -35,6 +35,13 @@ MongoClient.connect(url, function(err, db) {
   // '..' means "go up one directory", so this translates into `client/build`!
   app.use(express.static('../client/build'));
 
+  /**
+ * Helper function: Sends back HTTP response with error code 500 due to
+ * a database error.
+ */
+  function sendDatabaseError(res, err) {
+    res.status(500).send("A database error occurred: " + err);
+  }
 
   function getUserData(user, callback) {
     db.collection('users').findOne({
@@ -175,24 +182,6 @@ MongoClient.connect(url, function(err, db) {
     });
   }
 
-  app.get('/categories/:categoryid', function(req, res) {
-      var category = req.params.categoryid;
-      res.send(getCategoryListings(category));
-      res.status(200);
-  });
-
-  function getCategoryListings(category) {
-    var itemDataList = []
-
-    var itemListings = database.search('item_listings', {categories: category})
-    itemListings.forEach((item) => {
-      for(var i = 0; i < item.categories.length; i++)
-        if(item.categories[i] == category && item.active == 1) {
-          itemDataList.push(item);
-        }
-    })
-    return itemDataList;
-  }
 
   /*
   Start with app.POST/GET(ETC)
@@ -220,19 +209,19 @@ MongoClient.connect(url, function(err, db) {
        // A database error happened.
        // 500: Internal error.
        res.status(500).send("A database error occurred: " + err);
-     } else{
+     } else {
         // When POST creates a new resource, we should tell the client about it
         // in the 'Location' header and use status code 201.
         res.status(201);
         res.set('/make_listing/' + newItem._id)
         res.send(newItem)
       }
-    });
   } else {
-  // 401: Unauthorized.
-  res.status(401).end();
-}
+    // 401: Unauthorized.
+    res.status(401).end();
+  }
 });
+
   // Reset database.
   var ResetDatabase = require('./resetdatabase');
 
@@ -242,7 +231,6 @@ MongoClient.connect(url, function(err, db) {
       res.send();
     });
   });
-
 
   /*
   app.post('/make_listing/:id', validate({body: NewItemSchema}), function(req,res) {
