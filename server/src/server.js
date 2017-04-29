@@ -111,16 +111,13 @@ app.get('/categories/:categoryid', function(req, res) {
     res.status(200);
 });
 
-function getCategoryListings(category) {
+function getCategoryListings(category, cb) {
   var itemDataList = []
-  var itemListings = database.search('item_listings', {categories: category};
-  itemListings.forEach((item) => {
-    for(var i = 0; i < item.categories.length; i++)
-      if(item.categories[i] == category && item.active == 1) {
-        itemDataList.push(item);
-      }
+  db.collection('item_listings').find({categories: category, active: 1}).toArray((err, items) => {
+    if (err)
+      cb(err)
+    return items
   })
-  return itemDataList;
 }
 
 function getUserIdFromToken(authorizationLine) {
@@ -184,7 +181,7 @@ app.use(function(err, req, res, next) {
 
 app.post('/make_listing/:id', function(req,res) {
   var body = req.body;
-  var fromUser = new ObjectID(getUserIdFromToken(req.get('Authorization')));
+  var fromUser = getUserIdFromToken(req.get('Authorization'));
   if(fromUser == body.user) {
     var newItem = storeListing(body.user,body.title,body.description,body.categories,body.preferred_payments,body.price);
     res.status(201);
