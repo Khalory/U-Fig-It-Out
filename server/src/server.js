@@ -64,13 +64,11 @@ app.get('/categories', function(req, res) {
 //Helper function for app.get('/allcategories'...). Retrieves the list of
 //categories from the database and returns it.
 function getCategories() {
-  var categoriesList = [];
-  var categories = getCollection("categories");
-  var length = Object.keys(categories).length;
-  for(var i = 0; i < length; i++) {
-    var category = readDocument("categories", categories[i]._id);
-    categoriesList.push(category);
-  }
+  var categoriesList = []
+  var categories = database.search('categories', {})
+  categories.forEach((category) => {
+    categoriesList.push(category)
+  })
   return categoriesList;
 }
 
@@ -105,7 +103,7 @@ app.get('/categories/:categoryid', function(req, res) {
 
 function getCategoryListings(category) {
   var itemDataList = []
-  var itemListings = db.item_listings.find({});
+  var itemListings = database.search('item_listings', {categories: category};
   itemListings.forEach((item) => {
     for(var i = 0; i < item.categories.length; i++)
       if(item.categories[i] == category && item.active == 1) {
@@ -128,12 +126,12 @@ function getUserIdFromToken(authorizationLine) {
         if (typeof id === 'string') {
             return id;
         } else {
-            // Not a number. Return -1, an invalid ID.
+            // Not a number. Return an empty string, an invalid ID.
             return '';
         }
     } catch (e) {
         // Return an invalid ID.
-        return -1;
+        return '';
     }
 }
 
