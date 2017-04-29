@@ -10,7 +10,8 @@ function emulateServerReturn(data, cb) {
   }, 4);
 }
 
-var token = 'eyJpZCI6MX0=' //Need to figure out our token
+//var token = 'eyJpZCI6MX0=' //Need to figure out our token
+var token = 'eyJpZCI6IjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMSJ9'
 /**
  * Properly configure+send an XMLHttpRequest with error handling,
  * authorization token, and other needed properties.
