@@ -36,9 +36,18 @@ MongoClient.connect(url, function(err, db) {
   app.use(express.static('../client/build'));
 
 
-  function getUserData(user) {
-    var userData = readDocument('users', user)
-    return userData
+  function getUserData(user, callback) {
+    db.collection('users').findOne({
+      _id: user
+    }, function(err, userInfo) {
+      if(err) {
+        return callback(err)
+      }
+      else if(userInfo==null) {
+        return callback(null, null)
+      }
+      callback(null, userInfo)
+    })
   }
 
   function getItemListings(itemIds) {
@@ -59,7 +68,17 @@ MongoClient.connect(url, function(err, db) {
   //Get user info for a particular user
   app.get('/user/:userid/info', function(req, res) {
     var userid = req.params.userid
-    res.send(getUserData(userid))
+    getUserData(new ObjectID(userid), function(err, userInfo) {
+      if(err) {
+        res.status(500).send("Database error: " + err);
+      }
+      else if (userInfo === null) {
+        res.status(400).send("Could not look up info for user " + userid);
+      }
+      else {
+        res.send(userInfo);
+      }
+    })
   })
 
   app.post('/items', function(req, res) {
