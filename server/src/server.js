@@ -84,6 +84,37 @@ MongoClient.connect(url, function(err, db) {
     return categoriesList;
   }
 
+  function getCategoryListings(category, cb) {
+    var itemDataList = []
+    db.collection('item_listings').find({categories: category, active: 1}).toArray((err, items) => {
+      if (err)
+        cb(err)
+      return items
+    })
+  }
+
+  function getUserIdFromToken(authorizationLine) {
+    try {
+        // Cut off "Bearer " from the header value.
+        var token = authorizationLine.slice(7);
+        // Convert the base64 string to a UTF-8 string.
+        var regularString = new Buffer(token, 'base64').toString('utf8');
+        // Convert the UTF-8 string into a JavaScript object.
+        var tokenObj = JSON.parse(regularString);
+        var id = tokenObj['id'];
+        // Check that id is a string.
+        if (typeof id === 'string') {
+            return id;
+        } else {
+            // Not a number. Return an empty string, an invalid ID.
+            return '';
+        }
+    } catch (e) {
+        // Return an invalid ID.
+        return '';
+    }
+  }
+
   function storeListing(user, title, description, categories, preferred_payments, price, images) {
     var newItem = {
       "owner": new ObjectId(user),
@@ -124,47 +155,6 @@ MongoClient.connect(url, function(err, db) {
     })
     return itemDataList;
   }
-
-  function getUserIdFromToken(authorizationLine) {
-      try {
-          // Cut off "Bearer " from the header value.
-          var token = authorizationLine.slice(7);
-          // Convert the base64 string to a UTF-8 string.
-          var regularString = new Buffer(token, 'base64').toString('utf8');
-          // Convert the UTF-8 string into a JavaScript object.
-          var tokenObj = JSON.parse(regularString);
-          var id = tokenObj['id'];
-          // Check that id is a string.
-          if (typeof id === 'string') {
-              return id;
-          } else {
-              // Not a number. Return an empty string, an invalid ID.
-              return '';
-          }
-      } catch (e) {
-          // Return an invalid ID.
-          return '';
-      }
-  }
-
-  /*
-
-  Example
-  app.get('examplePath', function(req, res) {
-    var userid = req.params.userid;
-    var fromUser = getUserIdFromToken(req.get('Authorization'));
-    // userid is a string. We need it to be a number.
-    // Parameters are always strings.
-    var useridNumber = parseInt(userid, 10);
-    if (fromUser === useridNumber) {
-      // Send response.
-      res.send(getFeedData(userid));
-    } else {
-      // 401: Unauthorized request.
-      res.status(401).end();
-    }
-  });
-  */
 
 
   /*
