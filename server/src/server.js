@@ -115,7 +115,7 @@ MongoClient.connect(url, function(err, db) {
 
   function getCategoryListings(category) {
     var itemDataList = []
-    var itemListings = database.search('item_listings', {categories: category};
+    var itemListings = database.search('item_listings', {categories: category})
     itemListings.forEach((item) => {
       for(var i = 0; i < item.categories.length; i++)
         if(item.categories[i] == category && item.active == 1) {
