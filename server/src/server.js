@@ -187,7 +187,7 @@ MongoClient.connect(url, function(err, db) {
   function getCategoryListings(category) {
     var itemDataList = []
 
-    var itemListings = database.search('item_listings', {categories: category})F
+    var itemListings = database.search('item_listings', {categories: category})
     itemListings.forEach((item) => {
       for(var i = 0; i < item.categories.length; i++)
         if(item.categories[i] == category && item.active == 1) {
@@ -224,7 +224,7 @@ MongoClient.connect(url, function(err, db) {
        // A database error happened.
        // 500: Internal error.
        res.status(500).send("A database error occurred: " + err);
-     } else
+     } else{
         // When POST creates a new resource, we should tell the client about it
         // in the 'Location' header and use status code 201.
         res.status(201);
@@ -232,12 +232,11 @@ MongoClient.connect(url, function(err, db) {
         res.send(newItem)
       }
     });
-  } else {
-    // 401: Unauthorized.
-    res.status(401).end();
-  }
+  } else {		
+  // 401: Unauthorized.
+  res.status(401).end();
+}
 });
-
   // Reset database.
   var ResetDatabase = require('./resetdatabase');
 
@@ -247,6 +246,7 @@ MongoClient.connect(url, function(err, db) {
       res.send();
     });
   });
+
 
   /*
   app.post('/make_listing/:id', validate({body: NewItemSchema}), function(req,res) {
