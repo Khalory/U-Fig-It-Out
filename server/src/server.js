@@ -32,8 +32,8 @@ function getItemListings(itemIds) {
   }
   var itemDataList = []
   for (var i = 0; i < itemIds.length; i++) {
-    var itemData = readDocument("item_listings", itemIds[i])
-    var userData = readDocument("users", itemData.owner)
+    var itemData = readDocument("item_listings", new ObjectId(itemIds[i]))
+    var userData = readDocument("users", new ObjectId(itemData.owner))
     itemData.owner = userData
     itemDataList.push(itemData)
   }
@@ -64,8 +64,8 @@ function getCategories() {
   var categoriesList = [];
   var categories = getCollection("categories");
   var length = Object.keys(categories).length;
-  for(var i=1; i<=length; i++) {
-    var category = readDocument("categories", i);
+  for(var i = 0; i < length; i++) {
+    var category = readDocument("categories", categories[i]._id);
     categoriesList.push(category);
   }
   return categoriesList;
@@ -73,7 +73,7 @@ function getCategories() {
 
 function storeListing(user, title, description, categories, preferred_payments, price, images) {
   var newItem = {
-    "owner": user,
+    "owner": new ObjectId(user),
     "title": title,
     "description": description,
     "categories": categories,
@@ -87,32 +87,11 @@ function storeListing(user, title, description, categories, preferred_payments, 
     "images": images
   }
   newItem = addDocument('item_listings', newItem)
-  var userdata = readDocument('users',user)
+  var userdata = readDocument('users', newItem.owner)
 
   userdata.items.push(newItem._id)
   writeDocument('users', userdata)
   return newItem;
-  /**
-  for each(var cat in categories){
-    var catdata = readDocument('categories',cat)
-    catdata.items.unshift(newitem.id)
-    writeDocument('categories',catdata)
-  }
-  */
-
-//  emulateServerReturn(newItem, cb);
-}
-
-function getUserListings(user, bs, cb) {
-  var itemDataList = []
-  var itemListings = readFullCollection("item_listings");
-  for(var i=1; i<=Object.keys(itemListings).length; i++){
-    var item = readDocument("item_listings", i)
-    if(user===item.owner && item.type===bs && item.active===1){
-      itemDataList.push(item);
-    }
-  }
-  emulateServerReturn(itemDataList, cb);
 }
 
 app.get('/categories/:categoryid', function(req, res) {
@@ -123,14 +102,13 @@ app.get('/categories/:categoryid', function(req, res) {
 
 function getCategoryListings(category) {
   var itemDataList = []
-  var itemListings = getCollection("item_listings");
-  for(var i=1; i<=Object.keys(itemListings).length; i++){
-    var item = readDocument("item_listings", i)
-    for(var j=0; j<item.categories.length; j++)
-      if(item.categories[j]==category && item.active==1){
+  var itemListings = db.item_listings.find({});
+  itemListings.forEach((item) => {
+    for(var i = 0; i < item.categories.length; i++)
+      if(item.categories[i] == category && item.active == 1) {
         itemDataList.push(item);
       }
-  }
+  })
   return itemDataList;
 }
 
@@ -143,12 +121,12 @@ function getUserIdFromToken(authorizationLine) {
         // Convert the UTF-8 string into a JavaScript object.
         var tokenObj = JSON.parse(regularString);
         var id = tokenObj['id'];
-        // Check that id is a number.
-        if (typeof id === 'number') {
+        // Check that id is a string.
+        if (typeof id === 'string') {
             return id;
         } else {
             // Not a number. Return -1, an invalid ID.
-            return -1;
+            return '';
         }
     } catch (e) {
         // Return an invalid ID.
@@ -193,14 +171,13 @@ app.use(function(err, req, res, next) {
   }
 });
 
-app.post('/make_listing/:id',function(req,res) {
+app.post('/make_listing/:id', function(req,res) {
   var body = req.body;
-  var fromUser = getUserIdFromToken(req.get('Authorization'));
-  //var fromUser = getuserIdFromToken(req.get('Authorization'));
-  if(fromUser == body.user){
+  var fromUser = new ObjectID(getUserIdFromToken(req.get('Authorization')));
+  if(fromUser == body.user) {
     var newItem = storeListing(body.user,body.title,body.description,body.categories,body.preferred_payments,body.price);
     res.status(201);
-    res.set('/make_listing/'+newItem._id)
+    res.set('/make_listing/' + newItem._id)
     res.send(newItem)
   }else{
     res.status(401).end()
