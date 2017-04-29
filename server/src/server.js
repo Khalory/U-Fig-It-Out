@@ -23,6 +23,16 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.text());
 // Support receiving JSON in HTTP request bodies
 app.use(bodyParser.json());
+var MongoClient = require('mongodb').MongoClient;
+var url = 'mongodb://localhost:27017/U-Fig-It-Out';
+MongoClient.connect(url, function(err, db) {
+  if (err) {
+    throw new Error("Could not connect to database: " + err);
+  } else {
+    console.log("Connected correctly to server.");
+    // This is where we will kick off other actions that use the database!
+  }
+});
 
 function getUserData(user) {
   var userData = readDocument('users', user)
@@ -211,12 +221,13 @@ app.post('/make_listing/:id',function(req,res) {
 });
 
 // Reset database.
+var ResetDatabase = require('./resetdatabase');
+
 app.post('/resetdb', function(req, res) {
   console.log("Resetting database...");
-  // This is a debug route, so don't do any validation.
-  database.resetDatabase();
-  // res.send() sends an empty response with status code 200
-  res.send();
+  ResetDatabase(db, function() {
+    res.send();
+  });
 });
 
 /*
