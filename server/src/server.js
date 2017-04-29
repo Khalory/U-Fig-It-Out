@@ -95,16 +95,19 @@ MongoClient.connect(url, function(err, db) {
         res.status(200);
       }
     });
-  })
+  });
 
-  function getCategoryListings(category, cb) {
-    var itemDataList = []
-    db.collection('item_listings').find({categories: category, active: 1}).toArray((err, items) => {
-      if (err)
-        cb(err)
-      return items
-    })
-  }
+  app.get('/categories/:categoryid', function(req, res) {
+      var category = req.params.categoryid;
+      db.collection('item_listings').find({categories: category, active: 1}).toArray((err, items) => {
+        if (err) {
+          sendDatabaseError(res, err);
+        } else {
+          res.send(items);
+          res.status(200);
+        }
+      });
+  });
 
   function getUserIdFromToken(authorizationLine) {
     try {
@@ -170,25 +173,6 @@ MongoClient.connect(url, function(err, db) {
         );
       });
     });
-  }
-
-  app.get('/categories/:categoryid', function(req, res) {
-      var category = req.params.categoryid;
-      res.send(getCategoryListings(category));
-      res.status(200);
-  });
-
-  function getCategoryListings(category) {
-    var itemDataList = []
-
-    var itemListings = database.search('item_listings', {categories: category})F
-    itemListings.forEach((item) => {
-      for(var i = 0; i < item.categories.length; i++)
-        if(item.categories[i] == category && item.active == 1) {
-          itemDataList.push(item);
-        }
-    })
-    return itemDataList;
   }
 
 
