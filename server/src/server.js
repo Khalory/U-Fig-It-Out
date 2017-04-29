@@ -32,7 +32,7 @@ MongoClient.connect(url, function(err, db) {
     console.log("Connected correctly to server.");
     // This is where we will kick off other actions that use the database!
   }
-});
+
 
 function getUserData(user) {
   var userData = readDocument('users', user)
@@ -225,4 +225,5 @@ app.post('/make_listing/:id', validate({body: NewItemSchema}), function(req,res)
 // Starts the server on port 3000!
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
+});
 });
