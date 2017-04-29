@@ -87,30 +87,27 @@ MongoClient.connect(url, function(err, db) {
 
   //Get all the categories in the database
   app.get('/categories', function(req, res) {
-      var allCategories = getCategories();
-      res.send(allCategories);
-      res.status(200);
+    db.collection('categories').find({}).toArray((err, items) => {
+      if (err) {
+        sendDatabaseError(res, err);
+      } else {
+        res.send(items);
+        res.status(200);
+      }
+    });
   });
 
-  //Helper function for app.get('/allcategories'...). Retrieves the list of
-  //categories from the database and returns it.
-  function getCategories() {
-    var categoriesList = []
-    var categories = database.search('categories', {})
-    categories.forEach((category) => {
-      categoriesList.push(category)
-    })
-    return categoriesList;
-  }
-
-  function getCategoryListings(category, cb) {
-    var itemDataList = []
-    db.collection('item_listings').find({categories: category, active: 1}).toArray((err, items) => {
-      if (err)
-        cb(err)
-      return items
-    })
-  }
+  app.get('/categories/:categoryid', function(req, res) {
+      var category = req.params.categoryid;
+      db.collection('item_listings').find({categories: category, active: 1}).toArray((err, items) => {
+        if (err) {
+          sendDatabaseError(res, err);
+        } else {
+          res.send(items);
+          res.status(200);
+        }
+      });
+  });
 
   function getUserIdFromToken(authorizationLine) {
     try {
@@ -178,6 +175,7 @@ MongoClient.connect(url, function(err, db) {
     });
   }
 
+<<<<<<< HEAD
   app.get('/categories/:categoryid', function(req, res) {
       var category = req.params.categoryid;
       res.send(getCategoryListings(category));
@@ -197,6 +195,8 @@ MongoClient.connect(url, function(err, db) {
     return itemDataList;
   }
 
+=======
+>>>>>>> 3a84253b476d3b5dc985236ca3974c9c5ffa88ff
 
   /*
   Start with app.POST/GET(ETC)
