@@ -86,7 +86,7 @@ MongoClient.connect(url, function(err, db) {
 
   function storeListing(user, title, description, categories, preferred_payments, price, images) {
     var newItem = {
-      "owner": new ObjectId(user),
+      "owner":user,
       "title": title,
       "description": description,
       "categories": categories,
@@ -98,13 +98,34 @@ MongoClient.connect(url, function(err, db) {
       "type": 0,
       "rating": null,
       "images": images
-    }
-    newItem = addDocument('item_listings', newItem)
-    var userdata = readDocument('users', newItem.owner)
-
-    userdata.items.push(newItem._id)
-    writeDocument('users', userdata)
-    return newItem;
+    };
+    db.collection('item_listings').insertOne(newItem,function(err,result){
+      if(err){
+        return callback(err);
+      }
+      newItem._id = resut.insertedId;
+      db.colletion('user').findOne({_id:user},function(err,userObject){
+        if(err){
+           return callback(err);
+        }
+        db.collection('item_listings').updateOne({_id: UserObject.item_listings},
+          {
+            $push:{
+              contents:{
+                $each: [newItem._id],
+                $position:0
+              }
+            }
+          },
+          function(err){
+            if(err){
+              return callback(err);
+            }
+            callback(null,newItem)
+          }
+        );
+      });
+    });
   }
 
   app.get('/categories/:categoryid', function(req, res) {
@@ -115,7 +136,7 @@ MongoClient.connect(url, function(err, db) {
 
   function getCategoryListings(category) {
     var itemDataList = []
-    var itemListings = database.search('item_listings', {categories: category};
+    var itemListings = database.search('item_listings', {categories: category},
     itemListings.forEach((item) => {
       for(var i = 0; i < item.categories.length; i++)
         if(item.categories[i] == category && item.active == 1) {
@@ -188,14 +209,24 @@ MongoClient.connect(url, function(err, db) {
     var body = req.body;
     var fromUser = new ObjectID(getUserIdFromToken(req.get('Authorization')));
     if(fromUser == body.user) {
-      var newItem = storeListing(body.user,body.title,body.description,body.categories,body.preferred_payments,body.price);
-      res.status(201);
-      res.set('/make_listing/' + newItem._id)
-      res.send(newItem)
-    }else{
-      res.status(401).end()
-    }
-  });
+      storeListing(fromUser,body.title,body.description,body.categories,body.preferred_payments,body.price,function(err,newItem){
+        if (err) {
+       // A database error happened.
+       // 500: Internal error.
+       res.status(500).send("A database error occurred: " + err);
+     } else
+        // When POST creates a new resource, we should tell the client about it
+        // in the 'Location' header and use status code 201.
+        res.status(201);
+        res.set('/make_listing/' + newItem._id)
+        res.send(newItem)
+      }
+    });
+  } else {
+    // 401: Unauthorized.
+    res.status(401).end();
+  }
+});
 
   // Reset database.
   var ResetDatabase = require('./resetdatabase');
