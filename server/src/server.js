@@ -175,7 +175,6 @@ MongoClient.connect(url, function(err, db) {
     });
   }
 
-<<<<<<< HEAD
   app.get('/categories/:categoryid', function(req, res) {
       var category = req.params.categoryid;
       res.send(getCategoryListings(category));
@@ -194,9 +193,6 @@ MongoClient.connect(url, function(err, db) {
     })
     return itemDataList;
   }
-
-=======
->>>>>>> 3a84253b476d3b5dc985236ca3974c9c5ffa88ff
 
   /*
   Start with app.POST/GET(ETC)
@@ -232,7 +228,7 @@ MongoClient.connect(url, function(err, db) {
         res.send(newItem)
       }
     });
-  } else {		
+  } else {
   // 401: Unauthorized.
   res.status(401).end();
 }
