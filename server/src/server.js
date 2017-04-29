@@ -10,7 +10,10 @@ var validate = require('express-jsonschema').validate;
 var NewItemSchema = require('../schemas/itemlistings.json')
 // Creates an Express server.
 var app = express();
+var mongo_express = require('../node_modules/mongo-express/lib/middleware');
+var mongo_express_config = require('../node_modules/mongo-express/config.default.js');
 
+app.use('/mongo_express', mongo_express(mongo_express_config));
 // You run the server from `server`, so `../client/build` is `server/../client/build`.
 // '..' means "go up one directory", so this translates into `client/build`!
 app.use(express.static('../client/build'));
