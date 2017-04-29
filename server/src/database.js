@@ -75,6 +75,75 @@ var initialData = {
         "img/figs-3.jpg"
       ],
       "rating": null
+    },
+    "3": {
+      "_id": 3,
+      "owner": 2,
+      "title": "iClicker",
+      "description": "It's destroyed",
+      "categories": [
+        2, 15
+      ],
+      "preferred_payments": [
+        1, 2, 5, 4
+      ],
+      "timestamp": 1453690890000,
+      "last_updated": 1453690800000,
+      //0=inactive, 1=active
+      "active": 1,
+      "price": 13.37,
+      //0=sellListing, 1=buyListing
+      "type": 0,
+      "images": [
+        "img/iclicker.jpeg"
+      ],
+      "rating": null
+    },
+    "4": {
+      "_id": 4,
+      "owner": 1,
+      "title": "Limited Edition Tim Richards portrait",
+      "description": "No description needed for this art",
+      "categories": [
+        2, 12
+      ],
+      "preferred_payments": [
+        1, 2, 5, 4
+      ],
+      "timestamp": 1453690890000,
+      "last_updated": 1453690800000,
+      //0=inactive, 1=active
+      "active": 1,
+      "price": 13.37,
+      //0=sellListing, 1=buyListing
+      "type": 0,
+      "images": [
+        "img/timRichards.jpeg"
+      ],
+      "rating": null
+    },
+    "5": {
+      "_id": 5,
+      "owner": 1,
+      "title": "Expensive Laptop",
+      "description": "1080 8GB VRAM, 32GB RAM, 512 GB",
+      "categories": [
+        2, 12
+      ],
+      "preferred_payments": [
+        1, 2, 5, 4
+      ],
+      "timestamp": 1453690890000,
+      "last_updated": 1453690800000,
+      //0=inactive, 1=active
+      "active": 1,
+      "price": 13.37,
+      //0=sellListing, 1=buyListing
+      "type": 0,
+      "images": [
+        "img/razerLaptop.jpeg"
+      ],
+      "rating": null
     }
   },
   "categories": {
