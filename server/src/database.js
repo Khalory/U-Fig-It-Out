@@ -1,7 +1,9 @@
+var ObjectID = require('mongodb').ObjectID;
+
 var initialData = {
   "users": {
     "1": {
-      "_id": 1,
+      "_id": new ObjectID("000000000000000000000001"),
       "username": "FigMan",
       "password": "figlover24",
       "email": "figman24@umass.edu",
@@ -9,11 +11,11 @@ var initialData = {
       "avg_rating": 4,
       "num_ratings": 22,
       "items": [
-        1
+        new ObjectID("000000000000000000000001")
       ]
     },
     "2": {
-      "_id": 2,
+      "_id": new ObjectID("000000000000000000000002"),
       "username": "tRich",
       "password": "ilovewebprogramming",
       "email": "trichards@umass.edu",
@@ -21,21 +23,21 @@ var initialData = {
       "avg_rating": 5,
       "num_ratings": 8,
       "items": [
-        2
+        new ObjectID("000000000000000000000002")
       ]
     }
   },
   "item_listings": {
     "1": {
-      "_id": 1,
-      "owner": 1,
+      "_id": new ObjectID("000000000000000000000001"),
+      "owner": new ObjectID("000000000000000000000001"),
       "title": "CS 311 Textbook",
       "description": "Like new, has no markings whatsoever!",
       "categories": [
-        0, 1, 2
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000003")
       ],
       "preferred_payments": [
-        1, 2, 3
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000003")
       ],
       "timestamp": 1453690800000,
       "last_updated": 1453690800000,
@@ -50,17 +52,17 @@ var initialData = {
       "rating": null
     },
     "2": {
-      "_id": 2,
-      "owner": 2,
+      "_id": new ObjectID("000000000000000000000002"),
+      "owner": new ObjectID("000000000000000000000002"),
       "title": "Top Quality Fig - CHEAP!",
       "description": "This is the best fig ever, grown in a garden of magic beans which has numerous giant beanstocks. In fact, this fig\
                       actually grew on one of the giant bean stocks, thus being imbued with the power of giants. You won't find another\
                       fig like this ever, especially not for this cheap, cheap price because I don't like figs very much.",
       "categories": [
-        0, 1, 2
+        new ObjectID("000000000000000000000000"), new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002")
       ],
       "preferred_payments": [
-        1, 2, 5, 4
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000005"), new ObjectID("000000000000000000000004")
       ],
       "timestamp": 1453690890000,
       "last_updated": 1453690800000,
@@ -79,215 +81,215 @@ var initialData = {
   },
   "categories": {
     1:{
-      "_id": 1,
+      "_id": new ObjectID("000000000000000000000001"),
       "name": "BOOKS",
       "items": [
-        1, 2
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002")
       ]
     },
     2:{
-      "_id": 2,
+      "_id": new ObjectID("000000000000000000000002"),
       "name": "Textbooks",
       "items": [
-        1, 2
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002")
       ]
     },
     3:{
-      "_id": 3,
+      "_id": new ObjectID("000000000000000000000003"),
       "name": "Non-textbooks",
       "items": [
-        1, 2
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002")
       ]
     },
     4:{
-      "_id": 4,
+      "_id": new ObjectID("000000000000000000000004"),
       "name": "CARS",
       "items": []
     },
     5:{
-      "_id": 5,
+      "_id": new ObjectID("000000000000000000000005"),
       "name": "Vehicles",
       "items": []
     },
     6:{
-      "_id": 6,
+      "_id": new ObjectID("000000000000000000000006"),
       "name": "Automotive Accessories",
       "items": []
     },
     7:{
-      "_id": 7,
+      "_id": new ObjectID("000000000000000000000007"),
       "name": "CLOTHING",
       "items": []
     },
     8:{
-      "_id": 8,
+      "_id": new ObjectID("000000000000000000000008"),
       "name": "Men",
       "items": []
     },
     9:{
-      "_id": 9,
+      "_id": new ObjectID("000000000000000000000009"),
       "name": "Women",
       "items": []
     },
     10:{
-      "_id": 10,
+      "_id": new ObjectID("000000000000000000000010"),
       "name": "HOUSEHOLD",
       "items": []
     },
     11:{
-      "_id": 11,
+      "_id": new ObjectID("000000000000000000000011"),
       "name": "Furniture",
       "items": []
     },
     12:{
-      "_id": 12,
+      "_id": new ObjectID("000000000000000000000012"),
       "name": "Refrigerators and Appliances",
       "items": []
     },
     13:{
-      "_id": 13,
+      "_id": new ObjectID("000000000000000000000013"),
       "name": "Other Items",
       "items": []
     },
     14:{
-      "_id": 14,
+      "_id": new ObjectID("000000000000000000000014"),
       "name": "FIGS",
       "items": []
     },
     15:{
-      "_id": 15,
+      "_id": new ObjectID("000000000000000000000015"),
       "name": "ELECTRONICS",
       "items": []
     },
     16:{
-      "_id": 16,
+      "_id": new ObjectID("000000000000000000000016"),
       "name": "iClickers",
       "items": []
     },
     17:{
-      "_id": 17,
+      "_id": new ObjectID("000000000000000000000017"),
       "name": "Cell Phones",
       "items": []
     },
     18:{
-      "_id": 18,
+      "_id": new ObjectID("000000000000000000000018"),
       "name": "TVs",
       "items": []
     },
     19:{
-      "_id": 19,
+      "_id": new ObjectID("000000000000000000000019"),
       "name": "Other Electronic Items",
       "items": []
     },
     20:{
-      "_id": 20,
+      "_id": new ObjectID("000000000000000000000020"),
       "name": "COMPUTERS",
       "items": []
     },
     21:{
-      "_id": 21,
+      "_id": new ObjectID("000000000000000000000021"),
       "name": "Laptops",
       "items": []
     },
     22:{
-      "_id": 22,
+      "_id": new ObjectID("000000000000000000000022"),
       "name": "Desktops",
       "items": []
     },
     23:{
-      "_id": 23,
+      "_id": new ObjectID("000000000000000000000023"),
       "name": "Computing Accessories",
       "items": []
     },
     24:{
-      "_id": 24,
+      "_id": new ObjectID("000000000000000000000024"),
       "name": "VIDEO GAMES",
       "items": []
     },
     25:{
-      "_id": 25,
+      "_id": new ObjectID("000000000000000000000025"),
       "name": "Consoles",
       "items": []
     },
     26:{
-      "_id": 26,
+      "_id": new ObjectID("000000000000000000000026"),
       "name": "Games",
       "items": []
     },
     27:{
-      "_id": 27,
+      "_id": new ObjectID("000000000000000000000027"),
       "name": "Gaming Accessories",
       "items": []
     }
   },
   "preferred_payments": {
     1: {
-      "_id": 1,
+      "_id": new ObjectID("000000000000000000000001"),
       "name": "Venmo"
     },
     2: {
-      "_id": 2,
+      "_id": new ObjectID("000000000000000000000002"),
       "name": "Paypal"
     },
     3: {
-      "_id": 3,
+      "_id": new ObjectID("000000000000000000000003"),
       "name": "Figs"
     },
     4: {
-      "_id": 4,
+      "_id": new ObjectID("000000000000000000000004"),
       "name": "Cash"
     },
     5: {
-      "_id": 5,
+      "_id": new ObjectID("000000000000000000000005"),
       "name": "Check"
     },
     6: {
-      "_id": 6,
+      "_id": new ObjectID("000000000000000000000006"),
       "name": "Barter"
     },
     7: {
-      "_id": 7,
+      "_id": new ObjectID("000000000000000000000007"),
       "name": "Bank Transfer"
     }
   },
   "conversation": {
     1: {
-      "_id": 1,
-      "u1": 1,
-      "u2": 2,
+      "_id": new ObjectID("000000000000000000000001"),
+      "u1": new ObjectID("000000000000000000000001"),
+      "u2": new ObjectID("000000000000000000000002"),
       "messages": [
-        1, 2, 3, 4, 5
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000003"), new ObjectID("000000000000000000000004"), new ObjectID("000000000000000000000005")
       ]
     }
   },
   "messages": {
     1: {
-      "_id": 1,
-      "author": 1,
+      "_id": new ObjectID("000000000000000000000001"),
+      "author": new ObjectID("000000000000000000000001"),
       "timestamp": 1453668490000,
       "content": "I need help"
     },
     2: {
-      "_id": 2,
-      "author": 2,
+      "_id": new ObjectID("000000000000000000000002"),
+      "author": new ObjectID("000000000000000000000002"),
       "timestamp": 1453669500000,
       "content": "With what?"
     },
     3: {
-      "_id": 3,
-      "author": 1,
+      "_id": new ObjectID("000000000000000000000003"),
+      "author": new ObjectID("000000000000000000000001"),
       "timestamp": 1453670510000,
       "content": "Workshop 8 is too hard"
     },
     4: {
-      "_id": 4,
-      "author": 2,
+      "_id": new ObjectID("000000000000000000000004"),
+      "author": new ObjectID("000000000000000000000002"),
       "timestamp": 1453671520000,
       "content": "I will extend it to next Friday"
     },
     5: {
-      "_id": 5,
-      "author": 1,
+      "_id": new ObjectID("000000000000000000000005"),
+      "author": new ObjectID("000000000000000000000001"),
       "timestamp": 1453672530000,
       "content": "thanks bro"
     }
