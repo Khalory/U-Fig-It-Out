@@ -1,19 +1,8 @@
-var database = require('./database')
-var readDocument = database.readDocument
-var writeDocument = database.writeDocument;
-var addDocument = database.addDocument;
-var getCollection = database.getCollection;
 
-var ResetDatabase = require('./resetdatabase');
 // Imports the express Node module.
 var express = require('express');
-var validate = require('express-jsonschema').validate;
-var NewItemSchema = require('../schemas/itemlistings.json')
-// Creates an Express server.
 var app = express();
-var mongo_express = require('../node_modules/mongo-express/lib/middleware');
-var mongo_express_config = require('../node_modules/mongo-express/config.default.js');
-var bodyParser = require('body-parser');
+
 var MongoDB = require('mongodb');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = MongoDB.ObjectID;
@@ -26,6 +15,21 @@ MongoClient.connect(url, function(err, db) {
     console.log("Connected correctly to server.");
     // This is where we will kick off other actions that use the database!
   }
+  var database = require('./database')
+  var readDocument = database.readDocument
+  var writeDocument = database.writeDocument;
+  var addDocument = database.addDocument;
+  var getCollection = database.getCollection;
+
+  var ResetDatabase = require('./resetdatabase');
+var validate = require('express-jsonschema').validate;
+var NewItemSchema = require('../schemas/itemlistings.json')
+// Creates an Express server.
+
+var mongo_express = require('../node_modules/mongo-express/lib/middleware');
+var mongo_express_config = require('../node_modules/mongo-express/config.default.js');
+var bodyParser = require('body-parser');
+
   // Support receiving text in HTTP request bodies
   app.use(bodyParser.text());
   // Support receiving JSON in HTTP request bodies
@@ -35,13 +39,6 @@ MongoClient.connect(url, function(err, db) {
   // '..' means "go up one directory", so this translates into `client/build`!
   app.use(express.static('../client/build'));
 
-  /**
- * Helper function: Sends back HTTP response with error code 500 due to
- * a database error.
- */
-  function sendDatabaseError(res, err) {
-    res.status(500).send("A database error occurred: " + err);
-  }
 
   function getUserData(user, callback) {
     db.collection('users').findOne({
@@ -63,8 +60,8 @@ MongoClient.connect(url, function(err, db) {
     }
     var itemDataList = []
     for (var i = 0; i < itemIds.length; i++) {
-      var itemData = readDocument("item_listings", new ObjectId(itemIds[i]))
-      var userData = readDocument("users", new ObjectId(itemData.owner))
+      var itemData = readDocument("item_listings",itemIds[i])
+      var userData = readDocument("users",itemData.owner)
       itemData.owner = userData
       itemDataList.push(itemData)
     }
@@ -130,15 +127,16 @@ MongoClient.connect(url, function(err, db) {
             return id;
         } else {
             // Not a number. Return an empty string, an invalid ID.
-            return '';
+            return "";
         }
     } catch (e) {
         // Return an invalid ID.
-        return '';
+        return -1;
     }
   }
 
-  function storeListing(user, title, description, categories, preferred_payments, price, images) {
+  function storeListing(user, title, description, categories, preferred_payments, price, images,callback) {
+
     var newItem = {
       "owner":user,
       "title": title,
@@ -153,16 +151,17 @@ MongoClient.connect(url, function(err, db) {
       "rating": null,
       "images": images
     };
+
     db.collection('item_listings').insertOne(newItem,function(err,result){
       if(err){
         return callback(err);
       }
-      newItem._id = resut.insertedId;
+      newItem._id = result.insertedId;
       db.colletion('user').findOne({_id:user},function(err,userObject){
         if(err){
            return callback(err);
         }
-        db.collection('item_listings').updateOne({_id: UserObject.item_listings},
+        db.collection('item_listings').updateOne({_id: userObject.item_listings},
           {
             $push:{
               contents:{
@@ -180,6 +179,26 @@ MongoClient.connect(url, function(err, db) {
         );
       });
     });
+}
+
+
+  app.get('/categories/:categoryid', function(req, res) {
+      var category = req.params.categoryid;
+      res.send(getCategoryListings(category));
+      res.status(200);
+  });
+
+  function getCategoryListings(category) {
+    var itemDataList = []
+
+    var itemListings = database.search('item_listings', {categories: category})
+    itemListings.forEach((item) => {
+      for(var i = 0; i < item.categories.length; i++)
+        if(item.categories[i] == category && item.active == 1) {
+          itemDataList.push(item);
+        }
+    })
+    return itemDataList;
   }
 
 
@@ -199,31 +218,31 @@ MongoClient.connect(url, function(err, db) {
       next(err);
     }
   });
-
-  app.post('/make_listing/:id', function(req,res) {
+// Trent runs database from "C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe" --dbpath "U-Fig-it-out db"
+  app.post('/make_listing/:id',validate({body: NewItemSchema}), function(req,res) {
     var body = req.body;
-    var fromUser = new ObjectID(getUserIdFromToken(req.get('Authorization')));
+    var fromUser = getUserIdFromToken(req.get('Authorization'));
     if(fromUser == body.user) {
-      storeListing(fromUser,body.title,body.description,body.categories,body.preferred_payments,body.price,function(err,newItem){
+      storeListing(new ObjectID(fromUser),body.title,body.description,body.categories,body.preferred_payments,body.price,function(err,newItem){
         if (err) {
        // A database error happened.
        // 500: Internal error.
        res.status(500).send("A database error occurred: " + err);
-     } else {
+     } else{
         // When POST creates a new resource, we should tell the client about it
         // in the 'Location' header and use status code 201.
         res.status(201);
         res.set('/make_listing/' + newItem._id)
         res.send(newItem)
       }
+    });
   } else {
-    // 401: Unauthorized.
-    res.status(401).end();
-  }
+  // 401: Unauthorized.
+  res.status(401).end();
+}
 });
 
   // Reset database.
-  var ResetDatabase = require('./resetdatabase');
 
   app.post('/resetdb', function(req, res) {
     console.log("Resetting database...");
@@ -231,6 +250,7 @@ MongoClient.connect(url, function(err, db) {
       res.send();
     });
   });
+
 
   /*
   app.post('/make_listing/:id', validate({body: NewItemSchema}), function(req,res) {
@@ -247,6 +267,9 @@ MongoClient.connect(url, function(err, db) {
     }
   });
   */
+  function sendDatabaseError(res, err) {
+    res.status(500).send("A database error occurred: " + err);
+  }
   // Starts the server on port 3000!
   app.listen(3000, function () {
     console.log('Example app listening on port 3000!');

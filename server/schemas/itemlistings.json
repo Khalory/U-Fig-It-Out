@@ -5,11 +5,11 @@
   "properties": {
     "itemId": {
       "id": "itemId",
-      "type": "integer"
+      "type": "string"
     },
     "owner": {
       "id": "owner",
-      "type": "integer"
+      "type": "string"
     },
     "title": {
       "id": "title",
@@ -23,7 +23,7 @@
       "id":"categories",
       "type":"array",
       "items":{
-        "type":"integer"
+        "type":"string"
       }
     },
     "prefered_payments": {
