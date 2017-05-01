@@ -59,7 +59,7 @@ MongoClient.connect(url, function(err, db) {
       '_id': {
         '$in': itemIds
       }
-    }, (err, items) => {
+    }).toArray((err, items) => {
       if (err)
         callback(err)
 
@@ -68,7 +68,7 @@ MongoClient.connect(url, function(err, db) {
         '_id': {
           '$in': userIds
         }
-      }, (err, users) => {
+      }).toArray((err, users) => {
         if (err)
           callback(err)
 
@@ -76,7 +76,7 @@ MongoClient.connect(url, function(err, db) {
         users.map((user) => {
           idToUserMap[user._id] = user
         })
-        items.forEach((item, i) => {
+        items.forEach((item) => {
           item.owner = idToUserMap[item.owner]
         })
         callback(null, items)
