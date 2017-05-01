@@ -181,7 +181,7 @@ var bodyParser = require('body-parser');
     });
 }
 
-
+/*
   app.get('/categories/:categoryid', function(req, res) {
       var category = req.params.categoryid;
       res.send(getCategoryListings(category));
@@ -200,6 +200,7 @@ var bodyParser = require('body-parser');
     })
     return itemDataList;
   }
+*/
 
 
   /*
