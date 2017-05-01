@@ -36,7 +36,9 @@ MongoClient.connect(url, function(err, db) {
 
 
   function getUserData(user, callback) {
-    db.collection('users').findOne({_id: user}, function(err, userInfo) {
+    db.collection('users').findOne({
+      _id: user
+    }, function(err, userInfo) {
       if(err) {
         return callback(err)
       }
@@ -51,49 +53,46 @@ MongoClient.connect(url, function(err, db) {
     if(itemIds.constructor !== Array) {
       itemIds = [itemIds]
     }
-    var itemDataList = []
-    for (var i = 0; i < itemIds.length; i++) {
-      db.collection('item_listings').find({
+
+    itemIds = itemIds.map((itemId) => { return new ObjectID(itemId) })
+    db.collection('item_listings').find({
+      '_id': {
+        '$in': itemIds
+      }
+    }, (err, items) => {
+      if (err)
+        callback(err)
+
+      var userIds = items.map((item) => { return item.owner })
+      db.collection('users').find({
         '_id': {
-          '$in': itemIds
+          '$in': userIds
         }
-      }, (err, items) => {
+      }, (err, users) => {
         if (err)
           callback(err)
 
-        var userIds = items.map((item) => { return item.owner })
-        db.collection('users').find({
-          '_id': {
-            '$in': userIds
-          }
-        }, (err, users) => {
-          if (err)
-            callback(err)
-
-          var idToUserMap = {}
-          users.map((user) => {
-            idToUserMap[user._id] = user
-          })
-          items.forEach((item, i) => {
-            item.owner = idToUserMap[item.owner]
-          })
-          callback(null, items)
+        var idToUserMap = {}
+        users.map((user) => {
+          idToUserMap[user._id] = user
         })
+        items.forEach((item, i) => {
+          item.owner = idToUserMap[item.owner]
+        })
+        callback(null, items)
       })
-    }
-
-    return itemDataList
+    })
   }
 
   //Get user info for a particular user
   app.get('/user/:userid/info', function(req, res) {
-    var userId = new ObjectID(req.params.userid);
-    getUserData(userId, function(err, userInfo) {
+    var userid = req.params.userid
+    getUserData(new ObjectID(userid), function(err, userInfo) {
       if(err) {
         res.status(500).send("Database error: " + err);
       }
       else if (userInfo === null) {
-        res.status(400).send("Could not look up info for user " + userId);
+        res.status(400).send("Could not look up info for user " + userid);
       }
       else {
         res.send(userInfo);
@@ -102,7 +101,17 @@ MongoClient.connect(url, function(err, db) {
   })
 
   app.post('/items', function(req, res) {
-    res.send(getItemListings(req.body))
+    getItemListings(req.body, (err, items) => {
+      if(err) {
+        res.status(500).send("Database error: " + err);
+      }
+      else if (items === null) {
+        res.status(400).send("Failed to find itemIds for " + req.body);
+      }
+      else {
+        res.send(items);
+      }
+    })
   })
 
   //Get all the categories in the database
