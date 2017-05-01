@@ -12,11 +12,11 @@ export default class Index extends React.Component {
       <div>
         <h2>Application Views</h2>
         <ul>
-          <li><Link to={"/main/1"}>Main Page</Link></li>
-          <li><Link to={"/profile/1"} query={{user:1}}>Profile Page</Link></li>
-          <li><Link to={"/search/1"} query={{category:2}}>Search Results</Link></li>
-          <li><Link to={"/item/1"} query={{itemId:2}}>Item Listing</Link></li>
-          <li><Link to={"/make_listing/1"}>Make Listing</Link></li>
+          <li><Link to={"/main/000000000000000000000001"}>Main Page</Link></li>
+          <li><Link to={"/profile/000000000000000000000001"} query={{user:"000000000000000000000001"}}>Profile Page</Link></li>
+          <li><Link to={"/search/000000000000000000000001"} query={{category:"000000000000000000000002"}}>Search Results</Link></li>
+          <li><Link to={"/item/000000000000000000000001"} query={{itemId:"000000000000000000000002"}}>Item Listing</Link></li>
+          <li><Link to={"/make_listing/000000000000000000000001"}>Make Listing</Link></li>
         </ul>
       </div>
     )

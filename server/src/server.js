@@ -41,9 +41,7 @@ var bodyParser = require('body-parser');
 
 
   function getUserData(user, callback) {
-    db.collection('users').findOne({
-      _id: user
-    }, function(err, userInfo) {
+    db.collection('users').findOne({_id: user}, function(err, userInfo) {
       if(err) {
         return callback(err)
       }
@@ -71,13 +69,13 @@ var bodyParser = require('body-parser');
 
   //Get user info for a particular user
   app.get('/user/:userid/info', function(req, res) {
-    var userid = req.params.userid
-    getUserData(new ObjectID(userid), function(err, userInfo) {
+    var userId = new ObjectID(req.params.userid);
+    getUserData(userId, function(err, userInfo) {
       if(err) {
         res.status(500).send("Database error: " + err);
       }
       else if (userInfo === null) {
-        res.status(400).send("Could not look up info for user " + userid);
+        res.status(400).send("Could not look up info for user " + userId);
       }
       else {
         res.send(userInfo);
