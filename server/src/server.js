@@ -15,20 +15,15 @@ MongoClient.connect(url, function(err, db) {
     console.log("Connected correctly to server.");
     // This is where we will kick off other actions that use the database!
   }
-  var database = require('./database')
-  var readDocument = database.readDocument
-  var writeDocument = database.writeDocument;
-  var addDocument = database.addDocument;
-  var getCollection = database.getCollection;
 
   var ResetDatabase = require('./resetdatabase');
-var validate = require('express-jsonschema').validate;
-var NewItemSchema = require('../schemas/itemlistings.json')
-// Creates an Express server.
+  var validate = require('express-jsonschema').validate;
+  var NewItemSchema = require('../schemas/itemlistings.json')
+  // Creates an Express server.
 
-var mongo_express = require('../node_modules/mongo-express/lib/middleware');
-var mongo_express_config = require('../node_modules/mongo-express/config.default.js');
-var bodyParser = require('body-parser');
+  var mongo_express = require('../node_modules/mongo-express/lib/middleware');
+  var mongo_express_config = require('../node_modules/mongo-express/config.default.js');
+  var bodyParser = require('body-parser');
 
   // Support receiving text in HTTP request bodies
   app.use(bodyParser.text());
@@ -54,16 +49,39 @@ var bodyParser = require('body-parser');
     })
   }
 
-  function getItemListings(itemIds) {
+  function getItemListings(itemIds, callback) {
     if(itemIds.constructor !== Array) {
       itemIds = [itemIds]
     }
     var itemDataList = []
     for (var i = 0; i < itemIds.length; i++) {
-      var itemData = readDocument("item_listings",itemIds[i])
-      var userData = readDocument("users",itemData.owner)
-      itemData.owner = userData
-      itemDataList.push(itemData)
+      db.collection('item_listings').find({
+        '_id': {
+          '$in': itemIds
+        }
+      }, (err, items) => {
+        if (err)
+          callback(err)
+
+        var userIds = items.map((item) => { return item.owner })
+        db.collection('users').find({
+          '_id': {
+            '$in': userIds
+          }
+        }, (err, users) => {
+          if (err)
+            callback(err)
+
+          var idToUserMap = {}
+          users.map((user) => {
+            idToUserMap[user._id] = user
+          })
+          items.forEach((item, i) => {
+            item.owner = idToUserMap[item.owner]
+          })
+          callback(null, items)
+        })
+      })
     }
 
     return itemDataList
