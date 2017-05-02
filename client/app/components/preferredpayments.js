@@ -36,10 +36,9 @@ export default class PreferredPayments extends React.Component {
     e.preventDefault()
     var value = e.target.value
     var pps = this.state.preferred_payments
-
     pps[value].checked = !pps[value].checked
-
     this.setState({preferred_payments: pps})
+    this.props.onUpdate(pps.map((pp) => { return pp.checked ? pp._id : null }).filter((pp) => { return pp != null }))
   }
 
   render() {

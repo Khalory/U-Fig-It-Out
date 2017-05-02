@@ -93,11 +93,15 @@ export default class newlisting extends React.Component {
 
     reader.onloadend = () => {
       var images = this.state.images
-      images.push({file: file, name: reader.result})
+      images.push(reader.result);
       this.setState({images: images});
     }
 
     reader.readAsDataURL(file)
+  }
+
+  updatePreferredPayments(payments) {
+    this.setState({preferred_payments: payments})
   }
 
   render() {
@@ -132,7 +136,7 @@ export default class newlisting extends React.Component {
                 })}
                 <h2 className="nlh2"> Description:</h2>
                 <textarea className="form-control" rows="5" name="description" onChange={this.handleTextChange}></textarea>
-                <PreferredPayments disabled={false} preferred_payments={[]} />
+                <PreferredPayments disabled={false} preferred_payments={this.state.preferred_payments} onUpdate={this.updatePreferredPayments.bind(this)} />
 
                 <input className="fileInput" type="file" onChange={(e)=>this.handleImageChange(e)} />
 
