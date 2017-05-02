@@ -28,7 +28,8 @@ var initialData = {
       "avg_rating": 5,
       "num_ratings": 8,
       "items": [
-        new ObjectID("000000000000000000000002")
+        new ObjectID("000000000000000000000002"),
+        new ObjectID("000000000000000000000007")
       ]
     },
     "3": {
@@ -52,7 +53,7 @@ var initialData = {
       "title": "CS 311 Textbook",
       "description": "Like new, has no markings whatsoever!",
       "categories": [
-        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000003")
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002")
       ],
       "preferred_payments": [
         1, 2, 3
@@ -77,7 +78,7 @@ var initialData = {
                       actually grew on one of the giant bean stocks, thus being imbued with the power of giants. You won't find another\
                       fig like this ever, especially not for this cheap, cheap price because I don't like figs very much.",
       "categories": [
-        new ObjectID("000000000000000000000000"), new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002")
+        new ObjectID("000000000000000000000013"), new ObjectID("000000000000000000000014")
       ],
       "preferred_payments": [
         1, 2, 5, 4
@@ -171,7 +172,7 @@ var initialData = {
       "title": "Classical and Quantam Computation",
       "description": "Condition: Very used, book spine is falling apart",
       "categories": [
-        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000003")
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002")
       ],
       "preferred_payments": [
         1, 2, 4
@@ -187,6 +188,29 @@ var initialData = {
         "img/ComputationTextbook.jpg"
       ],
       "rating": null
+    },
+    "7": {
+      "_id": new ObjectID("000000000000000000000007"),
+      "owner": new ObjectID("000000000000000000000002"),
+      "title": "Javascript for Dummies",
+      "description": "I no longer need this.",
+      "categories": [
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000003")
+      ],
+      "preferred_payments": [
+        1, 2, 4
+      ],
+      "timestamp": 1453690890000,
+      "last_updated": 1453690800000,
+      //0=inactive, 1=active
+      "active": 1,
+      "price": 1.00,
+      //0=sellListing, 1=buyListing
+      "type": 0,
+      "images": [
+        "img/javascript.jpg"
+      ],
+      "rating": null
     }
   },
   "categories": {
@@ -194,21 +218,21 @@ var initialData = {
       "_id": new ObjectID("000000000000000000000001"),
       "name": "BOOKS",
       "items": [
-        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000006")
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000006"), new ObjectID("000000000000000000000007")
       ]
     },
     2:{
       "_id": new ObjectID("000000000000000000000002"),
       "name": "Textbooks",
       "items": [
-        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000006")
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000006")
       ]
     },
     3:{
       "_id": new ObjectID("000000000000000000000003"),
       "name": "Non-textbooks",
       "items": [
-        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000006")
+        new ObjectID("000000000000000000000007")
       ]
     },
     4:{
@@ -265,12 +289,16 @@ var initialData = {
     13:{
       "_id": new ObjectID("000000000000000000000013"),
       "name": "Other Items",
-      "items": []
+      "items": [
+        new ObjectID("000000000000000000000002")
+      ]
     },
     14:{
       "_id": new ObjectID("000000000000000000000014"),
       "name": "FIGS",
-      "items": []
+      "items": [
+        new ObjectID("000000000000000000000002")
+      ]
     },
     15:{
       "_id": new ObjectID("000000000000000000000015"),
