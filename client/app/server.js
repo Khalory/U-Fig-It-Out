@@ -95,6 +95,12 @@ export function getCategories(cb) {
   })
 }
 
+export function search(params, cb) {
+  sendXHR('POST', '/items/search', params, (xhr) => {
+    cb(JSON.parse(xhr.responseText))
+  })
+}
+
 export function storeListing(user, title, description, categories, preferred_payments, price, images, cb) {
   sendXHR('POST','/make_listing/' + user, {
     user: user,

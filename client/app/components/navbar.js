@@ -4,6 +4,20 @@ import {Link} from 'react-router';
 import NavbarUser from './navbarUser.js'
 
 export default class Navbar extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      value: this.props.searchText
+    }
+  }
+
+  onChange(e) {
+    this.setState({
+      value: e.target.value
+    })
+  }
+
   render() {
     return (
       <nav className="navbar navbar-fixed-top navbar-default">
@@ -24,11 +38,13 @@ export default class Navbar extends React.Component {
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form className="navbar-form navbar-left" role="search">
               <div className="input-group">
-                <input type="text" className="form-control fig-search" placeholder="Search UFig" />
+                <input type="text" className="form-control fig-search" placeholder="Search UFig" value={this.state.value} onChange={this.onChange.bind(this)} />
                 <span className="input-group-btn">
-                  <button type="submit" className="btn btn-default">
-                    <span className="glyphicon glyphicon-search"></span>
-                  </button>
+                  <Link to={"/search/" + this.props.user} query={{category:this.props.category, searchText:this.state.value}}>
+                    <button type="submit" className="btn btn-default">
+                      <span className="glyphicon glyphicon-search"></span>
+                    </button>
+                  </Link>
                 </span>
               </div>
             </form>

@@ -28,6 +28,7 @@ componentDidMount() {
               index={ category._id }
               isActive={ this.props.activeIndex == category._id }
               user={ this.props.user }
+              searchText={ this.props.searchText }
             /> } )
         }
         </ul>
@@ -39,7 +40,7 @@ componentDidMount() {
 class Category extends React.Component {
 
   render () {
-    return <Link to={"/search/" + this.props.user} query={{category:this.props.index}}><li role="presentation" className={this.props.isActive ? "active" : "inactive"}>
+    return <Link to={"/search/" + this.props.user} query={{category:this.props.index, searchText:this.props.searchText}}><li role="presentation" className={this.props.isActive ? "active" : "inactive"}>
       {this.props.name}
     </li>
   </Link>

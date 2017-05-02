@@ -299,6 +299,10 @@ var initialData = {
   }
 };
 
+function createIndices(db, cb) {
+  db.collection('item_listings').createIndex({title:'text', description:'text'}, cb)
+}
+
 /**
  * Resets a collection.
  */
@@ -335,7 +339,7 @@ function resetDatabase(db, cb) {
       // Use myself as a callback.
       resetCollection(db, collection, processNextCollection);
     } else {
-      cb();
+      createIndices(db, cb);
     }
   }
 

@@ -1,11 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-import newListing from './newlisting'
-import Profile from './profile'
-import Search from './search'
-import ListingPage from './listingPage'
-
 export default class Index extends React.Component {
   render() {
     return(

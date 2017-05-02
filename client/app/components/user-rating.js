@@ -49,11 +49,10 @@ export default class UserRating extends React.Component {
   }
 
   render() {
-    console.log(this.state.owner)
     var rating = this.calcRating()
     return (
       <div>
-        <h3><Link to={"/profile/" + this.props.owner} query={{ user:this.state.owner._id }}>{this.state.owner.username}</Link></h3>
+        <h3><Link to={"/profile/" + this.props.owner._id} query={{ user:this.state.owner._id }}>{this.state.owner.username}</Link></h3>
         <ul className="nav nav-pills pull-left">
           {rating}
         </ul>

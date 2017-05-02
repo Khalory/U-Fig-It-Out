@@ -85,6 +85,34 @@ MongoClient.connect(url, function(err, db) {
     })
   }
 
+  function search(params, callback) {
+    db.collection('item_listings')
+      .find(params)
+      .toArray((err, items) => {
+      if (err)
+        callback(err)
+
+      var userIds = items.map((item) => { return item.owner })
+      db.collection('users').find({
+        '_id': {
+          '$in': userIds
+        }
+      }).toArray((err, users) => {
+        if (err)
+          callback(err)
+
+        var idToUserMap = {}
+        users.forEach((user) => {
+          idToUserMap[user._id] = user
+        })
+        items.forEach((item) => {
+          item.owner = idToUserMap[item.owner]
+        })
+        callback(null, items)
+      })
+    })
+  }
+
   //Get user info for a particular user
   app.get('/user/:userid/info', function(req, res) {
     var userid = req.params.userid
@@ -110,7 +138,23 @@ MongoClient.connect(url, function(err, db) {
         res.status(400).send("Failed to find itemIds for " + req.body);
       }
       else {
-        res.send(items);
+        res.send(items)
+        res.status(200)
+      }
+    })
+  })
+
+  app.post('/items/search', function(req, res) {
+    search(req.body, (err, items) => {
+      if(err) {
+        res.status(500).send("Database error: " + err);
+      }
+      else if (items === null) {
+        res.status(400).send("Failed to find itemIds for " + req.body);
+      }
+      else {
+        res.send(items)
+        res.status(200)
       }
     })
   })
@@ -149,7 +193,6 @@ MongoClient.connect(url, function(err, db) {
             items.forEach((item) => {
               item.owner = idToUserMap[item.owner]
             })
-            console.log(items)
             res.send(items)
             res.status(200)
           })
