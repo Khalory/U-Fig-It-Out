@@ -2,7 +2,6 @@ import React from 'react';
 import Navbar from './navbar'
 import ProfileInfo from './profile-info'
 import ProfileListings from './profile-listings'
-import ChatPopup from './chat-popup'
 import {getUserData} from '../server'
 
 export default class Profile extends React.Component {
@@ -39,7 +38,6 @@ export default class Profile extends React.Component {
             </div>
           </div>
         </div>
-        <ChatPopup />
       </div>
     )
   }

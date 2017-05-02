@@ -18,8 +18,13 @@ export default class UserRating extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.state.owner === this.props.owner && typeof(this.state.owner) !== 'number')
+    if (this.state.owner === this.props.owner && this.props.owner !== null)
       return
+
+    if (typeof this.props.owner === 'object') {
+      this.setState({owner: this.props.owner})
+      return
+    }
 
     getUserData(this.props.owner, (user) => {
       this.setState({owner: user})
@@ -44,10 +49,11 @@ export default class UserRating extends React.Component {
   }
 
   render() {
+    console.log(this.state.owner)
     var rating = this.calcRating()
     return (
       <div>
-        <h3><Link to={"/profile/" + this.props.user} query={{ user:this.state.owner._id }}>{this.state.owner.username}</Link></h3>
+        <h3><Link to={"/profile/" + this.props.owner} query={{ user:this.state.owner._id }}>{this.state.owner.username}</Link></h3>
         <ul className="nav nav-pills pull-left">
           {rating}
         </ul>

@@ -36,7 +36,7 @@ export default class ProfileListings extends React.Component {
 
   render() {
     var items = !this.state.userListings ? <div></div> : this.state.userListings.filter((listing) => {
-      if(listing.type==this.state.type){return true}
+      return listing.type == this.state.type
     }).map((listing, i) => {
       return (<li key={i} className="media list-group-item listing-item">
       <Item id={listing._id} user={this.props.loggeduser} picture={listing.images[0]} itemtitle={listing.title}

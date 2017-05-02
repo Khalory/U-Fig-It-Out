@@ -37,7 +37,7 @@ var initialData = {
         new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000003")
       ],
       "preferred_payments": [
-        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000003")
+        1, 2, 3
       ],
       "timestamp": 1453690800000,
       "last_updated": 1453690800000,
@@ -62,7 +62,7 @@ var initialData = {
         new ObjectID("000000000000000000000000"), new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002")
       ],
       "preferred_payments": [
-        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000005"), new ObjectID("000000000000000000000004")
+        1, 2, 5, 4
       ],
       "timestamp": 1453690890000,
       "last_updated": 1453690800000,

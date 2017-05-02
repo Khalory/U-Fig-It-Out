@@ -28,7 +28,8 @@ MongoClient.connect(url, function(err, db) {
   // Support receiving text in HTTP request bodies
   app.use(bodyParser.text());
   // Support receiving JSON in HTTP request bodies
-  app.use(bodyParser.json());
+  app.use(bodyParser.json({limit: "50mb"}));
+  app.use(bodyParser.urlencoded({limit: "50mb", extended: true, parameterLimit:50000}));
   app.use('/mongo_express', mongo_express(mongo_express_config));
   // You run the server from `server`, so `../client/build` is `server/../client/build`.
   // '..' means "go up one directory", so this translates into `client/build`!
@@ -73,7 +74,7 @@ MongoClient.connect(url, function(err, db) {
           callback(err)
 
         var idToUserMap = {}
-        users.map((user) => {
+        users.forEach((user) => {
           idToUserMap[user._id] = user
         })
         items.forEach((item) => {
@@ -116,12 +117,12 @@ MongoClient.connect(url, function(err, db) {
 
   //Get all the categories in the database
   app.get('/categories', function(req, res) {
-    db.collection('categories').find({}).toArray((err, items) => {
+    db.collection('categories').find({}).toArray((err, categories) => {
       if (err) {
         sendDatabaseError(res, err);
       } else {
-        res.send(items);
-        res.status(200);
+        res.send(categories)
+        res.status(200)
       }
     });
   });
@@ -132,8 +133,26 @@ MongoClient.connect(url, function(err, db) {
         if (err) {
           sendDatabaseError(res, err);
         } else {
-          res.send(items);
-          res.status(200);
+          var userIds = items.map((item) => { return item.owner })
+          db.collection('users').find({
+            '_id': {
+              '$in': userIds
+            }
+          }).toArray((err, users) => {
+            if (err)
+              sendDatabaseError(res, err)
+
+            var idToUserMap = {}
+            users.forEach((user) => {
+              idToUserMap[user._id] = user
+            })
+            items.forEach((item) => {
+              item.owner = idToUserMap[item.owner]
+            })
+            console.log(items)
+            res.send(items)
+            res.status(200)
+          })
         }
       });
   });

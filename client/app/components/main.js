@@ -1,6 +1,5 @@
 import React from 'react';
 import Navbar from './navbar'
-import ChatPopup from './chat-popup'
 import { Link } from 'react-router'
 import {getCategories} from '../server'
 
@@ -53,7 +52,6 @@ export default class Main extends React.Component {
             </table>
           </div>
         </div>
-        <ChatPopup />
       </div>
     )
   }

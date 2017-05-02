@@ -6,7 +6,7 @@ export default class Item extends React.Component {
     return (
       <div>
         <div className="media-top media-left">
-          <a href="#"><img src={this.props.picture} alt="Item" /></a>
+          <Link to={"/item/" + this.props.user} query={{itemId:this.props.id}}><img src={this.props.picture} alt="Item" /></Link>
         </div>
         <div className="media-body">
           <Link to={"/item/" + this.props.user} query={{itemId:this.props.id}}><h3>{this.props.itemtitle}</h3></Link>

@@ -89,15 +89,19 @@ export default class newlisting extends React.Component {
     e.preventDefault();
 
     var reader = new FileReader();
-    var file = e.target.files[0];
+    var files = e.target.files
+    var counter = 0
+    var numFiles = files.length
 
     reader.onloadend = () => {
       var images = this.state.images
       images.push(reader.result);
       this.setState({images: images});
+      if (++counter < numFiles)
+        reader.readAsDataURL(files[counter])
     }
 
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(files[0])
   }
 
   updatePreferredPayments(payments) {
@@ -106,7 +110,7 @@ export default class newlisting extends React.Component {
 
   render() {
     var imagePreviews = this.state.images.map((image, i) => {
-      return <img key={i} src={image.name} />
+      return <img key={i} src={image} />
     })
 
     return (
@@ -138,8 +142,12 @@ export default class newlisting extends React.Component {
                 <textarea className="form-control" rows="5" name="description" onChange={this.handleTextChange}></textarea>
                 <PreferredPayments disabled={false} preferred_payments={this.state.preferred_payments} onUpdate={this.updatePreferredPayments.bind(this)} />
 
-                <input className="fileInput" type="file" onChange={(e)=>this.handleImageChange(e)} />
-
+                <div className="row">
+                  <div className="col-md-4"></div>
+                  <div className="col-md-8">
+                    <input className="fileInput" type="file" onChange={(e)=>this.handleImageChange(e)} />
+                  </div>
+                </div>
                 <div className="imgPreview">
                   {imagePreviews}
                 </div>
