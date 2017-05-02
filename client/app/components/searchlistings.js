@@ -46,7 +46,6 @@ export default class SearchListings extends React.Component {
             <div className="col-md-10">
               <div className="panel panel-default fig-listings">
                 <div className="panel-body">
-                  <h4>{'Books > Textbooks: '}<b>"CS 311"</b></h4>
                   <ul className="list-group">
                     {items}
                   </ul>

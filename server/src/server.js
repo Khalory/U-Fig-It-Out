@@ -127,7 +127,7 @@ MongoClient.connect(url, function(err, db) {
   });
 
   app.get('/categories/:categoryid', function(req, res) {
-      var category = req.params.categoryid;
+      var category = new ObjectID(req.params.categoryid);
       db.collection('item_listings').find({categories: category, active: 1}).toArray((err, items) => {
         if (err) {
           sendDatabaseError(res, err);
