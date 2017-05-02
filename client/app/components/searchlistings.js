@@ -49,7 +49,7 @@ export default class SearchListings extends React.Component {
                       <Item id={listing._id} user={this.props.user} picture={listing.images[0]} itemtitle={listing.title}
                         itemdescription={listing.description}>
                         <div className="media-top media-right user-rating">
-                          <UserRating key={listing.owner} owner={listing.owner}/>
+                          <UserRating key={listing.owner} user={this.props.user} owner={listing.owner}/>
                         </div>
                       </Item>
                     </li>)})
