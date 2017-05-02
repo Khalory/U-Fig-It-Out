@@ -127,7 +127,7 @@ MongoClient.connect(url, function(err, db) {
   });
 
   app.get('/categories/:categoryid', function(req, res) {
-      var category = req.params.categoryid;
+      var category = new ObjectID(req.params.categoryid);
       db.collection('item_listings').find({categories: category, active: 1}).toArray((err, items) => {
         if (err) {
           sendDatabaseError(res, err);
@@ -160,7 +160,7 @@ MongoClient.connect(url, function(err, db) {
     }
   }
 
-  function storeListing(user, title, description, categories, preferred_payments, price, images,callback) {
+  function storeListing(user, title, description, categories, preferred_payments, price, images, callback) {
 
     var newItem = {
       "owner":user,
@@ -182,27 +182,21 @@ MongoClient.connect(url, function(err, db) {
         return callback(err);
       }
       newItem._id = result.insertedId;
-      db.colletion('user').findOne({_id:user},function(err,userObject){
-        if(err){
-           return callback(err);
-        }
-        db.collection('item_listings').updateOne({_id: userObject.item_listings},
-          {
-            $push:{
-              contents:{
-                $each: [newItem._id],
-                $position:0
-              }
-            }
-          },
-          function(err){
-            if(err){
-              return callback(err);
-            }
-            callback(null,newItem)
+      console.log(user);
+      db.collection('users').update({_id:user},
+        {
+          $push:{
+              items: newItem._id
           }
-        );
       });
+      newItem.categories.forEach((category) => {db.collection('categories').update({_id:category},
+        {
+          $push:{
+              items: newItem._id
+          }
+      });
+    });
+      callback(null, result);
     });
 }
 
@@ -245,11 +239,12 @@ MongoClient.connect(url, function(err, db) {
     }
   });
 // Trent runs database from "C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe" --dbpath "U-Fig-it-out db"
-  app.post('/make_listing/:id',validate({body: NewItemSchema}), function(req,res) {
+  app.post('/make_listing/:id', function(req,res) {
     var body = req.body;
     var fromUser = getUserIdFromToken(req.get('Authorization'));
     if(fromUser == body.user) {
-      storeListing(new ObjectID(fromUser),body.title,body.description,body.categories,body.preferred_payments,body.price,function(err,newItem){
+      var categories = body.categories.map((category) => {return new ObjectID(category)});
+      storeListing(new ObjectID(fromUser),body.title,body.description,categories,body.preferred_payments,body.price, body.images, function(err,newItem){
         if (err) {
        // A database error happened.
        // 500: Internal error.

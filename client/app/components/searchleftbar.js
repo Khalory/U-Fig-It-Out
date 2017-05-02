@@ -22,11 +22,11 @@ componentDidMount() {
     return <div>
       <div className="col-md-2 fig-categories">
         <ul className="nav nav-pills nav-stacked">
-        { this.state.categoriesList.map((category, i) => {
-            return <Category key={i}
+        { this.state.categoriesList.map((category) => {
+            return <Category key={category._id}
               name={ category.name }
-              index={ i }
-              isActive={ this.props.activeIndex == i }
+              index={ category._id }
+              isActive={ this.props.activeIndex == category._id }
               user={ this.props.user }
             /> } )
         }
