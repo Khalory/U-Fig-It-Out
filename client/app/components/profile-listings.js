@@ -11,7 +11,8 @@ export default class ProfileListings extends React.Component {
 
   refresh() {
     getItemListings(this.props.items, (userListings) => {
-      this.setState({userListings: userListings})
+      this.setState({userListings: userListings,
+                    type: 0})
     })
   }
 
@@ -51,11 +52,11 @@ export default class ProfileListings extends React.Component {
       <div className="panel panel-default fig-listings">
         <div className="panel-heading">
           <ul className="nav nav-tabs nav-justified">
-            <li role="presentation">
+            <li role="presentation" className={this.state.type==0 ? "active" : "inactive"}>
               <a href="#" onClick={(e) => this.handleSellClick(e)}><span className="glyphicon glyphicon-tag">
               </span> <strong>Selling</strong></a>
             </li>
-            <li role="presentation">
+            <li role="presentation" className={this.state.type==1 ? "active" : "inactive"}>
               <a href="#" onClick={(e) => this.handleBuyClick(e)}><span className="glyphicon glyphicon-heart"></span>
               <strong>Buying</strong></a>
             </li>
