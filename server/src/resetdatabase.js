@@ -14,7 +14,9 @@ var initialData = {
       "avg_rating": 4,
       "num_ratings": 22,
       "items": [
-        new ObjectID("000000000000000000000001")
+        new ObjectID("000000000000000000000001"),
+        new ObjectID("000000000000000000000003"),
+        new ObjectID("000000000000000000000004")
       ]
     },
     "2": {
@@ -22,11 +24,24 @@ var initialData = {
       "username": "tRich",
       "password": "ilovewebprogramming",
       "email": "trichards@umass.edu",
-      "profile_picture": "img/totally-tim-richards.jpeg",
+      "profile_picture": "img/timRichards.jpeg",
       "avg_rating": 5,
       "num_ratings": 8,
       "items": [
         new ObjectID("000000000000000000000002")
+      ]
+    },
+    "3": {
+      "_id": new ObjectID("000000000000000000000003"),
+      "username": "MixMaster",
+      "password": "PequalsNP",
+      "email": "dBarrington@umass.edu",
+      "profile_picture": "img/totally-tim-richards.jpeg",
+      "avg_rating": 5,
+      "num_ratings": 8,
+      "items": [
+        new ObjectID("000000000000000000000005"),
+        new ObjectID("000000000000000000000006")
       ]
     }
   },
@@ -80,6 +95,98 @@ var initialData = {
         "img/figs-3.jpg"
       ],
       "rating": null
+    },
+    "3": {
+      "_id": new ObjectID("000000000000000000000003"),
+      "owner": new ObjectID("000000000000000000000001"),
+      "title": "iClicker",
+      "description": "Midly used, can't connect to frequency AB",
+      "categories": [
+        new ObjectID("000000000000000000000015"), new ObjectID("000000000000000000000016")
+      ],
+      "preferred_payments": [
+        1, 5, 6
+      ],
+      "timestamp": 1453690890000,
+      "last_updated": 1453690800000,
+      //0=inactive, 1=active
+      "active": 1,
+      "price": 100.00,
+      //0=sellListing, 1=buyListing
+      "type": 0,
+      "images": [
+        "img/iclicker.jpeg"
+      ],
+      "rating": null
+    },
+    "4": {
+      "_id": new ObjectID("000000000000000000000004"),
+      "owner": new ObjectID("000000000000000000000001"),
+      "title": "Broken razer laptop",
+      "description": "The video card overheated and damaged the motherboard, scrapping this for cash.",
+      "categories": [
+        new ObjectID("000000000000000000000015"), new ObjectID("000000000000000000000020"), new ObjectID("000000000000000000000021")
+      ],
+      "preferred_payments": [
+        3, 5, 6
+      ],
+      "timestamp": 1453690890000,
+      "last_updated": 1453690800000,
+      //0=inactive, 1=active
+      "active": 1,
+      "price": 60.00,
+      //0=sellListing, 1=buyListing
+      "type": 0,
+      "images": [
+        "img/razerLaptop.jpeg"
+      ],
+      "rating": null
+    },
+    "5": {
+      "_id": new ObjectID("000000000000000000000005"),
+      "owner": new ObjectID("000000000000000000000003"),
+      "title": "Safari hat",
+      "description": "This hat has been through the depths of the Amazon rain forest. May be enchanted.",
+      "categories": [
+        new ObjectID("000000000000000000000007"), new ObjectID("000000000000000000000008"), new ObjectID("000000000000000000000009")
+      ],
+      "preferred_payments": [
+        7
+      ],
+      "timestamp": 1453690890000,
+      "last_updated": 1453690800000,
+      //0=inactive, 1=active
+      "active": 1,
+      "price": 300.00,
+      //0=sellListing, 1=buyListing
+      "type": 0,
+      "images": [
+        "img/hat.jpg"
+      ],
+      "rating": null
+    },
+    "6": {
+      "_id": new ObjectID("000000000000000000000006"),
+      "owner": new ObjectID("000000000000000000000003"),
+      "title": "Classical and Quantam Computation",
+      "description": "Condition: Very used, book spine is falling apart",
+      "categories": [
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000003")
+      ],
+      "preferred_payments": [
+        1, 2, 4
+      ],
+      "timestamp": 1453690890000,
+      "last_updated": 1453690800000,
+      //0=inactive, 1=active
+      "active": 1,
+      "price": 35.00,
+      //0=sellListing, 1=buyListing
+      "type": 0,
+      "images": [
+        "img/ComputationTextbook.jpg"
+      ],
+      "rating": null
     }
   },
   "categories": {
@@ -87,21 +194,21 @@ var initialData = {
       "_id": new ObjectID("000000000000000000000001"),
       "name": "BOOKS",
       "items": [
-        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002")
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000006")
       ]
     },
     2:{
       "_id": new ObjectID("000000000000000000000002"),
       "name": "Textbooks",
       "items": [
-        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002")
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000006")
       ]
     },
     3:{
       "_id": new ObjectID("000000000000000000000003"),
       "name": "Non-textbooks",
       "items": [
-        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002")
+        new ObjectID("000000000000000000000001"), new ObjectID("000000000000000000000002"), new ObjectID("000000000000000000000006")
       ]
     },
     4:{
@@ -122,17 +229,23 @@ var initialData = {
     7:{
       "_id": new ObjectID("000000000000000000000007"),
       "name": "CLOTHING",
-      "items": []
+      "items": [
+        new ObjectID("000000000000000000000005")
+      ]
     },
     8:{
       "_id": new ObjectID("000000000000000000000008"),
       "name": "Men",
-      "items": []
+      "items": [
+        new ObjectID("000000000000000000000005")
+      ]
     },
     9:{
       "_id": new ObjectID("000000000000000000000009"),
       "name": "Women",
-      "items": []
+      "items": [
+        new ObjectID("000000000000000000000005")
+      ]
     },
     10:{
       "_id": new ObjectID("000000000000000000000010"),
@@ -162,12 +275,17 @@ var initialData = {
     15:{
       "_id": new ObjectID("000000000000000000000015"),
       "name": "ELECTRONICS",
-      "items": []
+      "items": [
+        new ObjectID("000000000000000000000003"),
+        new ObjectID("000000000000000000000004")
+      ]
     },
     16:{
       "_id": new ObjectID("000000000000000000000016"),
       "name": "iClickers",
-      "items": []
+      "items": [
+        new ObjectID("000000000000000000000003")
+      ]
     },
     17:{
       "_id": new ObjectID("000000000000000000000017"),
@@ -187,12 +305,16 @@ var initialData = {
     20:{
       "_id": new ObjectID("000000000000000000000020"),
       "name": "COMPUTERS",
-      "items": []
+      "items": [
+        new ObjectID("000000000000000000000004")
+      ]
     },
     21:{
       "_id": new ObjectID("000000000000000000000021"),
       "name": "Laptops",
-      "items": []
+      "items": [
+        new ObjectID("000000000000000000000004")
+      ]
     },
     22:{
       "_id": new ObjectID("000000000000000000000022"),
